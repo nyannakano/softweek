@@ -3,11 +3,13 @@ import RegisterHome from "@/Components/RegisterHome.vue";
 import Partners from "@/Components/Partners.vue";
 import EventData from "@/Components/EventData.vue";
 import WeeklySchedule from "@/Components/WeeklySchedule.vue";
+import LastEditionPhotos from "@/Components/LastEditionPhotos.vue";
 
 const props = defineProps<{
     image_logo: string,
     image_partner: string,
-    image_logo_softweek: string
+    image_logo_softweek: string,
+    images_last_edition: string
 }>();
 </script>
 
@@ -22,31 +24,46 @@ const props = defineProps<{
                 <EventData :image_logo_softweek="image_logo_softweek" class="bg-gradient-event-data"/>
             </div>
             <WeeklySchedule />
+            <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>
         </main>
+
+        <footer class="footer-space">
+        </footer>
     </div>
+
 </template>
 
 
 <style scoped>
 .bg-gradient-radial-header {
-    height: 100vh;
+    height: 70vh;
     background: radial-gradient(circle at 60% 20%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 40%);
     margin: 0;
     padding: 0;
 }
 
 .bg-gradient-event-data {
-    height: 100vh;
-    background: radial-gradient(circle at 60% 50%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 30%);
+    height: 70vh;
+    background: radial-gradient(circle at 60% 50%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 26%);
     padding: 0;
     margin: 0 0 0;
 }
 
 .background-image {
     background: url('/images/LOGO_background.svg') no-repeat center right;
-    background-size: 40%;
+    background-size: 30%;
     padding: 0;
     margin: 0;
+}
+
+.background-image-last-edition {
+    background: url('/images/LOGO_background_2.svg') no-repeat center left;
+    background-size: 30%;
+    padding: 0;
+    margin: 0 0 0 0;
+}
+.footer-space {
+    padding-bottom: 10rem;
 }
 
 @media (max-width: 768px) {
@@ -59,6 +76,10 @@ const props = defineProps<{
     .bg-gradient-radial-header {
         height: 200vh;
         background: radial-gradient(circle at 50% 40%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 50%);
+    }
+
+    .footer-space {
+        padding-bottom: 6rem;
     }
 
 }
