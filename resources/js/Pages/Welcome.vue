@@ -1,20 +1,27 @@
 <script setup lang="ts">
 import RegisterHome from "@/Components/RegisterHome.vue";
 import Partners from "@/Components/Partners.vue";
+import EventData from "@/Components/EventData.vue";
+import WeeklySchedule from "@/Components/WeeklySchedule.vue";
 
 const props = defineProps<{
     image_logo: string,
-    image_partner: string
+    image_partner: string,
+    image_logo_softweek: string
 }>();
 </script>
 
 <template>
     <div class="bg-gradient-radial-header">
         <header>
-            <RegisterHome :image_logo="image_logo" />
+            <RegisterHome :image_logo="image_logo"/>
         </header>
         <main>
-            <Partners :image_partner="image_partner" />
+            <Partners :image_partner="image_partner"/>
+            <div class="background-image">
+                <EventData :image_logo_softweek="image_logo_softweek" class="bg-gradient-event-data"/>
+            </div>
+            <WeeklySchedule />
         </main>
     </div>
 </template>
@@ -26,6 +33,34 @@ const props = defineProps<{
     background: radial-gradient(circle at 60% 20%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 40%);
     margin: 0;
     padding: 0;
+}
+
+.bg-gradient-event-data {
+    height: 100vh;
+    background: radial-gradient(circle at 60% 50%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 30%);
+    padding: 0;
+    margin: 0 0 0;
+}
+
+.background-image {
+    background: url('/images/LOGO_background.svg') no-repeat center right;
+    background-size: 40%;
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .bg-gradient-event-data {
+        height: 120vh;
+        margin: 50px 0 0;
+        background: radial-gradient(circle at 50% 70%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 40%);
+    }
+
+    .bg-gradient-radial-header {
+        height: 200vh;
+        background: radial-gradient(circle at 50% 40%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 50%);
+    }
+
 }
 
 </style>

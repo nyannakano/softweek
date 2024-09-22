@@ -19,7 +19,7 @@ const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
 
 <template>
     <div class="text-center">
-        <h1 class="font-semibold text-white text-xl md:text-2xl mb-2 mt-10">Empresas parceiras:</h1>
+        <h1 class="font-semibold text-white text-2xl md:text-4xl mb-2 mt-10">Empresas parceiras:</h1>
         <swiper
             :cssMode="true"
             :navigation="false"
