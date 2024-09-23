@@ -47,7 +47,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
                         </button>
                     </div>
                     <small class="text-xs text-white mt-5 text-center">Já possui uma conta?
-                        <a href="#" class="text-white underline hover:text-gray-400">
+                        <a href="/login" class="text-white underline hover:text-gray-400">
                             clique aqui.
                         </a>
                     </small>
