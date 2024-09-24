@@ -31,4 +31,13 @@ class PageController extends Controller
             'images_last_edition' => $images_last_edition,
         ]);
     }
+
+    public function dashboard()
+    {
+        $logo = asset('images/LOGO_SOFTWEEK.svg');
+
+        return Inertia::render('Dashboard', [
+            'logo' => $logo,
+        ]);
+    }
 }

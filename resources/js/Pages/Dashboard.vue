@@ -1,22 +1,25 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import HeaderDashboard from "@/Components/HeaderDashboard.vue";
+import FormSubscribe from "@/Components/FormSubscribe.vue";
+
+const props = defineProps<{
+    logo: string
+}>();
+
 </script>
 
 <template>
-    <Head title="Dashboard" />
-
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">You're logged in!</div>
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
+    <div class="header">
+        <HeaderDashboard :logo="logo"/>
+        <FormSubscribe/>
+    </div>
 </template>
+
+<style scoped>
+.header {
+    height: 120vh;
+    background: radial-gradient(circle at 80% 10%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 60%);
+}
+</style>
+
+
