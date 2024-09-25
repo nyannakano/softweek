@@ -9,7 +9,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div class="header">
+    <div class="header background-image-first">
         <HeaderDashboard :logo="logo"/>
         <FormSubscribe/>
     </div>
@@ -17,7 +17,7 @@ const props = defineProps<{
 
 <style scoped>
 .header {
-    height: 120vh;
+    height: 200vh;
     background: radial-gradient(circle at 80% 10%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 60%);
 }
 </style>
