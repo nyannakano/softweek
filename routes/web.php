@@ -22,4 +22,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment-pending', [SubscriptionController::class, 'paymentPending'])->name('payment.pending');
 });
 
+Route::post('/webhook', [SubscriptionController::class, 'webhook']);
+
 require __DIR__.'/auth.php';

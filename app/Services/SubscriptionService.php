@@ -2,14 +2,24 @@
 
 namespace App\Services;
 
+use App\Models\Subscription;
+
 class SubscriptionService
 {
-    public function subscribe($data)
+    public function subscribe($data): ?string
     {
         $mercadoPagoService = new MercadoPagoService();
 
         $value = 20.0;
 
-        return $mercadoPagoService->setProduct($value);
+        $subscription = $mercadoPagoService->setProduct($value);
+
+        $subscribe = Subscription::create([
+            'user_id' => auth()->id(),
+            'status' => 'pending',
+            'payment_id' => $subscription->external_reference
+        ]);
+
+        return $subscription->init_point;
     }
 }

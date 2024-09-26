@@ -61,4 +61,9 @@ class SubscriptionController extends Controller
     {
         return $this->mercadoPagoService->paymentPending($request);
     }
+
+    public function webhook(Request $request)
+    {
+        return $this->mercadoPagoService->webhook($request);
+    }
 }
