@@ -16,6 +16,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
+
+    Route::get('/payment-success', [SubscriptionController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/payment-failure', [SubscriptionController::class, 'paymentFailure'])->name('payment.failure');
+    Route::get('/payment-pending', [SubscriptionController::class, 'paymentPending'])->name('payment.pending');
 });
 
 require __DIR__.'/auth.php';

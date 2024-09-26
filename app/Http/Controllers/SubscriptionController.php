@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MercadoPagoService;
 use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SubscriptionController extends Controller
 {
     protected SubscriptionService $subscriptionService;
+    protected MercadoPagoService $mercadoPagoService;
 
-    public function __construct(SubscriptionService $subscriptionService)
+    public function __construct(SubscriptionService $subscriptionService, MercadoPagoService $mercadoPagoService)
     {
         $this->subscriptionService = $subscriptionService;
+        $this->mercadoPagoService = $mercadoPagoService;
     }
 
     public function subscribe(Request $request)
@@ -38,8 +42,23 @@ class SubscriptionController extends Controller
             'thursday2.required' => 'O campo Quinta-feira (segundo horário) é obrigatório.',
         ]);
 
-        $this->subscriptionService->subscribe($validatedData);
+        $subscriptionUrl = $this->subscriptionService->subscribe($validatedData);
 
-        return back()->with('success', 'You have successfully subscribed!');
+        return Inertia::location($subscriptionUrl);
+    }
+
+    public function paymentSuccess(Request $request)
+    {
+        return $this->mercadoPagoService->paymentSuccess($request);
+    }
+
+    public function paymentFailure(Request $request)
+    {
+        return $this->mercadoPagoService->paymentFailure($request);
+    }
+
+    public function paymentPending(Request $request)
+    {
+        return $this->mercadoPagoService->paymentPending($request);
     }
 }

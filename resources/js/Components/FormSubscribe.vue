@@ -23,6 +23,9 @@ const submit = () => {
             headers: {
                 'Accept': 'application/json, multipart/form-data',
             },
+            onSuccess: (response) => {
+                window.open(response.url, '_blank');
+            }
         });
     }, 100);
 };
