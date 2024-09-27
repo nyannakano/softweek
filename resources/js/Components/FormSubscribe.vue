@@ -4,6 +4,12 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
 
 import { useForm } from "@inertiajs/vue3";
 
+const props = defineProps<{
+    events: Array<{}>,
+    lunches: Array<{}>,
+    drinks: Array<{}>
+}>();
+
 const form = useForm({
     monday: '',
     tuesday1: '',
@@ -54,80 +60,49 @@ const submit = () => {
                     <div class="text-left">
                         <h3 class="font-bold text-2xl mb-4 mt-10">Terça-feira - 15 de outubro:</h3>
                         <h4 class="font-bold mb-4 mt-5">Primeiro horário: 19h-20:30h</h4>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday1" value="a" name="tuesday1" required>Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday1"  value="s" name="tuesday1">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday1"  value="d" name="tuesday1">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday1"  value="f" name="tuesday1">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday1"  value="g" name="tuesday1">Título da palestra
-                            - nome da empresa</p>
+
+                        <p class="mt-2" v-for="event in events['tuesday_first_half']">
+                            <input type="radio" class="mr-2" v-model="form.tuesday1" :value="event['id']" name="tuesday1" required>
+                            {{ event['title'] }} - {{ event['company'] }}
+                        </p>
 
                         <h4 class="font-bold mb-4 mt-5">Segundo horário: 21h-22:30h</h4>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday2" value="a" name="tuesday2" required>Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday2" value="s" name="tuesday2">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday2" value="f" name="tuesday2">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday2" value="g" name="tuesday2">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.tuesday2" value="c" name="tuesday2">Título da palestra
-                            - nome da empresa</p>
+                        <p class="mt-2" v-for="event in events['tuesday_second_half']">
+                            <input type="radio" class="mr-2" v-model="form.tuesday2" value="event['id']" name="tuesday2" required>
+                            {{ event['title'] }} - {{ event['company'] }}
+                        </p>
+
                     </div>
                     <div class="text-left">
                         <h3 class="font-bold text-2xl mb-4 mt-10">Quarta-feira - 16 de outubro:</h3>
                         <h4 class="font-bold mb-4 mt-5">Primeiro horário: 19h-20:30h</h4>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday1" value="x" name="wednesday1" required>Título
-                            da palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday1" value="a" name="wednesday1">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday1" value="r" name="wednesday1">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday1" value="g" name="wednesday1">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday1" value="h" name="wednesday1">Título da
-                            palestra - nome da empresa</p>
+                        <p class="mt-2" v-for="event in events['wednesday_first_half']">
+                            <input type="radio" class="mr-2" v-model="form.wednesday1" value="event['id']" name="wednesday1" required>
+                            {{ event['title'] }} - {{ event['company'] }}
+                        </p>
 
                         <h4 class="font-bold mb-4 mt-5">Segundo horário: 21h-22:30h</h4>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday2" value="a" name="wednesday2" required>Título
-                            da palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday2" value="s" name="wednesday2">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday2" value="d" name="wednesday2">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday2" value="f" name="wednesday2">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.wednesday2" value="g" name="wednesday2">Título da
-                            palestra - nome da empresa</p>
+                        <p class="mt-2" v-for="event in events['wednesday_second_half']">
+                            <input type="radio" class="mr-2" v-model="form.wednesday2" value="event['id']" name="wednesday2" required>
+                            {{ event['title'] }} - {{ event['company'] }}
+                        </p>
+
                     </div>
                     <div class="text-left">
                         <h3 class="font-bold text-2xl mb-4 mt-10">Quinta-feira - 17 de outubro:</h3>
                         <h4 class="font-bold mb-4 mt-5">Primeiro horário: 19h-20:30h</h4>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday1" value="a" name="thursday1" required>Título
-                            da palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday1" value="x" name="thursday1">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday1" value="f" name="thursday1">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday1" value="g" name="thursday1">Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday1" value="xr" name="thursday1">Título da
-                            palestra - nome da empresa</p>
+                        <p class="mt-2" v-for="event in events['thursday_first_half']">
+                            <input type="radio" class="mr-2" v-model="form.thursday1" value="event['id']" name="thursday1" required>
+                            {{ event['title'] }} - {{ event['company'] }}
+                        </p>
+
 
                         <h4 class="font-bold mb-4 mt-10">Segundo horário: 21h-22:30h</h4>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday2" value="a" name="thursday2" required>Título da
-                            palestra - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday2" value="s" name="thursday2">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday2" value="d" name="thursday2">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday2" value="f" name="thursday2">Título da palestra
-                            - nome da empresa</p>
-                        <p class="mt-2"><input type="radio" class="mr-2" v-model="form.thursday2" value="e" name="thursday2">Título da palestra
-                            - nome da empresa</p>
+                        <p class="mt-2" v-for="event in events['thursday_second_half']">
+                            <input type="radio" class="mr-2" v-model="form.thursday2" value="event['id']" name="thursday2" required>
+                            {{ event['title'] }} - {{ event['company'] }}
+                        </p>
+
                     </div>
                     <div class="text-left">
                         <h3 class="font-bold mb-4 mt-10">Sexta-feira - 18 de outubro:</h3>
@@ -147,21 +122,17 @@ const submit = () => {
                     <div class="text-left">
                         <h3 class="font-bold mb-4 mt-5">Escolha seu lanche:</h3>
 
-                        <p class="mt-2">
-                            <input type="radio" class="mr-2" name="lunch" v-model="form.lunch" value="lunch1" ref="lunchInputs"> Lanche 1
-                        </p>
-                        <p class="mt-2">
-                            <input type="radio" class="mr-2" name="lunch" v-model="form.lunch" value="lunch2" ref="lunchInputs"> Lanche 2
+                        <p class="mt-2" v-for="lunch in lunches">
+                            <input type="radio" class="mr-2" name="lunch" v-model="form.lunch" value="lunch['id']" ref="lunchInputs">
+                            {{ lunch['name'] }}
                         </p>
                     </div>
 
                     <div class="text-left">
                         <h3 class="font-bold mb-4 mt-5">Escolha sua bebida:</h3>
-                        <p class="mt-2">
-                            <input type="radio" class="mr-2" name="drink" v-model="form.drink" value="chopp" ref="drinkInputs"> Chopp
-                        </p>
-                        <p class="mt-2">
-                            <input type="radio" class="mr-2" name="drink" v-model="form.drink" value="other" ref="drinkInputs"> Suco/Refrigerante/Água
+                        <p class="mt-2" v-for="drink in drinks">
+                            <input type="radio" class="mr-2" name="drink" v-model="form.drink" value="drink['id']" ref="drinkInputs">
+                            {{ drink['name'] }}
                         </p>
                     </div>
 

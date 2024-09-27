@@ -3,7 +3,10 @@ import HeaderDashboard from "@/Components/HeaderDashboard.vue";
 import FormSubscribe from "@/Components/FormSubscribe.vue";
 
 const props = defineProps<{
-    logo: string
+    logo: string,
+    events: Array<{}>,
+    lunches: Array<{}>,
+    drinks: Array<{}>
 }>();
 
 </script>
@@ -11,7 +14,7 @@ const props = defineProps<{
 <template>
     <div class="header background-image-first">
         <HeaderDashboard :logo="logo"/>
-        <FormSubscribe/>
+        <FormSubscribe :events="events" :lunches="lunches" :drinks="drinks"/>
     </div>
 </template>
 

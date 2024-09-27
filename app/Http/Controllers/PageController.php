@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\EventService;
 use Inertia\Inertia;
 
 class PageController extends Controller
 {
+    protected EventService $eventService;
+
+    public function __construct(EventService $eventService)
+    {
+        $this->eventService = $eventService;
+    }
+
     public function index()
     {
         $image_logo = asset('images/LOGO-HOME.svg');
@@ -36,8 +44,16 @@ class PageController extends Controller
     {
         $logo = asset('images/LOGO_SOFTWEEK.svg');
 
+        $events = $this->eventService->getEventsPerDay();
+
+        $lunches = $this->eventService->getLunches('lunch');
+        $drinks = $this->eventService->getLunches('drink');
+
         return Inertia::render('Dashboard', [
             'logo' => $logo,
+            'events' => $events,
+            'lunches' => $lunches,
+            'drinks' => $drinks,
         ]);
     }
 }
