@@ -10,4 +10,9 @@ class Coupon extends Model
         'code',
         'percentage',
     ];
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }
