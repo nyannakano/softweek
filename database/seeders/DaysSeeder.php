@@ -41,6 +41,18 @@ class DaysSeeder extends Seeder
             [
                 'name' => 'friday',
                 'period' => 'all_day'
+            ],
+            [
+                'name' =>'tuesday',
+                'period' => 'all_day'
+            ],
+            [
+                'name' =>'wednesday',
+                'period' => 'all_day'
+            ],
+            [
+                'name' => 'thursday',
+                'period' => 'all_day'
             ]
         ];
 

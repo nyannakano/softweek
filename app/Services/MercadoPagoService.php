@@ -34,12 +34,12 @@ class MercadoPagoService
                 )
             ),
             "back_urls" => [
-                "success" => "http://localhost:8000/success",
-                "failure" => "http://localhost:8000/failure",
-                "pending" => "http://localhost:8000/pending"
+                "success" => "http://localhost/payment-success",
+                "failure" => "http://localhost/payment-failure",
+                "pending" => "http://localhost/payment-pending"
             ],
             "external_reference" => $random_id,
-            "notification_url" => "http://localhost:8000/webhook"
+            "notification_url" => "http://localhost/webhook"
         ]);
 
         return $preference;
