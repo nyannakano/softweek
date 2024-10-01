@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.ts', // Certifique-se de que este caminho está correto
+            input: ['resources/js/app.ts'],  // Adicione outros arquivos conforme necessário
             refresh: true,
         }),
         vue({
@@ -17,12 +17,4 @@ export default defineConfig({
             },
         }),
     ],
-    build: {
-        outDir: 'public/build',
-        rollupOptions: {
-            input: {
-                app: 'resources/js/app.ts',
-            },
-        },
-    },
 });
