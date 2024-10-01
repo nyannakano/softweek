@@ -15,7 +15,7 @@
         @routes
         @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
-
+        <script src="{{ mix('/js/app.js') }}" defer></script>
         <script src="https://sdk.mercadopago.com/js/v2"></script>
     </head>
     <body class="font-sans antialiased">
