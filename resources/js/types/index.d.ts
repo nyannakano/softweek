@@ -10,3 +10,24 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
         user: User;
     };
 };
+
+export interface Event {
+    id: number;
+    title: string;
+    company: string;
+}
+
+export interface Drink {
+    id: number;
+    name: string;
+}
+
+export interface Subscription {
+
+}
+
+export interface Metric {
+    total_subscriptions: number;
+    companies: number;
+    hours_total: number;
+}

@@ -4,14 +4,27 @@ import Partners from "@/Components/Partners.vue";
 import EventData from "@/Components/EventData.vue";
 import WeeklySchedule from "@/Components/WeeklySchedule.vue";
 import LastEditionPhotos from "@/Components/LastEditionPhotos.vue";
+import { Metric } from "@/types";
+import { Event } from "@/types";
 
 const props = defineProps<{
     image_logo: string,
     image_partner: string,
     image_logo_softweek: string,
     images_last_edition: string,
-    metrics: Array<{}>,
-    events: Array<{}>,
+    metrics: Metric,
+    events: {
+        tuesday_all_night: Array<Event>;
+        tuesday_first_half: Array<Event>;
+        tuesday_second_half: Array<Event>;
+        wednesday_all_night: Array<Event>;
+        wednesday_first_half: Array<Event>;
+        wednesday_second_half: Array<Event>;
+        thursday_all_night: Array<Event>;
+        thursday_first_half: Array<Event>;
+        thursday_second_half: Array<Event>;
+        friday: Array<Event>;
+    },
 }>();
 </script>
 

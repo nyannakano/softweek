@@ -1,8 +1,10 @@
 <script setup lang="ts">
 
+import { Metric } from "@/types";
+
 const props = defineProps<{
     image_logo_softweek: string
-    metrics: Array<{}>
+    metrics: Metric;
 }>();
 </script>
 

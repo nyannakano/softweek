@@ -1,6 +1,16 @@
 <script setup lang="ts">
     const props = defineProps<{
-        events: Array<{}>,
+        events: {
+            tuesday_all_night: Array<{ title: string, company: string }>,
+            tuesday_first_half: Array<{ title: string, company: string }>,
+            tuesday_second_half: Array<{ title: string, company: string }>,
+            wednesday_all_night: Array<{ title: string, company: string }>,
+            wednesday_first_half: Array<{ title: string, company: string }>,
+            wednesday_second_half: Array<{ title: string, company: string }>,
+            thursday_all_night: Array<{ title: string, company: string }>,
+            thursday_first_half: Array<{ title: string, company: string }>,
+            thursday_second_half: Array<{ title: string, company: string }>,
+        },
     }>();
 
 </script>

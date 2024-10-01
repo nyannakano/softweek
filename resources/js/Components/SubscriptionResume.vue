@@ -1,6 +1,18 @@
 <script setup lang="ts">
     const props = defineProps<{
-        subscription: Array<{}>,
+        subscription: {
+            events: Array<{
+                id: number,
+                title: string,
+                day: {
+                    name: string,
+                    period: string,
+                },
+            }>,
+            lunch: {
+                name: string,
+            } | null,
+        },
     }>();
 
     const dayTranslations: Record<string, string> = {
