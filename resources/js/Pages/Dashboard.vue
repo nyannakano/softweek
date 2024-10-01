@@ -1,20 +1,30 @@
 <script setup lang="ts">
 import HeaderDashboard from "@/Components/HeaderDashboard.vue";
 import FormSubscribe from "@/Components/FormSubscribe.vue";
+import SubscriptionResume from "@/Components/SubscriptionResume.vue";
 
 const props = defineProps<{
     logo: string,
     events: Array<{}>,
     lunches: Array<{}>,
-    drinks: Array<{}>
+    drinks: Array<{}>,
+    is_already_subbed: boolean,
+    subscription: Array<{}>,
 }>();
+
+let title = 'Realize a sua inscrição';
+
+if (props.is_already_subbed) {
+    title = 'Resumo da inscrição';
+}
 
 </script>
 
 <template>
     <div class="header background-image-first">
-        <HeaderDashboard :logo="logo"/>
-        <FormSubscribe :events="events" :lunches="lunches" :drinks="drinks"/>
+        <HeaderDashboard :logo="logo" :title="title"/>
+        <FormSubscribe v-if="!is_already_subbed" :events="events" :lunches="lunches" :drinks="drinks"/>
+        <SubscriptionResume v-else :subscription="subscription"/>
     </div>
 </template>
 

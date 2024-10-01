@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-    logo: string
+    logo: string,
+    title: string,
 }>();
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
@@ -19,7 +20,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
 
             <div class="absolute left-1/2 transform -translate-x-1/2 mt-5 sm:mt-10 w-full px-4 hidden sm:block">
                 <h1 class="text-white font-semibold text-lg sm:text-2xl text-center">
-                    Realize a sua inscrição
+                    {{ title }}
                 </h1>
             </div>
 
@@ -36,7 +37,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
         </div>
         <div class="absolute left-1/2 transform -translate-x-1/2 mt-5 sm:mt-10 w-full px-4 block sm:hidden">
             <h1 class="text-white font-semibold text-lg sm:text-2xl text-center">
-                Realize a sua inscrição
+                {{ title }}
             </h1>
         </div>
     </header>

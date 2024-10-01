@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Day;
 use App\Models\Event;
 use App\Models\Lunch;
+use App\Models\Subscription;
 
 class EventService
 {
@@ -49,7 +50,7 @@ class EventService
 
     public function getEvents($dayId): array
     {
-        return Event::where('day_id', $dayId)->get()->toArray();
+        return Event::where('day_id', $dayId)->where('slots', '>', 0)->get()->toArray();
     }
 
     public function getLunches($type): array
@@ -82,5 +83,35 @@ class EventService
             'thursday_first_half' => $this->getEvents($thursday_first_half_id),
             'thursday_second_half' => $this->getEvents($thursday_second_half_id),
         ];
+    }
+
+    public function getMetrics()
+    {
+        $total_subscriptions = Subscription::where('status', 'paid')->count();
+        $companies = Event::select('company')->distinct()->count();
+        $firstHalfDays = Day::where('period', 'first_half')->pluck('id');
+        $secondHalfDays = Day::where('period', 'second_half')->pluck('id');
+        $allNight = Day::where('period', 'all_day')->pluck('id');
+
+        $events_half = Event::whereIn('day_id', $firstHalfDays)
+            ->orWhereIn('day_id', $secondHalfDays)
+            ->count();
+
+        $events_all_night = Event::whereIn('day_id', $allNight)->count();
+
+        $hours_half = $events_half;
+        $hours_all_night = $events_all_night * 3;
+        $hours_total = $hours_half + $hours_all_night;
+
+        return [
+            'total_subscriptions' => $total_subscriptions,
+            'companies' => $companies,
+            'hours_total' => $hours_total,
+        ];
+    }
+
+    public function getEventsAsAdmin()
+    {
+        return Event::with('day')->get();
     }
 }

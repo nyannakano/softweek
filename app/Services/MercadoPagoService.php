@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Event;
 use App\Models\Subscription;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
@@ -25,7 +26,7 @@ class MercadoPagoService
             $random_id = rand(1, 10000);
         }
 
-        $preference = $this->client->create([
+        return $this->client->create([
             "items" => array(
                 array(
                     "title" => "Softweek Inscrição",
@@ -39,10 +40,8 @@ class MercadoPagoService
                 "pending" => "http://localhost/payment-pending"
             ],
             "external_reference" => $random_id,
-            "notification_url" => "http://localhost/webhook"
+            "notification_url" => "http://localhost/webhook",
         ]);
-
-        return $preference;
     }
 
     public function paymentSuccess($request)
@@ -50,6 +49,16 @@ class MercadoPagoService
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
         $subscription->status = 'paid';
         $subscription->save();
+        $subscriptionId = $subscription->id;
+
+        $events = Event::whereHas('subscriptions', function ($query) use ($subscriptionId) {
+            $query->where('subscription_id', $subscriptionId);
+        })->get();
+
+        foreach ($events as $event) {
+            $event->slots = $event->slots - 1;
+            $event->save();
+        }
 
         return 'Pagamento realizado com sucesso!';
     }
@@ -75,6 +84,25 @@ class MercadoPagoService
     public function webhook($request)
     {
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
+
+        if ($request->status == 'paid') {
+            $subscription->status = $request->status;
+            $subscription->save();
+
+            $subscriptionId = $subscription->id;
+
+            $events = Event::whereHas('subscriptions', function ($query) use ($subscriptionId) {
+                $query->where('subscription_id', $subscriptionId);
+            })->get();
+
+            foreach ($events as $event) {
+                $event->slots = $event->slots - 1;
+                $event->save();
+            }
+
+            return 'Webhook recebido!';
+        }
+
         $subscription->status = $request->status;
         $subscription->save();
 

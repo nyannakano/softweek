@@ -61,7 +61,6 @@ const handleChange = (day, type) => {
                 <span v-if="form.errors.wednesday" class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.wednesday }}</span>
                 <span v-if="form.errors.thursday" class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.thursday }}</span>
                 <span v-if="form.errors.friday" class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.friday }}</span>
-                <span v-if="form.errors.lunch" class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.lunch }}</span>
                 <div v-if="form.errors.drink" class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.drink }}</div>
                 <div v-if="form.errors.coupon" class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.coupon }}</div>
                 <div class="text-left">
@@ -71,7 +70,7 @@ const handleChange = (day, type) => {
 
 
                     <h3 class="font-bold text-2xl mt-10 mb-4">Segunda-feira - 14 de outubro:</h3>
-                    <p class="mt-2"><input type="radio" class="mr-2" v-model="form.monday"  value="opening" name="monday" required>Palestra
+                    <p class="mt-2">Palestra
                         de abertura</p>
 
                     <div class="text-left">
@@ -153,15 +152,6 @@ const handleChange = (day, type) => {
                         <p class="mt-2">
                             <input type="radio" class="mr-2" v-model="form.friday" name="friday" value="no">
                             Não vou participar
-                        </p>
-                    </div>
-
-                    <div class="text-left">
-                        <h3 class="font-bold mb-4 mt-5">Escolha seu lanche:</h3>
-
-                        <p class="mt-2" v-for="lunch in lunches">
-                            <input type="radio" class="mr-2" name="lunch" v-model="form.lunch" :value="lunch['id']" ref="lunchInputs">
-                            {{ lunch['name'] }}
                         </p>
                     </div>
 

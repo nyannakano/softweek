@@ -9,7 +9,9 @@ const props = defineProps<{
     image_logo: string,
     image_partner: string,
     image_logo_softweek: string,
-    images_last_edition: string
+    images_last_edition: string,
+    metrics: Array<{}>,
+    events: Array<{}>,
 }>();
 </script>
 
@@ -21,9 +23,9 @@ const props = defineProps<{
         <main>
             <Partners :image_partner="image_partner"/>
             <div class="background-image">
-                <EventData :image_logo_softweek="image_logo_softweek" class="bg-gradient-event-data"/>
+                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>
             </div>
-            <WeeklySchedule />
+            <WeeklySchedule :events="events" />
             <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>
         </main>
 

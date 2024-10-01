@@ -14,6 +14,7 @@ class Subscription extends Model
         'user_id',
         'payment_id',
         'status',
+        'lunch_id',
     ];
 
     public function user(): BelongsTo
@@ -29,5 +30,10 @@ class Subscription extends Model
     public function events(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'subscriptions_events');
+    }
+
+    public function lunch(): BelongsTo
+    {
+        return $this->belongsTo(Lunch::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lunch extends Model
@@ -13,6 +14,12 @@ class Lunch extends Model
 
     protected $fillable = [
         'name',
-        'type'
+        'type',
+        'slots',
     ];
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

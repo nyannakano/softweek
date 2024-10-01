@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', Rules\Password::defaults()],
             'ra' => 'nullable|string|unique:'.User::class,
+            'cpf' => 'required|string|min_digits:11|max_digits:11|unique:'.User::class,
         ], [
             'ra.unique' => 'O RA informado já está em uso.',
             'ra.string' => 'O RA informado não é válido.',
@@ -50,6 +51,10 @@ class RegisteredUserController extends Controller
             'password.required' => 'A senha informada não é válida.',
             'password.string' => 'A senha informada não é válida.',
             'password.min' => 'A senha informada não é válida.',
+            'cpf.unique' => 'O CPF informado já está em uso.',
+            'cpf.string' => 'O CPF informado não é válido.',
+            'cpf.min_digits' => 'O CPF informado não é válido.',
+            'cpf.max_digits' => 'O CPF informado não é válido.',
         ]);
 
         $user = User::create([

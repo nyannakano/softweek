@@ -1,4 +1,8 @@
 <script setup lang="ts">
+    const props = defineProps<{
+        events: Array<{}>,
+    }>();
+
 </script>
 
 <template>
@@ -15,27 +19,21 @@
             </div>
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Terça-feira</h3>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
+                <p v-for="event in events['tuesday_all_night']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['tuesday_first_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['tuesday_second_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
             </div>
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Quarta-feira</h3>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
+                <p v-for="event in events['wednesday_all_night']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['wednesday_first_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['wednesday_second_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
             </div>
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Quinta-feira</h3>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
-                <p>Título da palestra - nome da empresa</p>
+                <p v-for="event in events['thursday_all_night']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['thursday_first_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['thursday_second_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
             </div>
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Sexta-feira</h3>

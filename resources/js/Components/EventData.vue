@@ -2,6 +2,7 @@
 
 const props = defineProps<{
     image_logo_softweek: string
+    metrics: Array<{}>
 }>();
 </script>
 
@@ -11,21 +12,21 @@ const props = defineProps<{
         <div>
             <div class="flex flex-col md:flex-row md:space-x-20 mb-10">
                 <div class="mb-10 md:mb-0">
-                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+0000</h1>
+                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['total_subscriptions']}}</h1>
                     <p class="text-white font-semibold text-2xl md:text-4xl">INSCRITOS</p>
                 </div>
                 <div>
-                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+00</h1>
+                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['companies']}}</h1>
                     <p class="text-white font-semibold text-2xl md:text-4xl">EMPRESAS</p>
                 </div>
             </div>
             <div class="flex flex-col md:flex-row md:space-x-20">
                 <div class="mb-10 md:mb-0">
-                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+000h</h1>
+                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['hours_total']}}h</h1>
                     <p class="text-white font-semibold text-2xl md:text-4xl">IMERSÃO</p>
                 </div>
                 <div>
-                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+00</h1>
+                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['companies']}}</h1>
                     <p class="text-white font-semibold text-2xl md:text-4xl">PALESTRANTES</p>
                 </div>
             </div>

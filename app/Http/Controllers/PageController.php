@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Services\EventService;
+use App\Services\SubscriptionService;
 use Inertia\Inertia;
 
 class PageController extends Controller
 {
     protected EventService $eventService;
+    protected SubscriptionService $subscriptionService;
 
-    public function __construct(EventService $eventService)
+    public function __construct(EventService $eventService, SubscriptionService $subscriptionService)
     {
         $this->eventService = $eventService;
+        $this->subscriptionService = $subscriptionService;
     }
 
     public function index()
@@ -32,19 +35,36 @@ class PageController extends Controller
             asset('images/last_editions/lasted10.png'),
         ];
 
+        $metrics = $this->eventService->getMetrics();
+        $events = $this->eventService->getEventsPerDay();
+
         return Inertia::render('Welcome', [
             'image_logo' => $image_logo,
             'image_partner' => $image_partner,
             'image_logo_softweek' => $image_logo_softweek,
             'images_last_edition' => $images_last_edition,
+            'metrics' => $metrics,
+            'events' => $events,
         ]);
     }
 
     public function dashboard()
     {
+        $user = auth()->user();
+
+        if ($user->is_admin) {
+            return redirect()->route('admin');
+        }
+
         $logo = asset('images/LOGO_SOFTWEEK.svg');
 
         $events = $this->eventService->getEventsPerDay();
+        $is_already_subbed = $this->subscriptionService->isSubscribed($user);
+        $subscription = null;
+
+        if ($is_already_subbed) {
+            $subscription = $this->subscriptionService->getSubscription($user);
+        }
 
         $lunches = $this->eventService->getLunches('lunch');
         $drinks = $this->eventService->getLunches('drink');
@@ -54,6 +74,20 @@ class PageController extends Controller
             'events' => $events,
             'lunches' => $lunches,
             'drinks' => $drinks,
+            'is_already_subbed' => $is_already_subbed,
+            'subscription' => $subscription,
         ]);
+    }
+
+    public function admin()
+    {
+        return view('admin.admin');
+    }
+
+    public function workshops()
+    {
+        $workshops = $this->eventService->getEventsAsAdmin();
+
+        return view('admin.workshops', compact('workshops'));
     }
 }

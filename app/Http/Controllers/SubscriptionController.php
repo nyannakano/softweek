@@ -31,11 +31,9 @@ class SubscriptionController extends Controller
             'thursday' => 'required_without:thursday1,thursday2',
             'thursday1' => 'required_without:thursday',
             'thursday2' => 'required_without:thursday',
-            'lunch' => 'required_if:friday,yes',
             'drink' => 'required_if:friday,yes',
             'coupon' => 'nullable|exists:coupons,code',
         ], [
-            'lunch.required_if' => 'O lanche é obrigatório caso vá participar do Happy Hour.',
             'drink.required_if' => 'A bebida é obrigatória caso vá participar do Happy Hour.',
             'friday.required' => 'O campo Sexta-feira é obrigatório.',
             'tuesday.required_without' => 'O campo Terça-feira é obrigatório.',
@@ -73,5 +71,12 @@ class SubscriptionController extends Controller
     public function webhook(Request $request)
     {
         return $this->mercadoPagoService->webhook($request);
+    }
+
+    public function getSubscriptionsAsAdmin()
+    {
+        return view('admin.subscription', [
+            'subscriptions' => $this->subscriptionService->getSubscriptions(),
+        ]);
     }
 }

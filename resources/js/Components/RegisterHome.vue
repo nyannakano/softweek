@@ -35,6 +35,12 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
                             class="shadow appearance-none text-white bg-transparent border-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="ra" name="ra" type="text" placeholder="R.A.">
                     </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="cpf"></label>
+                        <input
+                            class="shadow appearance-none text-white bg-transparent border-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="cpf" name="cpf" type="text" placeholder="CPF (apenas números)*" required>
+                    </div>
                     <div class="mb-6">
                         <label class="block text-gray-700 text-white text-sm font-bold mb-2" for="password"></label>
                         <input

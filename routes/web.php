@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
-
-Route::get('/dashboard', [PageController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -20,6 +21,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment-success', [SubscriptionController::class, 'paymentSuccess'])->name('payment.success');
     Route::get('/payment-failure', [SubscriptionController::class, 'paymentFailure'])->name('payment.failure');
     Route::get('/payment-pending', [SubscriptionController::class, 'paymentPending'])->name('payment.pending');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+
+    Route::middleware(AdminMiddleware::class)->group(function () {
+        Route::get('/admin', [PageController::class, 'admin'])->name('admin');
+        Route::get('/admin/subscriptions', [SubscriptionController::class, 'getSubscriptionsAsAdmin'])->name('admin.subscriptions');
+        Route::get('/admin/coupons', [CouponController::class, 'getCouponsAsAdmin'])->name('admin.coupons');
+        Route::get('/admin/register-coupon', [CouponController::class, 'registerCoupon'])->name('admin.register-coupon');
+        Route::get('/admin/workshops', [PageController::class, 'workshops'])->name('admin.workshops');
+
+        Route::get('/admin/create-workshop', [EventController::class, 'createWorkshop'])->name('admin.register-workshop');
+        Route::post('/create-event', [EventController::class, 'createEvent'])->name('create-workshop');
+        Route::patch('/update-event', [EventController::class, 'updateEvent'])->name('update-workshop');
+        Route::delete('/delete-event', [EventController::class, 'deleteEvent'])->name('delete-workshop');
+
+        Route::post('/create-coupon', [CouponController::class, 'createCoupon'])->name('create-coupon');
+    });
 });
 
 Route::post('/webhook', [SubscriptionController::class, 'webhook']);

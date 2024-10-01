@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Day;
 use App\Services\EventService;
 use Illuminate\Http\Request;
 
@@ -59,5 +60,12 @@ class EventController extends Controller
         return response()->json([
             'message' => 'Error deleting event',
         ], 500);
+    }
+
+    public function createWorkshop()
+    {
+        $days = Day::all();
+
+        return view('admin.register-workshop', compact('days'));
     }
 }
