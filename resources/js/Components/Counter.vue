@@ -45,14 +45,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center min-h-screen lg:ml-[100px]">
+    <div class="flex flex-col justify-center items-center min-h-screen lg:ml-[180px]">
         <div class="flex flex-col md:flex-row">
             <img :src="image_logo" alt="Logo Softweek 2024" class="logo-image w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
 
             <div class="max-w-lg w-full lg:m-10 lg:ml-20 mt-20">
-                <h1 class="text-white text-xl md:text-2xl mb-10 font-bold text-title">Prepare-se para garantir seu ingresso!
-                    O universo da Engenharia de Software está te esperando! ⚡</h1>
-                <h2 class="text-white text-xl md:text-2xl mb-10 font-bold text-title">As vendas iniciam em:</h2>
+                <h1 class="text-white text-xl md:text-2xl mb-10 font-bold text-title">
+                    O universo da Engenharia de Software está te esperando! ⚡
+                </h1>
+                <h2 class="text-white text-xl md:text-2xl mb-10 ml-5 font-bold text-title">As vendas iniciam em:</h2>
                 <section class="p-8 rounded-lg shadow-lg text-left items-center">
                     <div class="grid grid-cols-1 md:grid-cols-1 gap-8 text-white">
                         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
@@ -107,9 +108,7 @@ section {
 
 @media (max-width: 768px) {
     section {
-        margin-top: 5em;
-        margin-left: 1em;
-        margin-right: 1em;
+        margin: 1em 1em 5em;
     }
 }
 
