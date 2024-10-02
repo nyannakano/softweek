@@ -22,6 +22,8 @@ class PageController extends Controller
         $image_logo = asset('images/LOGO-HOME.svg');
         $image_partner = asset('images/icon-empresa.svg');
         $image_logo_softweek = asset('images/LOGO_SOFTWEEK.svg');
+        $image_eng_soft = asset('images/engsoft.svg');
+        $image_campo_real = asset('images/camporeal.png');
         $images_last_edition = [
             asset('images/last_editions/lasted1.png'),
             asset('images/last_editions/lasted2.png'),
@@ -45,6 +47,8 @@ class PageController extends Controller
             'images_last_edition' => $images_last_edition,
             'metrics' => $metrics,
             'events' => $events,
+            'image_eng_soft' => $image_eng_soft,
+            'image_campo_real' => $image_campo_real,
         ]);
     }
 

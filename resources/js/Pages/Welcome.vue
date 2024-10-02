@@ -6,12 +6,15 @@ import WeeklySchedule from "@/Components/WeeklySchedule.vue";
 import LastEditionPhotos from "@/Components/LastEditionPhotos.vue";
 import { Metric } from "@/types";
 import { Event } from "@/types";
+import Counter from "@/Components/Counter.vue";
 
 const props = defineProps<{
     image_logo: string,
     image_partner: string,
     image_logo_softweek: string,
     images_last_edition: string,
+    image_eng_soft: string,
+    image_campo_real: string,
     metrics: Metric,
     events: {
         tuesday_all_night: Array<Event>;
@@ -31,38 +34,26 @@ const props = defineProps<{
 <template>
     <div class="bg-gradient-radial-header">
         <header>
-            <RegisterHome :image_logo="image_logo"/>
+<!--            <RegisterHome :image_logo="image_logo"/>-->
+            <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real"/>
         </header>
         <main>
-            <Partners :image_partner="image_partner"/>
-            <div class="background-image">
-                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>
-            </div>
-            <WeeklySchedule :events="events" />
-            <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>
+<!--            <Partners :image_partner="image_partner"/>-->
+<!--            <div class="background-image">-->
+<!--                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>-->
+<!--            </div>-->
+<!--            <WeeklySchedule :events="events" />-->
+<!--            <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>-->
         </main>
 
-        <footer class="footer-space">
-        </footer>
+<!--        <footer class="footer-space">-->
+<!--        </footer>-->
     </div>
 
 </template>
 
 
 <style scoped>
-.bg-gradient-radial-header {
-    height: 70vh;
-    background: radial-gradient(circle at 60% 20%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 40%);
-    margin: 0;
-    padding: 0;
-}
-
-.bg-gradient-event-data {
-    height: 70vh;
-    background: radial-gradient(circle at 60% 50%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 26%);
-    padding: 0;
-    margin: 0 0 0;
-}
 
 .background-image {
     background: url('/images/LOGO_background.svg') no-repeat center right;
@@ -82,17 +73,6 @@ const props = defineProps<{
 }
 
 @media (max-width: 768px) {
-    .bg-gradient-event-data {
-        height: 120vh;
-        margin: 50px 0 0;
-        background: radial-gradient(circle at 50% 70%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 40%);
-    }
-
-    .bg-gradient-radial-header {
-        height: 200vh;
-        background: radial-gradient(circle at 50% 40%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 50%);
-    }
-
     .footer-space {
         padding-bottom: 6rem;
     }
