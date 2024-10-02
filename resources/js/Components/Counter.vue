@@ -7,7 +7,7 @@ const props = defineProps<{
     image_campo_real: string
 }>();
 
-const targetDate = new Date('2024-10-07T00:00:00').getTime();
+const targetDate = new Date('2024-10-07T20:00:00').getTime();
 
 const days = ref(0);
 const hours = ref(0);
