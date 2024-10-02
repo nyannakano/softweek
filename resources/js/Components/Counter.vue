@@ -50,7 +50,7 @@ onUnmounted(() => {
             <img :src="image_logo" alt="Logo Softweek 2024" class="logo-image w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
 
             <div class="max-w-lg w-full lg:m-10 lg:ml-20 mt-20">
-                <h1 class="text-white text-xl md:text-2xl mb-10 font-bold text-title">
+                <h1 class="text-white text-xl md:text-2xl mb-10 ml-5 font-bold text-title">
                     O universo da Engenharia de Software está te esperando! ⚡
                 </h1>
                 <h2 class="text-white text-xl md:text-2xl mb-10 ml-5 font-bold text-title">As vendas iniciam em:</h2>
