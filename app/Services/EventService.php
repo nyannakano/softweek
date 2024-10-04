@@ -14,6 +14,7 @@ class EventService
         return Event::create([
             'day_id' => $data['day_id'],
             'title' => $data['title'],
+            'speaker' => $data['speaker'],
             'company' => $data['company'],
         ]);
     }

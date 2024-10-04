@@ -26,6 +26,10 @@
                 <input type="text" id="percentage" name="title" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
             </div>
             <div class="mb-4">
+                <label for="speaker" class="block text-sm font-medium text-gray-700">Palestrante</label>
+                <input type="text" id="speaker" name="speaker" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
+            </div>
+            <div class="mb-4">
                 <label for="company" class="block text-sm font-medium text-gray-700">Empresa</label>
                 <input type="text" id="company" name="company" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
             </div>
