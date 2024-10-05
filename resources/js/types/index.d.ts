@@ -15,6 +15,8 @@ export interface Event {
     id: number;
     title: string;
     company: string;
+    speaker: string;
+    day: Day;
 }
 
 export interface Drink {
@@ -23,11 +25,19 @@ export interface Drink {
 }
 
 export interface Subscription {
-
+    events: Array<Event>,
+    lunch: {
+        name: string,
+    } | null,
 }
 
 export interface Metric {
     total_subscriptions: number;
     companies: number;
     hours_total: number;
+}
+
+export interface Day {
+    name: string;
+    period: string;
 }

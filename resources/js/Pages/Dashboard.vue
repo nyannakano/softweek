@@ -22,6 +22,7 @@ const props = defineProps<{
     },
     drinks: Array<Drink>,
     is_already_subbed: boolean,
+    subscription: Subscription
 }>();
 
 let title = 'Realize a sua inscrição';
@@ -36,7 +37,7 @@ if (props.is_already_subbed) {
     <div class="header background-image-first">
         <HeaderDashboard :logo="logo" :title="title"/>
         <FormSubscribe v-if="!is_already_subbed" :events="events" :drinks="drinks"/>
-<!--        <SubscriptionResume v-else :subscription="subscription"/>-->
+        <SubscriptionResume v-else :subscription="subscription"/>
     </div>
 </template>
 

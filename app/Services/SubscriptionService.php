@@ -21,8 +21,13 @@ class SubscriptionService
             if ($data['coupon']) {
                 $coupon = Coupon::where('code', $data['coupon'])->first();
 
+                if ($coupon->max_uses <= $coupon->uses) {
+                    return null;
+                }
+
                 if ($coupon) {
                     $value = $value - ($value * $coupon->percentage);
+                    $coupon->uses += 1;
                 }
             }
 

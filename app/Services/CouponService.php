@@ -17,6 +17,7 @@ class CouponService
             return Coupon::create([
                 'code' => $data['code'],
                 'percentage' => $data['percentage'],
+                'max_uses' => $data['max_uses'],
             ]);
         } catch (\Exception $e) {
             \Log::error('Error creating coupon', ['error' => $e->getMessage()]);

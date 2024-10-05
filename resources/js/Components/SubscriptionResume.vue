@@ -1,18 +1,8 @@
 <script setup lang="ts">
+    import {Subscription} from "@/types";
+
     const props = defineProps<{
-        subscription: {
-            events: Array<{
-                id: number,
-                title: string,
-                day: {
-                    name: string,
-                    period: string,
-                },
-            }>,
-            lunch: {
-                name: string,
-            } | null,
-        },
+        subscription: Subscription
     }>();
 
     const dayTranslations: Record<string, string> = {
@@ -46,7 +36,7 @@
                     <h2 class="text-xl mb-2 font-bold">Workshops</h2>
                     <ul>
                         <li v-for="event in subscription['events']" :key="event.id">
-                            <p>- {{ event.title }} - {{ translateDay(event.day.name) }} {{ translatePeriod(event.day.period) }}</p>
+                            <p>- {{ event.title }} - {{ translateDay(event.day.name) }} {{ translatePeriod(event.day.period) }} - {{ event.speaker }}</p>
                         </li>
                     </ul>
                 </div>

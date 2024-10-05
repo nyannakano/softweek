@@ -50,6 +50,10 @@ class SubscriptionController extends Controller
 
         $subscriptionUrl = $this->subscriptionService->subscribe($validatedData);
 
+        if (!$subscriptionUrl) {
+            return redirect()->back()->with('error', 'Ocorreu um erro ao fazer a inscrição.');
+        }
+
         return Inertia::location($subscriptionUrl);
     }
 
