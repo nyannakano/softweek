@@ -6,7 +6,6 @@ use App\Models\Coupon;
 use App\Models\Day;
 use App\Models\Event;
 use App\Models\Subscription;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use LaravelIdea\Helper\App\Models\_IH_Subscription_C;
 
 class SubscriptionService
@@ -16,7 +15,7 @@ class SubscriptionService
         try {
             $mercadoPagoService = new MercadoPagoService();
 
-            $value = 75.0;
+            $value = 5.0;
 
             if ($data['coupon']) {
                 $coupon = Coupon::where('code', $data['coupon'])->first();
