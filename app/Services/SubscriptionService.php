@@ -90,7 +90,7 @@ class SubscriptionService
 
             return $subscription->init_point ?? '/dashboard';
         } catch (\Exception $e) {
-            \Log::error('Error subscribing: ' . $e->getMessage());
+            \Log::error('Error subscribing: ' . $e);
             return null;
         }
     }
