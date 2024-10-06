@@ -20,7 +20,6 @@ class PageController extends Controller
     public function index()
     {
         $image_logo = asset('images/LOGO-HOME.svg');
-        $image_partner = asset('images/icon-empresa.svg');
         $image_logo_softweek = asset('images/LOGO_SOFTWEEK.svg');
         $image_eng_soft = asset('images/engsoft.svg');
         $image_campo_real = asset('images/camporeal.png');
@@ -37,12 +36,54 @@ class PageController extends Controller
             asset('images/last_editions/lasted10.png'),
         ];
 
+        $images_master = [
+            asset('images/MASTER/shootinghouse.png'),
+            asset('images/MASTER/teorema.png'),
+        ];
+
+        $images_knight = [
+            asset('images/KNIGHT/3c.png'),
+            asset('images/KNIGHT/dam.png'),
+        ];
+
+        $image_force = [
+            asset('images/FORCE/palinha.svg'),
+            asset('images/FORCE/cooperalianca.png'),
+        ];
+
+        $image_jedi = [
+            asset('images/JEDI/dalpozzo.png'),
+            asset('images/JEDI/fiqon.png'),
+            asset('images/JEDI/fuel.png'),
+            asset('images/JEDI/nexun.png'),
+            asset('images/JEDI/rp.png'),
+            asset('images/JEDI/santamaria.svg'),
+            asset('images/JEDI/spa.png'),
+            asset('images/JEDI/unimed.png'),
+        ];
+
+        $image_padawan = [
+            asset('images/PADAWAN/act.png'),
+            asset('images/PADAWAN/celeiro.png'),
+            asset('images/PADAWAN/ctp.png'),
+            asset('images/PADAWAN/lets.png'),
+            asset('images/PADAWAN/NextAge.png'),
+        ];
+
+        $images_partners = [
+            'jedi' => $image_jedi,
+            'padawan' => $image_padawan,
+            'force' => $image_force,
+            'knight' => $images_knight,
+            'master' => $images_master,
+        ];
+
         $metrics = $this->eventService->getMetrics();
         $events = $this->eventService->getEventsPerDay();
 
         return Inertia::render('Welcome', [
             'image_logo' => $image_logo,
-            'image_partner' => $image_partner,
+            'images_partners' => $images_partners,
             'image_logo_softweek' => $image_logo_softweek,
             'images_last_edition' => $images_last_edition,
             'metrics' => $metrics,

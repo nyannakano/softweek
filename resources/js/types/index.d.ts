@@ -43,3 +43,11 @@ export interface Day {
     name: string;
     period: string;
 }
+
+export interface ImagePartner {
+    jedi: string;
+    master: string;
+    padawan: string;
+    force: string;
+    knight: string;
+}

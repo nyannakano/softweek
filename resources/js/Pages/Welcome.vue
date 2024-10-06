@@ -4,17 +4,17 @@ import Partners from "@/Components/Partners.vue";
 import EventData from "@/Components/EventData.vue";
 import WeeklySchedule from "@/Components/WeeklySchedule.vue";
 import LastEditionPhotos from "@/Components/LastEditionPhotos.vue";
-import { Metric } from "@/types";
+import {ImagePartner, Metric} from "@/types";
 import { Event } from "@/types";
 import Counter from "@/Components/Counter.vue";
 
 const props = defineProps<{
     image_logo: string,
-    image_partner: string,
     image_logo_softweek: string,
     images_last_edition: string,
     image_eng_soft: string,
     image_campo_real: string,
+    images_partners: Array<ImagePartner>,
     metrics: Metric,
     events: {
         tuesday_all_night: Array<Event>;
@@ -37,7 +37,7 @@ const props = defineProps<{
             <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real"/>
         </header>
         <main>
-<!--            <Partners :image_partner="image_partner"/>-->
+<!--            <Partners :images_partners="images_partners"/>-->
 <!--            <div class="background-image">-->
 <!--                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>-->
 <!--            </div>-->
@@ -45,8 +45,8 @@ const props = defineProps<{
 <!--            <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>-->
         </main>
 
-<!--        <footer class="footer-space">-->
-<!--        </footer>-->
+        <footer class="footer-space">
+        </footer>
     </div>
 
 </template>
