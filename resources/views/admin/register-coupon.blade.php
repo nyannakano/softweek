@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="max_uses" class="block text-sm font-medium text-gray-700">Máximo de usos</label>
-                    <input type="text" id="max_uses-use" name="max_uses-use" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
+                    <input type="text" id="max_uses" name="max_uses" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
                 </div>
                 <button type="submit" class="bg-gray-50 hover:bg-blue-700 text-black font-semibold py-2 px-4 rounded-lg">Cadastrar</button>
             </form>
