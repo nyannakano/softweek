@@ -11,18 +11,22 @@
 
 
         <h1 class="text-2xl font-semibold mb-4">Cadastrar Cupons</h1>
-        <form action="{{ route('create-coupon') }}" method="post">
-            @csrf
-            <div class="mb-4">
-                <label for="code" class="block text-sm font-medium text-gray-700">Código</label>
-                <input type="text" id="code" name="code" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
-            </div>
-            <div class="mb-4">
-                <label for="percentage" class="block text-sm font-medium text-gray-700">Porcentagem (exemplo, se for 10%, colocar: 0.1)</label>
-                <input type="text" id="percentage" name="percentage" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
-            </div>
-            <button type="submit" class="bg-gray-50 hover:bg-blue-700 text-black font-semibold py-2 px-4 rounded-lg">Cadastrar</button>
-        </form>
+            <form action="{{ route('create-coupon') }}" method="post">
+                @csrf
+                <div class="mb-4">
+                    <label for="code" class="block text-sm font-medium text-gray-700">Código</label>
+                    <input type="text" id="code" name="code" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="percentage" class="block text-sm font-medium text-gray-700">Porcentagem (exemplo, se for 10%, colocar: 0.1)</label>
+                    <input type="text" id="percentage" name="percentage" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="max_uses" class="block text-sm font-medium text-gray-700">Máximo de usos</label>
+                    <input type="text" id="max_uses-use" name="max_uses-use" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
+                </div>
+                <button type="submit" class="bg-gray-50 hover:bg-blue-700 text-black font-semibold py-2 px-4 rounded-lg">Cadastrar</button>
+            </form>
 
     </div>
 
