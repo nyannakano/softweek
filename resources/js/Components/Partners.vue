@@ -19,7 +19,47 @@ const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
 
 <template>
     <div class="text-center">
-        <h1 class="font-semibold text-white text-2xl md:text-4xl mb-2 mt-10">Empresas parceiras:</h1>
+        <h1 class="font-semibold text-white text-2xl mb-2 mt-10">Empresas parceiras Master Sponsor:</h1>
+        <swiper
+            :cssMode="true"
+            :navigation="false"
+            :pagination="false"
+            :mousewheel="true"
+            :autoplay="{
+                delay: 2500,
+                disableOnInteraction: false,
+            }"
+            :keyboard="true"
+            :loop="true"
+            :modules="modules"
+            class="mySwiper"
+        >
+            <swiper-slide v-for="(partner, index) in partners" :key="index">
+                <img :src="partner.image" alt="Logo Empresa Parceira" class="w-32 h-32 mb-4">
+            </swiper-slide>
+        </swiper>
+
+        <h1 class="font-semibold text-white text-2xl mb-2 mt-10">Empresas parceiras Knight Sponsor:</h1>
+        <swiper
+            :cssMode="true"
+            :navigation="false"
+            :pagination="false"
+            :mousewheel="true"
+            :autoplay="{
+                delay: 2500,
+                disableOnInteraction: false,
+            }"
+            :keyboard="true"
+            :loop="true"
+            :modules="modules"
+            class="mySwiper"
+        >
+            <swiper-slide v-for="(partner, index) in partners" :key="index">
+                <img :src="partner.image" alt="Logo Empresa Parceira" class="w-32 h-32 mb-4">
+            </swiper-slide>
+        </swiper>
+
+        <h1 class="font-semibold text-white text-2xl mb-2 mt-10">Empresas parceiras Padawan Supporter:</h1>
         <swiper
             :cssMode="true"
             :navigation="false"

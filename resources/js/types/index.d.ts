@@ -36,6 +36,7 @@ export interface Metric {
     total_subscriptions: number;
     companies: number;
     hours_total: number;
+    speakers: number;
 }
 
 export interface Day {

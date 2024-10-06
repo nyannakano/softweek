@@ -56,14 +56,14 @@ const props = defineProps<{
 
 .background-image {
     background: url('/images/LOGO_background.svg') no-repeat center right;
-    background-size: 30%;
+    background-size: 20%;
     padding: 0;
     margin: 0;
 }
 
 .background-image-last-edition {
     background: url('/images/LOGO_background_2.svg') no-repeat center left;
-    background-size: 30%;
+    background-size: 20%;
     padding: 0;
     margin: 0 0 0 0;
 }

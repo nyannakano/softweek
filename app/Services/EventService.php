@@ -91,6 +91,7 @@ class EventService
     {
         $total_subscriptions = Subscription::where('status', 'paid')->count();
         $companies = Event::select('company')->distinct()->count();
+        $speakers = Event::select('speaker')->distinct()->count();
         $firstHalfDays = Day::where('period', 'first_half')->pluck('id');
         $secondHalfDays = Day::where('period', 'second_half')->pluck('id');
         $allNight = Day::where('period', 'all_day')->pluck('id');
@@ -108,6 +109,7 @@ class EventService
         return [
             'total_subscriptions' => $total_subscriptions,
             'companies' => $companies,
+            'speakers' => $speakers,
             'hours_total' => $hours_total,
         ];
     }
