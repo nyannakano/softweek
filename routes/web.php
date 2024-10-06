@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PageController;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
