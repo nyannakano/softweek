@@ -16,7 +16,7 @@ class SubscriptionService
         try {
             $mercadoPagoService = new MercadoPagoService();
 
-            $value = 75.0;
+            $value = 5.0;
 
             if ($data['coupon']) {
                 $coupon = Coupon::where('code', $data['coupon'])->first();
