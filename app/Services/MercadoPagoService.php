@@ -35,16 +35,16 @@ class MercadoPagoService
                 )
             ),
             "back_urls" => [
-                "success" => "http://localhost/payment-success",
-                "failure" => "http://localhost/payment-failure",
-                "pending" => "http://localhost/payment-pending"
+                "success" =>  config('services.url') . "/payment-success",
+                "failure" => config('services.url') . "/payment-failure",
+                "pending" =>  config('services.url') . "/payment-pending"
             ],
             "external_reference" => $random_id,
-            "notification_url" => "http://localhost/webhook",
+            "notification_url" => config('services.url') . "/webhook",
         ]);
     }
 
-    public function paymentSuccess($request)
+    public function paymentSuccess($request): string
     {
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
         $subscription->status = 'paid';
@@ -110,5 +110,3 @@ class MercadoPagoService
     }
 
 }
-
-
