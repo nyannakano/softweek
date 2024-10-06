@@ -30,6 +30,7 @@ class SubscriptionService
 
             if ($value > 0) {
                 $subscription = $mercadoPagoService->setProduct($value);
+                \Log::info('Subscription: ' . $subscription);
                 $status = 'pending';
             }
 
