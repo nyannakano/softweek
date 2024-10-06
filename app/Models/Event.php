@@ -16,7 +16,8 @@ class Event extends Model
         'title',
         'company',
         'speaker',
-        'type'
+        'type',
+        'slots',
     ];
 
     public function day(): \Illuminate\Database\Eloquent\Relations\BelongsTo
