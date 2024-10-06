@@ -130,6 +130,9 @@ class SubscriptionService
             return 0;
         }
 
+        $coupon->uses += 1;
+        $coupon->save();
+
         return $coupon->percentage;
     }
 }

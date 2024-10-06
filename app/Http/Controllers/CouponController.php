@@ -32,6 +32,7 @@ class CouponController extends Controller
         $data = $request->validate([
             'code' => 'required|unique:coupons',
             'percentage' => 'required',
+            'max_uses' => 'required',
         ]);
 
         $coupon = $this->couponService->createCoupon($data);
