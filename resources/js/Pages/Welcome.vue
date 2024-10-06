@@ -23,10 +23,9 @@ const props = defineProps<{
         wednesday_all_night: Array<Event>;
         wednesday_first_half: Array<Event>;
         wednesday_second_half: Array<Event>;
-        thursday_all_night: Array<Event>;
-        thursday_first_half: Array<Event>;
-        thursday_second_half: Array<Event>;
-        friday: Array<Event>;
+        friday_all_night: Array<Event>;
+        friday_first_half: Array<Event>;
+        friday_second_half: Array<Event>;
     },
 }>();
 </script>

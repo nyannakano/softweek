@@ -21,16 +21,16 @@ class SubscriptionController extends Controller
     public function subscribe(Request $request)
     {
         $validatedData = $request->validate([
-            'friday' => 'required',
+            'thursday' => 'required',
             'tuesday' => 'required_without:tuesday1,tuesday2',
             'tuesday1' => 'required_without:tuesday',
             'tuesday2' => 'required_without:tuesday',
             'wednesday' => 'required_without:wednesday1,wednesday2',
             'wednesday1' => 'required_without:wednesday',
             'wednesday2' => 'required_without:wednesday',
-            'thursday' => 'required_without:thursday1,thursday2',
-            'thursday1' => 'required_without:thursday',
-            'thursday2' => 'required_without:thursday',
+            'friday' => 'required_without:thursday1,thursday2',
+            'friday1' => 'required_without:thursday',
+            'friday2' => 'required_without:thursday',
             'coupon' => 'nullable|exists:coupons,code',
         ], [
             'friday.required' => 'O campo Sexta-feira é obrigatório.',
@@ -41,9 +41,9 @@ class SubscriptionController extends Controller
             'wednesday1.required_without' => 'O campo Quarta-feira é obrigatório.',
             'wednesday2.required_without' => 'O campo Quarta-feira é obrigatório.',
             'thursday.required_without' => 'O campo Quinta-feira é obrigatório.',
-            'thursday1.required_without' => 'O campo Quinta-feira é obrigatório.',
-            'thursday2.required_without' => 'O campo Quinta-feira é obrigatório.',
             'coupon.exists' => 'Cupom inválido.',
+            'friday1.required_without' => 'O campo Sexta-feira é obrigatório.',
+            'friday2.required_without' => 'O campo Sexta-feira é obrigatório.',
         ]);
 
         $subscriptionUrl = $this->subscriptionService->subscribe($validatedData);

@@ -69,9 +69,9 @@ class EventService
         $wednesday_all_night_id = Day::where('name', 'wednesday')->where('period', 'all_day')->first()->id;
         $wednesday_first_half_id = Day::where('name', 'wednesday')->where('period', 'first_half')->first()->id;
         $wednesday_second_half_id = Day::where('name', 'wednesday')->where('period', 'second_half')->first()->id;
-        $thursday_all_night_id = Day::where('name', 'thursday')->where('period', 'all_day')->first()->id;
-        $thursday_first_half_id = Day::where('name', 'thursday')->where('period', 'first_half')->first()->id;
-        $thursday_second_half_id = Day::where('name', 'thursday')->where('period', 'second_half')->first()->id;
+        $friday_all_night_id = Day::where('name', 'friday')->where('period', 'all_day')->first()->id;
+        $friday_first_half_id = Day::where('name', 'friday')->where('period', 'first_half')->first()->id;
+        $friday_second_half_id = Day::where('name', 'friday')->where('period', 'second_half')->first()->id;
 
         return [
             'monday' => $this->getEvents($monday_id),
@@ -81,9 +81,9 @@ class EventService
             'wednesday_all_night' => $this->getEvents($wednesday_all_night_id),
             'wednesday_first_half' => $this->getEvents($wednesday_first_half_id),
             'wednesday_second_half' => $this->getEvents($wednesday_second_half_id),
-            'thursday_all_night' => $this->getEvents($thursday_all_night_id),
-            'thursday_first_half' => $this->getEvents($thursday_first_half_id),
-            'thursday_second_half' => $this->getEvents($thursday_second_half_id),
+            'friday_all_night' => $this->getEvents($friday_all_night_id),
+            'friday_first_half' => $this->getEvents($friday_first_half_id),
+            'friday_second_half' => $this->getEvents($friday_second_half_id),
         ];
     }
 
