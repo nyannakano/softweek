@@ -61,7 +61,7 @@ onUnmounted(() => {
                                 <div class="flex justify-around text-lg text-center">
                                     <div class="flex-col">
                                         <span class="font-bold">{{ days }}</span>
-                                        <div>dias</div>
+                                        <div>dia</div>
                                     </div>
                                     <div>:</div>
                                     <div class="flex-col">

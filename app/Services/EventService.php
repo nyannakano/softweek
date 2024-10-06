@@ -16,6 +16,7 @@ class EventService
             'title' => $data['title'],
             'speaker' => $data['speaker'],
             'company' => $data['company'],
+            'type' => $data['type'],
         ]);
     }
 

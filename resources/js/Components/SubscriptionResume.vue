@@ -1,37 +1,27 @@
 <script setup lang="ts">
-    const props = defineProps<{
-        subscription: {
-            events: Array<{
-                id: number,
-                title: string,
-                day: {
-                    name: string,
-                    period: string,
-                },
-            }>,
-            lunch: {
-                name: string,
-            } | null,
-        },
-    }>();
+import {Subscription} from "@/types";
 
-    const dayTranslations: Record<string, string> = {
-        'monday': 'Segunda-feira',
-        'tuesday': 'Terça-feira',
-        'wednesday': 'Quarta-feira',
-        'thursday': 'Quinta-feira',
-        'friday': 'Sexta-feira',
-    };
+const props = defineProps<{
+    subscription: Subscription
+}>();
 
-    const periodTranslations: Record<string, string> = {
-        'first_half': 'primeira metade 19h-20:30h',
-        'second_half': 'segunda metade 21h-22:30h',
-        'all_day': 'noite toda 19h-22:30h',
-    };
+const dayTranslations: Record<string, string> = {
+    'monday': 'Segunda-feira',
+    'tuesday': 'Terça-feira',
+    'wednesday': 'Quarta-feira',
+    'thursday': 'Quinta-feira',
+    'friday': 'Sexta-feira',
+};
 
-    const translateDay = (day: string) => dayTranslations[day] || day;
+const periodTranslations: Record<string, string> = {
+    'first_half': 'primeira metade 19h-20:30h',
+    'second_half': 'segunda metade 21h-22:30h',
+    'all_day': 'noite toda 19h-22:30h',
+};
 
-    const translatePeriod = (period: string) => periodTranslations[period] || period;
+const translateDay = (day: string) => dayTranslations[day] || day;
+
+const translatePeriod = (period: string) => periodTranslations[period] || period;
 </script>
 
 <template>
@@ -46,7 +36,7 @@
                     <h2 class="text-xl mb-2 font-bold">Workshops</h2>
                     <ul>
                         <li v-for="event in subscription['events']" :key="event.id">
-                            <p>- {{ event.title }} - {{ translateDay(event.day.name) }} {{ translatePeriod(event.day.period) }}</p>
+                            <p>- {{ event.title }} - {{ translateDay(event.day.name) }} {{ translatePeriod(event.day.period) }} - {{ event.speaker }}</p>
                         </li>
                     </ul>
                 </div>

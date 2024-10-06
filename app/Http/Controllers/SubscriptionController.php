@@ -31,10 +31,8 @@ class SubscriptionController extends Controller
             'thursday' => 'required_without:thursday1,thursday2',
             'thursday1' => 'required_without:thursday',
             'thursday2' => 'required_without:thursday',
-            'drink' => 'required_if:friday,yes',
             'coupon' => 'nullable|exists:coupons,code',
         ], [
-            'drink.required_if' => 'A bebida é obrigatória caso vá participar do Happy Hour.',
             'friday.required' => 'O campo Sexta-feira é obrigatório.',
             'tuesday.required_without' => 'O campo Terça-feira é obrigatório.',
             'tuesday1.required_without' => 'O campo Terça-feira é obrigatório.',
@@ -55,17 +53,27 @@ class SubscriptionController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        return $this->mercadoPagoService->paymentSuccess($request);
+        $response = $this->mercadoPagoService->paymentSuccess($request);
+
+        if ($response) {
+            return redirect()->route('dashboard')->with('success', 'Inscrição realizada com sucesso!');
+        }
+
+        return redirect()->route('dashboard')->with('error', 'Erro ao realizar inscrição.');
     }
 
     public function paymentFailure(Request $request)
     {
-        return $this->mercadoPagoService->paymentFailure($request);
+        $this->mercadoPagoService->paymentFailure($request);
+
+        return redirect()->route('dashboard')->with('error', 'Erro ao realizar inscrição. Verifique os dados de pagamento e tente novamente.');
     }
 
     public function paymentPending(Request $request)
     {
-        return $this->mercadoPagoService->paymentPending($request);
+        $this->mercadoPagoService->paymentPending($request);
+
+        return redirect()->route('dashboard')->with('success', 'Inscrição pendente de pagamento.');
     }
 
     public function webhook(Request $request)

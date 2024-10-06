@@ -60,25 +60,21 @@ class MercadoPagoService
             $event->save();
         }
 
-        return 'Pagamento realizado com sucesso!';
+        return true;
     }
 
-    public function paymentFailure($request)
+    public function paymentFailure($request): void
     {
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
         $subscription->status = 'failed';
         $subscription->save();
-
-        return 'Falha no pagamento!';
     }
 
-    public function paymentPending($request)
+    public function paymentPending($request): void
     {
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
         $subscription->status = 'pending';
         $subscription->save();
-
-        return 'Pagamento pendente!';
     }
 
     public function webhook($request)

@@ -34,6 +34,10 @@
                 <input type="text" id="company" name="company" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
             </div>
             <div class="mb-4">
+                <label for="type" class="block text-sm font-medium text-gray-700">Tipo (Workshop ou Palestra)</label>
+                <input type="text" id="type" name="type" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
+            </div>
+            <div class="mb-4">
                 <label for="slots" class="block text-sm font-medium text-gray-700">Vagas totais</label>
                 <input type="text" id="slots" name="slots" class="border border-gray-300 rounded-lg px-4 py-2 w-full">
             </div>

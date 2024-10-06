@@ -17,6 +17,7 @@ export interface Event {
     company: string;
     speaker: string;
     day: Day;
+    type: string;
 }
 
 export interface Drink {

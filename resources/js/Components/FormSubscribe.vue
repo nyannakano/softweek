@@ -19,7 +19,6 @@ const props = defineProps<{
         thursday_second_half: Array<Event>;
         friday: Array<Event>;
     },
-    drinks: Array<Drink>;
 }>();
 
 const form = useForm({
@@ -34,8 +33,6 @@ const form = useForm({
     thursday1: '',
     thursday2: '',
     friday: '',
-    lunch: '',
-    drink: '',
     coupon: '',
 } as { [key: string]: string | undefined });
 
@@ -54,9 +51,8 @@ const submit = () => {
 
 const handleChange = (day: string, type: string) => {
     if (type === 'all-night') {
-        form.tuesday = '';
-        form.wednesday = '';
-        form.thursday = '';
+        form[`${day}1`] = '';
+        form[`${day}2`] = '';
     } else {
         form[day] = '';
     }
@@ -78,10 +74,6 @@ const handleChange = (day: string, type: string) => {
                       class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.thursday }}</span>
                 <span v-if="form.errors.friday"
                       class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.friday }}</span>
-                <div v-if="form.errors.drink" class="text-white bg-red-600 rounded border-b px-5">{{
-                        form.errors.drink
-                    }}
-                </div>
                 <div v-if="form.errors.coupon" class="text-white bg-red-600 rounded border-b px-5">{{
                         form.errors.coupon
                     }}
@@ -104,7 +96,7 @@ const handleChange = (day: string, type: string) => {
                         <p class="mt-2" v-for="event in events['tuesday_all_night']">
                             <input type="radio" class="mr-2 all-night" @change="handleChange('tuesday', 'all-night')"
                                    v-model="form.tuesday" :value="event['id']" name="tuesday">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                         <h4 class="font-bold mb-4 mt-5">Primeiro horário: 19h-20:30h</h4>
@@ -112,7 +104,7 @@ const handleChange = (day: string, type: string) => {
                         <p class="mt-2" v-for="event in events['tuesday_first_half']">
                             <input type="radio" class="mr-2 first-half" @change="handleChange('tuesday', 'first-half')"
                                    v-model="form.tuesday1" :value="event['id']" name="tuesday1">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                         <h4 class="font-bold mb-4 mt-5">Segundo horário: 21h-22:30h</h4>
@@ -120,7 +112,7 @@ const handleChange = (day: string, type: string) => {
                             <input type="radio" class="mr-2 second-half"
                                    @change="handleChange('tuesday', 'second-half')" v-model="form.tuesday2"
                                    :value="event['id']" name="tuesday2">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                     </div>
@@ -131,7 +123,7 @@ const handleChange = (day: string, type: string) => {
                         <p class="mt-2" v-for="event in events['wednesday_all_night']">
                             <input type="radio" class="mr-2 all-night" @change="handleChange('wednesday', 'all-night')"
                                    v-model="form.wednesday" :value="event['id']" name="wednesday">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                         <h4 class="font-bold mb-4 mt-5">Primeiro horário: 19h-20:30h</h4>
@@ -139,7 +131,7 @@ const handleChange = (day: string, type: string) => {
                             <input type="radio" class="mr-2 first-half"
                                    @change="handleChange('wednesday', 'first-half')" v-model="form.wednesday1"
                                    :value="event['id']" name="wednesday1">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                         <h4 class="font-bold mb-4 mt-5">Segundo horário: 21h-22:30h</h4>
@@ -147,7 +139,7 @@ const handleChange = (day: string, type: string) => {
                             <input type="radio" class="mr-2 second-half"
                                    @change="handleChange('wednesday', 'second-half')" v-model="form.wednesday2"
                                    :value="event['id']" name="wednesday2">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                     </div>
@@ -157,23 +149,23 @@ const handleChange = (day: string, type: string) => {
                         <p class="mt-2" v-for="event in events['thursday_all_night']">
                             <input type="radio" class="mr-2 all-night" @change="handleChange('thursday', 'all-night')"
                                    v-model="form.thursday" :value="event['id']" name="thursday">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                         <h4 class="font-bold mb-4 mt-5">Primeiro horário: 19h-20:30h</h4>
                         <p class="mt-2" v-for="event in events['thursday_first_half']">
                             <input type="radio" class="mr-2 first-half" @change="handleChange('thursday', 'first-half')"
                                    v-model="form.thursday1" :value="event['id']" name="thursday1">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
 
-                        <h4 class="font-bold mb-4 mt-10">Segundo horário: 21h-22:30h</h4>
+                        <h4 class="font-bold mb-4 mt-5">Segundo horário: 21h-22:30h</h4>
                         <p class="mt-2" v-for="event in events['thursday_second_half']">
                             <input type="radio" class="mr-2 second-half"
                                    @change="handleChange('thursday', 'second-half')" v-model="form.thursday2"
                                    :value="event['id']" name="thursday2">
-                            {{ event['title'] }} - {{ event['company'] }}
+                            {{ event['title'] }} - {{ event['company'] }} - {{ event['speaker'] }} - {{ event['type'] }}
                         </p>
 
                     </div>
@@ -192,14 +184,6 @@ const handleChange = (day: string, type: string) => {
                         </p>
                     </div>
 
-                    <div class="text-left">
-                        <h3 class="font-bold mb-4 mt-5">Escolha sua bebida:</h3>
-                        <p class="mt-2" v-for="drink in drinks">
-                            <input type="radio" class="mr-2" name="drink" v-model="form.drink" :value="drink['id']"
-                                   ref="drinkInputs">
-                            {{ drink['name'] }}
-                        </p>
-                    </div>
 
                     <div class="text-left">
                         <h3 class="font-bold mb-4 mt-5">Cupom:</h3>
