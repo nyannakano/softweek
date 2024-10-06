@@ -17,6 +17,7 @@ class EventService
             'speaker' => $data['speaker'],
             'company' => $data['company'],
             'type' => $data['type'],
+            'slots' => $data['slots'],
         ]);
     }
 
