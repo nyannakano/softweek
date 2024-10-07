@@ -27,9 +27,7 @@ export interface Drink {
 
 export interface Subscription {
     events: Array<Event>,
-    lunch: {
-        name: string,
-    } | null,
+    will_participate_happy_hour: boolean,
 }
 
 export interface Metric {

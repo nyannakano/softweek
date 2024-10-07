@@ -106,7 +106,16 @@ class SubscriptionService
 
     public function getSubscription($user)
     {
-        return Subscription::with('events.day', 'lunch')->where('user_id', $user->id)->first();
+        $subscription = Subscription::with('events.day', 'lunch')->where('user_id', $user->id)->first();
+        $subscription->will_participate_happy_hour = false;
+
+        $subscription->events->map(function ($event) use ($subscription) {
+            if ($event->day->name == 'thursday') {
+                $subscription->will_participate_happy_hour = true;
+            }
+        });
+
+        return $subscription;
     }
 
     public function setValue($willParticipateHappyHour): float
