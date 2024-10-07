@@ -53,7 +53,6 @@ class PageController extends Controller
 
         $image_jedi = [
             asset('images/JEDI/dalpozzo.png'),
-            asset('images/JEDI/fiqon.png'),
             asset('images/JEDI/fuel.png'),
             asset('images/JEDI/nexun.png'),
             asset('images/JEDI/rp.png'),

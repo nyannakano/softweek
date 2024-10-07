@@ -38,9 +38,9 @@ const props = defineProps<{
         </header>
         <main>
 <!--            <Partners :images_partners="images_partners"/>-->
-            <div class="background-image">
-<!--                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>-->
-            </div>
+<!--            <div class="background-image">-->
+<!--&lt;!&ndash;                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>&ndash;&gt;-->
+<!--            </div>-->
 <!--            <WeeklySchedule :events="events" />-->
 <!--            <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>-->
         </main>
