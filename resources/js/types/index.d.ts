@@ -45,9 +45,9 @@ export interface Day {
 }
 
 export interface ImagePartner {
-    jedi: string;
-    master: string;
-    padawan: string;
-    force: string;
-    knight: string;
+    jedi: string[];
+    master: string[];
+    padawan: string[];
+    force: string[];
+    knight: string[];
 }

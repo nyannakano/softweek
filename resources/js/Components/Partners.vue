@@ -9,7 +9,7 @@ import {Navigation, Pagination, Mousewheel, Keyboard, Autoplay} from 'swiper/mod
 import {ImagePartner} from "@/types";
 
 const props = defineProps<{
-    images_partners: Array<ImagePartner>
+    images_partners: ImagePartner;
 }>();
 
 const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
@@ -34,7 +34,7 @@ const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
             :modules="modules"
             class="mySwiper"
         >
-            <swiper-slide v-for="(partner, index) in images_partners['force']" :key="index">
+            <swiper-slide v-for="(partner, index) in images_partners.force" :key="index">
                 <img :src="partner" alt="Logo Empresa Parceira" class="w-32 h-full">
             </swiper-slide>
         </swiper>
@@ -55,7 +55,7 @@ const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
             :modules="modules"
             class="mySwiper"
         >
-            <swiper-slide v-for="(partner, index) in images_partners['master']" :key="index">
+            <swiper-slide v-for="(partner, index) in images_partners.master" :key="index">
                 <img :src="partner" alt="Logo Empresa Parceira" class="w-32 h-full">
             </swiper-slide>
         </swiper>
@@ -76,7 +76,7 @@ const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
             :modules="modules"
             class="mySwiper"
         >
-            <swiper-slide v-for="(partner, index) in images_partners['knight']" :key="index">
+            <swiper-slide v-for="(partner, index) in images_partners.knight" :key="index">
                 <img :src="partner" alt="Logo Empresa Parceira" class="w-32 h-full">
             </swiper-slide>
         </swiper>
@@ -97,7 +97,7 @@ const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
             :modules="modules"
             class="mySwiper"
         >
-            <swiper-slide v-for="(partner, index) in images_partners['padawan']" :key="index">
+            <swiper-slide v-for="(partner, index) in images_partners.padawan" :key="index">
                 <img :src="partner" alt="Logo Empresa Parceira" class="w-32 h-full">
             </swiper-slide>
         </swiper>
@@ -118,7 +118,7 @@ const modules = [Navigation, Pagination, Mousewheel, Keyboard, Autoplay];
             :modules="modules"
             class="mySwiper"
         >
-            <swiper-slide v-for="(partner, index) in images_partners['jedi']" :key="index">
+            <swiper-slide v-for="(partner, index) in images_partners.jedi" :key="index">
                 <img :src="partner" alt="Logo Empresa Parceira" class="w-32 h-full">
             </swiper-slide>
         </swiper>

@@ -14,7 +14,7 @@ const props = defineProps<{
     images_last_edition: string,
     image_eng_soft: string,
     image_campo_real: string,
-    images_partners: Array<ImagePartner>,
+    images_partners: ImagePartner,
     metrics: Metric,
     events: {
         tuesday_all_night: Array<Event>;
