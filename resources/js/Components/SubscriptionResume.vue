@@ -56,7 +56,7 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
                 <div>
                     <h2 class="text-xl mb-2 font-bold">Happy Hour</h2>
                     <ul>
-                        <li v-if="props.events['thursday_all_night'].length > 0">
+                        <li v-if="props.events.thursday_all_night && props.events.thursday_all_night.length > 0">
                             <p>Inscrito para o Happy Hour</p>
                         </li>
                         <li v-else>
