@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -35,7 +34,7 @@ class RegisteredUserController extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-                'password' => ['required', Rules\Password::defaults()],
+                'password' => ['required'],
                 'cpf' => 'required|string|min_digits:11|max_digits:11|unique:' . User::class,
             ], [
                 'email.unique' => 'O e-mail informado já está em uso.',
