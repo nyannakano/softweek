@@ -45,15 +45,18 @@ class SubscriptionService
 
             $subscribe->events()->attach($event_monday->id);
 
-            if ($data['thursday'] === 'yes') {
+            $happy_hour = $data['thursday'] ?? null;
+            $subscribe->transport = false;
+
+            if ($happy_hour === 'yes_transport' || $happy_hour === 'yes_without_transport') {
                 $day_thursday = Day::where('name', 'thursday')->first();
                 $event_thursday = Event::where('day_id', $day_thursday->id)->first();
-                $subscribe->events()->attach($event_thursday->id);
 
-                if ($data['transport'] == 'yes') {
+                if ($happy_hour === 'yes_transport') {
                     $subscribe->transport = true;
-                    $subscribe->save();
                 }
+
+                $subscribe->events()->attach($event_thursday->id);
             }
 
             if ($data['tuesday']) {

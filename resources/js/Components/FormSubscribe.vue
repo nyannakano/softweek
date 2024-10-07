@@ -152,22 +152,16 @@ const handleChange = (day: string, type: string) => {
                     <div class="text-left">
                         <h3 class="font-semibold mb-4">HAPPY HOUR! 19h-22:30h</h3>
                         <p class="mt-2">
-                            <input type="radio" class="mr-2" v-model="form.thursday" name="thursday" value="yes" required>
-                            Vou participar
+                            <input type="radio" class="mr-2" v-model="form.thursday" name="thursday" value="yes_transport" required>
+                            Vou participar - Preciso de transporte
+                        </p>
+                        <p class="mt-2">
+                            <input type="radio" class="mr-2" v-model="form.thursday" name="thursday" value="yes_without_transport" required>
+                            Vou participar - Não preciso de transporte
                         </p>
                         <p class="mt-2">
                             <input type="radio" class="mr-2" v-model="form.thursday" name="thursday" value="no">
                             Não vou participar
-                        </p>
-
-                        <h3 class="font-semibold mt-2 mb-4">Precisa de transporte para o Happy Hour?</h3>
-                        <p class="mt-2">
-                            <input type="radio" class="mr-2" v-model="form.transport" id="transport" name="transport" value="yes">
-                            Sim
-                        </p>
-                        <p class="mt-2">
-                            <input type="radio" class="mr-2" v-model="form.transport" id="transport" name="transport" value="no">
-                            Não
                         </p>
 
                     </div>
