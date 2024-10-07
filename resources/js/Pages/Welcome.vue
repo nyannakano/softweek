@@ -33,16 +33,16 @@ const props = defineProps<{
 <template>
     <div class="bg-gradient-radial-header">
         <header>
-<!--            <RegisterHome :image_logo="image_logo"/>-->
-            <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real"/>
+            <RegisterHome :image_logo="image_logo"/>
+<!--            <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real"/>-->
         </header>
         <main>
-<!--            <Partners :images_partners="images_partners"/>-->
-<!--            <div class="background-image">-->
-<!--                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>-->
-<!--            </div>-->
-<!--            <WeeklySchedule :events="events" />-->
-<!--            <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>-->
+            <Partners :images_partners="images_partners"/>
+            <div class="background-image">
+                <EventData :image_logo_softweek="image_logo_softweek" :metrics="metrics" class="bg-gradient-event-data"/>
+            </div>
+            <WeeklySchedule :events="events" />
+            <LastEditionPhotos :images_last_edition="images_last_edition" class="background-image-last-edition"/>
         </main>
 
         <footer class="footer-space">
