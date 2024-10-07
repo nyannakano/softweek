@@ -30,6 +30,15 @@
                     <td class="py-2 px-4 border-b">{{ $person->created_at }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->coupon->code ?? '' }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->status }}</td>
+                    <td class="py-2 px-4 border-b">
+                        @if($person->status == 'pending')
+                            <form action="{{ route('admin.confirm-payment', ['id' => $person->id]) }}" method="post">
+                                @csrf
+                                <input type="hidden" name="subscription_id" value="{{ $person->id }}">
+                                <button type="submit">Confirmar pagamento</button>
+                            </form>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
             </tbody>

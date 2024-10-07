@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware(AdminMiddleware::class)->group(function () {
         Route::get('/admin', [PageController::class, 'admin'])->name('admin');
         Route::get('/admin/subscriptions', [SubscriptionController::class, 'getSubscriptionsAsAdmin'])->name('admin.subscriptions');
+        Route::post('admin/confirm-payment/{id}', [SubscriptionController::class, 'confirmPayment'])->name('admin.confirm-payment');
         Route::get('/admin/coupons', [CouponController::class, 'getCouponsAsAdmin'])->name('admin.coupons');
         Route::get('/admin/register-coupon', [CouponController::class, 'registerCoupon'])->name('admin.register-coupon');
         Route::get('/admin/workshops', [PageController::class, 'workshops'])->name('admin.workshops');

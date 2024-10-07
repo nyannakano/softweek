@@ -88,4 +88,11 @@ class SubscriptionController extends Controller
             'subscriptions' => $this->subscriptionService->getSubscriptions(),
         ]);
     }
+
+    public function confirmPayment($id)
+    {
+        $this->subscriptionService->confirmPayment($id);
+
+        return redirect()->route('admin.subscriptions')->with('success', 'Pagamento confirmado com sucesso.');
+    }
 }

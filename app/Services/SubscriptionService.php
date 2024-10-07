@@ -153,4 +153,13 @@ class SubscriptionService
 
         return $coupon->percentage;
     }
+
+    public function confirmPayment($id)
+    {
+        $subscription = Subscription::find($id);
+        $subscription->status = 'paid';
+        $subscription->save();
+
+        return true;
+    }
 }
