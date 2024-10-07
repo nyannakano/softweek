@@ -32,6 +32,7 @@ const form = useForm({
     friday: '',
     friday1: '',
     friday2: '',
+    transport: '',
     coupon: '',
 } as { [key: string]: string | undefined });
 
@@ -69,6 +70,8 @@ const handleChange = (day: string, type: string) => {
                       class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.tuesday }}</span>
                 <span v-if="form.errors.wednesday"
                       class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.wednesday }}</span>
+                <span v-if="form.errors.transport"
+                      class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.transport }}</span>
                 <span v-if="form.errors.thursday"
                       class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.thursday }}</span>
                 <span v-if="form.errors.friday"
@@ -156,6 +159,17 @@ const handleChange = (day: string, type: string) => {
                             <input type="radio" class="mr-2" v-model="form.thursday" name="thursday" value="no">
                             Não vou participar
                         </p>
+
+                        <h3 class="font-semibold mb-4">Precisa de transporte para o Happy Hour?</h3>
+                        <p class="mt-2">
+                            <input type="radio" class="mr-2" v-model="form.transport" name="transport" value="yes" required>
+                            Sim
+                        </p>
+                        <p class="mt-2">
+                            <input type="radio" class="mr-2" v-model="form.transport" name="transport" value="no">
+                            Não
+                        </p>
+
                     </div>
 
                     <div class="text-left">

@@ -20,6 +20,7 @@ class SubscriptionService
             if ($data['coupon']) {
                 $percentage = $this->checkCoupon($data['coupon']);
                 $value = $value - ($value * $percentage);
+                $coupon = Coupon::where('code', $data['coupon'])->first();
             }
 
             $status = 'paid';
@@ -48,6 +49,11 @@ class SubscriptionService
                 $day_thursday = Day::where('name', 'thursday')->first();
                 $event_thursday = Event::where('day_id', $day_thursday->id)->first();
                 $subscribe->events()->attach($event_thursday->id);
+
+                if ($data['transport'] === 'yes') {
+                    $subscribe->transport = true;
+                    $subscribe->save();
+                }
             }
 
             if ($data['tuesday']) {
