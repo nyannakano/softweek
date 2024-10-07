@@ -46,6 +46,8 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
                     <ul>
                         <li v-if="subscription['will_participate_happy_hour']">
                             <p>Inscrito para o Happy Hour</p>
+                            <p v-if="subscription['transport']">Vai necessitar de transporte</p>
+                            <p v-else>Não vai necessitar de transporte</p>
                         </li>
                         <li v-else>
                             <p>Não inscrito para o Happy Hour</p>
