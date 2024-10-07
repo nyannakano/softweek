@@ -50,7 +50,7 @@ class SubscriptionService
                 $event_thursday = Event::where('day_id', $day_thursday->id)->first();
                 $subscribe->events()->attach($event_thursday->id);
 
-                if ($data['transport'] === 'yes') {
+                if ($data['transport'] == 'yes') {
                     $subscribe->transport = true;
                     $subscribe->save();
                 }

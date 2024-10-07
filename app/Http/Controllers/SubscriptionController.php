@@ -32,6 +32,7 @@ class SubscriptionController extends Controller
             'friday1' => 'required_without:friday',
             'friday2' => 'required_without:friday',
             'coupon' => 'nullable|exists:coupons,code',
+            'transport' => 'nullable',
         ], [
             'friday.required' => 'O campo Sexta-feira é obrigatório.',
             'tuesday.required_without' => 'O campo Terça-feira é obrigatório.',
