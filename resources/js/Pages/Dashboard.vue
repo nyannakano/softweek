@@ -35,7 +35,7 @@ if (props.is_already_subbed) {
     <div class="header background-image-first">
         <HeaderDashboard :logo="logo" :title="title"/>
         <FormSubscribe v-if="!is_already_subbed" :events="events" />
-        <SubscriptionResume v-else :subscription="subscription"/>
+        <SubscriptionResume v-else :subscription="subscription" :events="events"/>
     </div>
 </template>
 

@@ -1,8 +1,20 @@
 <script setup lang="ts">
-import {Subscription} from "@/types";
+import {Event, Subscription} from "@/types";
 
 const props = defineProps<{
     subscription: Subscription
+    events: {
+        tuesday_all_night: Array<Event>;
+        tuesday_first_half: Array<Event>;
+        tuesday_second_half: Array<Event>;
+        wednesday_all_night: Array<Event>;
+        wednesday_first_half: Array<Event>;
+        wednesday_second_half: Array<Event>;
+        thursday_all_night: Array<Event>;
+        friday_all_night: Array<Event>;
+        friday_first_half: Array<Event>;
+        friday_second_half: Array<Event>;
+    }
 }>();
 
 const dayTranslations: Record<string, string> = {
@@ -44,8 +56,8 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
                 <div>
                     <h2 class="text-xl mb-2 font-bold">Happy Hour</h2>
                     <ul>
-                        <li v-if="subscription['lunch'] != null">
-                            <p>- {{ subscription['lunch']['name'] }}</p>
+                        <li v-if="props.events['thursday_all_night'].length > 0">
+                            <p>Inscrito para o Happy Hour</p>
                         </li>
                         <li v-else>
                             <p>Não inscrito para o Happy Hour</p>
