@@ -126,7 +126,7 @@ class SubscriptionService
             return 0;
         }
 
-        if ($coupon->uses >= $coupon->limit) {
+        if ($coupon->uses >= $coupon->max_uses) {
             return 0;
         }
 
