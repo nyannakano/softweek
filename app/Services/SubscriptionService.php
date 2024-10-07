@@ -19,7 +19,7 @@ class SubscriptionService
 
             if ($data['coupon']) {
                 $percentage = $this->checkCoupon($data['coupon']);
-                $value = $value - ($value * $percentage / 100);
+                $value = ($value - ($value * $percentage)) / 100;
             }
 
             $status = 'paid';
