@@ -1,5 +1,8 @@
 ## Softweek 2024
 
+### Versão em produção
+https://softweek.com.br/
+
 ### 1. Introdução
 
 Este repositório contém o código fonte do projeto Softweek 2024, desenvolvido para o evento Softweek 2024, organizado pela faculdade Campo Real.
