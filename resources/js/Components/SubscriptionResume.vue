@@ -29,7 +29,9 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8 text-white">
             <div class="flex justify-between">
                 <h1 class="text-2xl font-bold">Resumo da inscrição</h1>
-                <h3 class="text-xl font-semibold">Status: Pago</h3>
+                <h3 v-if="subscription['status'] == 'paid'" class="text-xl font-semibold">Status: Pago</h3>
+                <h3 v-else class="text-xl font-semibold">Status: Pendente de pagamento - Caso já tenha pago envie o comprovante para:
+                    <a href="https://wa.me/554299386986?text=Ol%C3%A1%2C%20segue%20o%20comprovante%20de%20pagamento%20de%20minha%20inscri%C3%A7%C3%A3o%20para%20a%20Softweek%202024%3A">clique aqui</a></h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
                 <div>

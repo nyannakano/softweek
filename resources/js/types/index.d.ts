@@ -29,6 +29,7 @@ export interface Subscription {
     events: Array<Event>,
     will_participate_happy_hour: boolean,
     transport: boolean,
+    status: string,
 }
 
 export interface Metric {

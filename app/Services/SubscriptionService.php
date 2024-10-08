@@ -108,7 +108,7 @@ class SubscriptionService
 
     public function isSubscribed($user): bool
     {
-        $subscription = Subscription::where('user_id', $user->id)->where('status', 'paid')->first();
+        $subscription = Subscription::where('user_id', $user->id)->where('status', '!=', 'failed')->first();
 
         return (bool)$subscription;
     }
