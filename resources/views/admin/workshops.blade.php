@@ -35,7 +35,7 @@
                     <td class="py-2 px-4 border-b">{{ $workshop->speaker }}</td>
                     <td class="py-2 px-4 border-b">{{ $workshop->slots }}</td>
                     <td class="py-2 px-4 border-b">{{ $workshop->subscriptions->count() }}</td>
-                    <td class="py-2 px-4 border-b">{{ $workshop->slots_left }}</td>
+                    <td class="py-2 px-4 border-b">{{ $workshop->total_slots }}</td>
                     <td class="py-2 px-4 border-b">
                         <form action="{{ route('delete-workshop', ['id' => $workshop->id]) }}" method="post">
                             @method('DELETE')
