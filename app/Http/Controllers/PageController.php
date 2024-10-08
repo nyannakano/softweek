@@ -131,6 +131,10 @@ class PageController extends Controller
     public function workshops()
     {
         $workshops = $this->eventService->getEventsAsAdmin();
+        $workshops->each(function ($workshop) {
+            $slots_left = $workshop->slots - $workshop->subscriptions()->where('status', 'paid')->count();
+            $workshop->slots_left = $slots_left;
+        });
 
         return view('admin.workshops', compact('workshops'));
     }
