@@ -83,7 +83,7 @@ class SubscriptionService
 
             $subscribe->save();
 
-            if ($status == 'paid') {
+            if ($status != 'failed') {
                 $events = $subscribe->events;
 
                 foreach ($events as $event) {
@@ -99,7 +99,7 @@ class SubscriptionService
         }
     }
 
-    public function getSubscriptions(): \Illuminate\Database\Eloquent\Collection|_IH_Subscription_C|array
+    public function getSubscriptions()
     {
         return Subscription::with('user', 'coupon', 'events')
             ->orderBy('created_at', 'desc')
