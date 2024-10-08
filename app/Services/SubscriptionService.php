@@ -160,6 +160,13 @@ class SubscriptionService
         $subscription->status = 'paid';
         $subscription->save();
 
+        $events = $subscription->events;
+
+        foreach ($events as $e) {
+            $e->slots -= 1;
+            $e->save();
+        }
+
         return true;
     }
 }
