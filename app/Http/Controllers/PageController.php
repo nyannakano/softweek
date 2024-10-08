@@ -78,7 +78,7 @@ class PageController extends Controller
         ];
 
         $metrics = $this->eventService->getMetrics();
-        $events = $this->eventService->getEventsPerDay();
+        $events = $this->eventService->getEventsPerDayHome();
 
         return Inertia::render('Welcome', [
             'image_logo' => $image_logo,
