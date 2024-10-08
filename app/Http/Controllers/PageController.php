@@ -56,7 +56,7 @@ class PageController extends Controller
             asset('images/JEDI/fuel.png'),
             asset('images/JEDI/nexun.png'),
             asset('images/JEDI/rp.png'),
-            asset('images/JEDI/santamaria.svg'),
+            asset('images/JEDI/santamaria.png'),
             asset('images/JEDI/spa.png'),
             asset('images/JEDI/unimed.png'),
         ];
