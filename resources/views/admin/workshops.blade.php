@@ -42,6 +42,8 @@
                             @csrf
                             <button type="submit" class="btn bg-red-500 text-white rounded px-4">Excluir</button>
                         </form>
+                        <a href="{{ route('admin.get-subscriptions', ['id' => $workshop->id]) }}" class="btn bg-black text-white rounded px-4">Inscritos</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

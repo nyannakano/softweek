@@ -7,6 +7,7 @@ use App\Models\Day;
 use App\Models\Event;
 use App\Models\Subscription;
 use LaravelIdea\Helper\App\Models\_IH_Subscription_C;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SubscriptionService
 {
@@ -168,5 +169,48 @@ class SubscriptionService
         }
 
         return true;
+    }
+
+    public function getSubscriptionsByEventId($id)
+    {
+        $event = Event::find($id);
+
+        $subscriptions = $event->subscriptions;
+
+        $response = new StreamedResponse(function () use ($subscriptions) {
+
+            $handle = fopen('php://output', 'w');
+            // Add CSV headers
+            fputcsv($handle, ['Nome', 'CPF', 'RA', 'E-mail', 'Status da inscrição']);
+
+            // Add CSV rows
+            foreach ($subscriptions as $subscription) {
+
+                if ($subscription->status == 'failed') {
+                    continue;
+                }
+
+                if ($subscription->status == 'pending') {
+                    $subscription->status = 'Pendente';
+                } else {
+                    $subscription->status = 'Confirmado';
+                }
+
+                fputcsv($handle, [
+                    $subscription->user->name,
+                    $subscription->user->cpf,
+                    $subscription->user->ra ?? '',
+                    $subscription->user->email,
+                    $subscription->status,
+                ]);
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="inscritos_' . $event->title .'.csv"');
+
+        return $response;
     }
 }

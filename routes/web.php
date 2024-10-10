@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admin/register-coupon', [CouponController::class, 'registerCoupon'])->name('admin.register-coupon');
         Route::get('/admin/workshops', [PageController::class, 'workshops'])->name('admin.workshops');
 
+        Route::get('/admin/get-subscriptions/{id}', [SubscriptionController::class, 'getSubscriptionsByEventId'])->name('admin.get-subscriptions');
+
         Route::get('/admin/create-workshop', [EventController::class, 'createWorkshop'])->name('admin.register-workshop');
         Route::post('/create-event', [EventController::class, 'createEvent'])->name('create-workshop');
         Route::patch('/update-event', [EventController::class, 'updateEvent'])->name('update-workshop');

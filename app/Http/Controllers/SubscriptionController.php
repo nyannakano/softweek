@@ -95,4 +95,9 @@ class SubscriptionController extends Controller
 
         return redirect()->route('admin.subscriptions')->with('success', 'Pagamento confirmado com sucesso.');
     }
+
+    public function getSubscriptionsByEventId($id)
+    {
+        return $this->subscriptionService->getSubscriptionsByEventId($id);
+    }
 }
