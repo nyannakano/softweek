@@ -17,6 +17,8 @@
                 <th class="py-2 px-4 border-b">ID</th>
                 <th class="py-2 px-4 border-b">Código</th>
                 <th class="py-2 px-4 border-b">Porcentagem</th>
+                <th class="py-2 px-4 border-b">Máximo de usos</th>
+                <th class="py-2 px-4 border-b">Usos</th>
             </tr>
             </thead>
             <tbody id="cupons-table-body">
@@ -25,6 +27,8 @@
                     <td class="py-2 px-4 border-b">{{ $coupon->id }}</td>
                     <td class="py-2 px-4 border-b">{{ $coupon->code }}</td>
                     <td class="py-2 px-4 border-b">{{ $coupon->percentage }}</td>
+                    <td class="py-2 px-4 border-b">{{ $coupon->max_uses }}</td>
+                    <td class="py-2 px-4 border-b">{{ $coupon->uses }}</td>
                 </tr>
             @endforeach
             </tbody>

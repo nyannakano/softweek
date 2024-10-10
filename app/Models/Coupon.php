@@ -9,6 +9,8 @@ class Coupon extends Model
     protected $fillable = [
         'code',
         'percentage',
+        'uses',
+        'max_uses',
     ];
 
     public function subscriptions()

@@ -6,8 +6,8 @@ use App\Models\Coupon;
 use App\Models\Day;
 use App\Models\Event;
 use App\Models\Subscription;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use LaravelIdea\Helper\App\Models\_IH_Subscription_C;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SubscriptionService
 {
@@ -16,14 +16,12 @@ class SubscriptionService
         try {
             $mercadoPagoService = new MercadoPagoService();
 
-            $value = 75.0;
+            $value = $this->setValue($data['thursday']);
 
             if ($data['coupon']) {
+                $percentage = $this->checkCoupon($data['coupon']);
+                $value = $value - ($value * $percentage);
                 $coupon = Coupon::where('code', $data['coupon'])->first();
-
-                if ($coupon) {
-                    $value = $value - ($value * $coupon->percentage);
-                }
             }
 
             $status = 'paid';
@@ -48,10 +46,18 @@ class SubscriptionService
 
             $subscribe->events()->attach($event_monday->id);
 
-            if ($data['friday'] === 'yes') {
-                $day_friday = Day::where('name', 'friday')->first();
-                $event_friday = Event::where('day_id', $day_friday->id)->first();
-                $subscribe->events()->attach($event_friday->id);
+            $happy_hour = $data['thursday'] ?? null;
+            $subscribe->transport = false;
+
+            if ($happy_hour === 'yes_transport' || $happy_hour === 'yes_without_transport') {
+                $day_thursday = Day::where('name', 'thursday')->first();
+                $event_thursday = Event::where('day_id', $day_thursday->id)->first();
+
+                if ($happy_hour === 'yes_transport') {
+                    $subscribe->transport = true;
+                }
+
+                $subscribe->events()->attach($event_thursday->id);
             }
 
             if ($data['tuesday']) {
@@ -69,16 +75,16 @@ class SubscriptionService
                 $subscribe->events()->attach($data['wednesday2']);
             }
 
-            if ($data['thursday']) {
-                $subscribe->events()->attach($data['thursday']);
+            if ($data['friday']) {
+                $subscribe->events()->attach($data['friday']);
             } else {
-                $subscribe->events()->attach($data['thursday1']);
-                $subscribe->events()->attach($data['thursday2']);
+                $subscribe->events()->attach($data['friday1']);
+                $subscribe->events()->attach($data['friday2']);
             }
 
             $subscribe->save();
 
-            if ($status == 'paid') {
+            if ($status != 'failed') {
                 $events = $subscribe->events;
 
                 foreach ($events as $event) {
@@ -89,12 +95,12 @@ class SubscriptionService
 
             return $subscription->init_point ?? '/dashboard';
         } catch (\Exception $e) {
-            \Log::error('Error subscribing: ' . $e->getMessage());
+            \Log::error('Error subscribing: ' . $e);
             return null;
         }
     }
 
-    public function getSubscriptions(): \Illuminate\Database\Eloquent\Collection|_IH_Subscription_C|array
+    public function getSubscriptions()
     {
         return Subscription::with('user', 'coupon', 'events')
             ->orderBy('created_at', 'desc')
@@ -103,13 +109,108 @@ class SubscriptionService
 
     public function isSubscribed($user): bool
     {
-        $subscription = Subscription::where('user_id', $user->id)->where('status', 'paid')->first();
+        $subscription = Subscription::where('user_id', $user->id)->where('status', '!=', 'failed')->first();
 
         return (bool)$subscription;
     }
 
     public function getSubscription($user)
     {
-        return Subscription::with('events.day', 'lunch')->where('user_id', $user->id)->first();
+        $subscription = Subscription::with('events.day', 'lunch')->where('user_id', $user->id)->first();
+        $subscription->will_participate_happy_hour = false;
+
+        $subscription->events->map(function ($event) use ($subscription) {
+            if ($event->day->name == 'thursday') {
+                $subscription->will_participate_happy_hour = true;
+            }
+        });
+
+        return $subscription;
+    }
+
+    public function setValue($willParticipateHappyHour): float
+    {
+        if ($willParticipateHappyHour == 'yes_transport' || $willParticipateHappyHour == 'yes_without_transport') {
+            return 80.0;
+        }
+
+        return 70.0;
+    }
+
+    public function checkCoupon($couponCode)
+    {
+        $coupon = Coupon::where('code', $couponCode)->first();
+
+        if (!$coupon) {
+            return 0;
+        }
+
+        if ($coupon->uses >= $coupon->max_uses) {
+            return 0;
+        }
+
+        $coupon->uses += 1;
+        $coupon->save();
+
+        return $coupon->percentage;
+    }
+
+    public function confirmPayment($id)
+    {
+        $subscription = Subscription::find($id);
+        $subscription->status = 'paid';
+        $subscription->save();
+
+        $events = $subscription->events;
+
+        foreach ($events as $e) {
+            $e->slots -= 1;
+            $e->save();
+        }
+
+        return true;
+    }
+
+    public function getSubscriptionsByEventId($id)
+    {
+        $event = Event::find($id);
+
+        $subscriptions = $event->subscriptions;
+
+        $response = new StreamedResponse(function () use ($subscriptions) {
+
+            $handle = fopen('php://output', 'w');
+            // Add CSV headers
+            fputcsv($handle, ['Nome', 'CPF', 'RA', 'E-mail', 'Status da inscrição']);
+
+            // Add CSV rows
+            foreach ($subscriptions as $subscription) {
+
+                if ($subscription->status == 'failed') {
+                    continue;
+                }
+
+                if ($subscription->status == 'pending') {
+                    $subscription->status = 'Pendente';
+                } else {
+                    $subscription->status = 'Confirmado';
+                }
+
+                fputcsv($handle, [
+                    $subscription->user->name,
+                    $subscription->user->cpf,
+                    $subscription->user->ra ?? '',
+                    $subscription->user->email,
+                    $subscription->status,
+                ]);
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="inscritos_' . $event->title .'.csv"');
+
+        return $response;
     }
 }

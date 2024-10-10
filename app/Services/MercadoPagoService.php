@@ -35,16 +35,16 @@ class MercadoPagoService
                 )
             ),
             "back_urls" => [
-                "success" => "http://localhost/payment-success",
-                "failure" => "http://localhost/payment-failure",
-                "pending" => "http://localhost/payment-pending"
+                "success" =>  config('services.url') . "/payment-success",
+                "failure" => config('services.url') . "/payment-failure",
+                "pending" =>  config('services.url') . "/payment-pending"
             ],
             "external_reference" => $random_id,
-            "notification_url" => "http://localhost/webhook",
+            "notification_url" => config('services.url') . "/webhook",
         ]);
     }
 
-    public function paymentSuccess($request)
+    public function paymentSuccess($request): string
     {
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
         $subscription->status = 'paid';
@@ -60,25 +60,21 @@ class MercadoPagoService
             $event->save();
         }
 
-        return 'Pagamento realizado com sucesso!';
+        return true;
     }
 
-    public function paymentFailure($request)
+    public function paymentFailure($request): void
     {
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
         $subscription->status = 'failed';
         $subscription->save();
-
-        return 'Falha no pagamento!';
     }
 
-    public function paymentPending($request)
+    public function paymentPending($request): void
     {
         $subscription = Subscription::where('payment_id', $request->external_reference)->first();
         $subscription->status = 'pending';
         $subscription->save();
-
-        return 'Pagamento pendente!';
     }
 
     public function webhook($request)
@@ -110,5 +106,3 @@ class MercadoPagoService
     }
 
 }
-
-

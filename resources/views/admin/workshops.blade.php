@@ -18,6 +18,7 @@
                 <th class="py-2 px-4 border-b">Nome</th>
                 <th class="py-2 px-4 border-b">Dia</th>
                 <th class="py-2 px-4 border-b">Período</th>
+                <th class ="py-2 px-4 border-b">Palestrante</th>
                 <th class="py-2 px-4 border-b">Vagas restantes</th>
                 <th class="py-2 px-4 border-b">Inscritos</th>
                 <th class="py-2 px-4 border-b">Total de vagas</th>
@@ -31,15 +32,18 @@
                     <td class="py-2 px-4 border-b">{{ $workshop->title }}</td>
                     <td class="py-2 px-4 border-b">{{ $workshop->day->name }}</td>
                     <td class="py-2 px-4 border-b">{{ $workshop->day->period }}</td>
+                    <td class="py-2 px-4 border-b">{{ $workshop->speaker }}</td>
                     <td class="py-2 px-4 border-b">{{ $workshop->slots }}</td>
                     <td class="py-2 px-4 border-b">{{ $workshop->subscriptions->count() }}</td>
-                    <td class="py-2 px-4 border-b">{{ ($workshop->slots + $workshop->subscriptions->count()) }}</td>
+                    <td class="py-2 px-4 border-b">{{ $workshop->total_slots }}</td>
                     <td class="py-2 px-4 border-b">
                         <form action="{{ route('delete-workshop', ['id' => $workshop->id]) }}" method="post">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn bg-red-500 text-white rounded px-4">Excluir</button>
                         </form>
+                        <a href="{{ route('admin.get-subscriptions', ['id' => $workshop->id]) }}" class="btn bg-black text-white rounded px-4">Inscritos</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

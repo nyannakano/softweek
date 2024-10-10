@@ -1,8 +1,10 @@
 <script setup lang="ts">
 
+import { Metric } from "@/types";
+
 const props = defineProps<{
     image_logo_softweek: string
-    metrics: Array<{}>
+    metrics: Metric;
 }>();
 </script>
 
@@ -26,7 +28,7 @@ const props = defineProps<{
                     <p class="text-white font-semibold text-2xl md:text-4xl">IMERSÃO</p>
                 </div>
                 <div>
-                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['companies']}}</h1>
+                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['speakers']}}</h1>
                     <p class="text-white font-semibold text-2xl md:text-4xl">PALESTRANTES</p>
                 </div>
             </div>
