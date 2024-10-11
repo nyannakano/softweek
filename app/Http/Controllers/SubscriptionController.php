@@ -86,6 +86,7 @@ class SubscriptionController extends Controller
     {
         return view('admin.subscription', [
             'subscriptions' => $this->subscriptionService->getSubscriptions(),
+            'subscriptions_with_transport' => $this->subscriptionService->getTransportCount(),
         ]);
     }
 

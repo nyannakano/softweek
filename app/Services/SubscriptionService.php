@@ -213,4 +213,16 @@ class SubscriptionService
 
         return $response;
     }
+
+    public function getTransportCount()
+    {
+        $subscriptions = Subscription::where('status', 'paid')
+            ->where('transport', true)
+            ->whereHas('events', function ($query) {
+                $query->where('title', 'Happy Hour');
+            })
+            ->get();
+
+        return $subscriptions->count();
+    }
 }

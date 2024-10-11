@@ -3,6 +3,7 @@
 @section('content')
     <div class="container mx-auto p-6 bg-white shadow-md rounded-lg">
         <h1 class="text-2xl font-semibold mb-4">Lista de Inscritos</h1>
+        <h2 class="text-xl font-semibold mb-4">Com transporte: {{ $subscriptions_with_transport }}</h2>
 
         <div class="mb-4">
             <input type="text" placeholder="Buscar inscritos..."
