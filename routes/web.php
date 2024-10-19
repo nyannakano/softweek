@@ -8,7 +8,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
