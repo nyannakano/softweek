@@ -13,6 +13,8 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::post('/register', [LoginController::class, 'register']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::middleware(AdminMiddleware::class)->group(function () {
         Route::post('/create-day', [DayController::class, 'createDay']);

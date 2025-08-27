@@ -19,7 +19,7 @@ class PageController extends Controller
 
     public function index()
     {
-        $image_logo = asset('images/LOGO-HOME.svg');
+        $image_logo = asset('images/LOGO_SOFTWEEK.svg');
         $image_logo_softweek = asset('images/LOGO_SOFTWEEK.svg');
         $image_eng_soft = asset('images/engsoft.svg');
         $image_campo_real = asset('images/camporeal.png');

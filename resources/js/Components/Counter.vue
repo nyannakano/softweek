@@ -7,7 +7,7 @@ const props = defineProps<{
     image_campo_real: string
 }>();
 
-const targetDate = new Date('2024-10-07T20:00:00').getTime();
+const targetDate = new Date('2025-09-22T20:00:00').getTime();
 
 const days = ref(0);
 const hours = ref(0);
@@ -45,15 +45,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center min-h-screen lg:ml-[180px]">
-        <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col justify-center items-center h-screen lg:ml-[180px]">
+
+    <div class="flex flex-col md:flex-row">
             <img :src="image_logo" alt="Logo Softweek 2024" class="logo-image w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
 
-            <div class="max-w-lg w-full lg:m-10 lg:ml-20 mt-20">
+        <div class="max-w-lg w-full lg:m-10 lg:ml-20 mt-4">
                 <h1 class="text-white text-xl md:text-2xl mb-10 ml-5 font-bold text-title">
                     O universo da Engenharia de Software está te esperando! ⚡
                 </h1>
-                <h2 class="text-white text-xl md:text-2xl mb-10 ml-5 font-bold text-title">As vendas iniciam em:</h2>
+                <h2 class="text-white text-xl md:text-2xl mb-10 ml-5 font-bold text-title">Faltam:</h2>
                 <section class="p-8 rounded-lg shadow-lg text-left items-center">
                     <div class="grid grid-cols-1 md:grid-cols-1 gap-8 text-white">
                         <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
@@ -61,22 +62,22 @@ onUnmounted(() => {
                                 <div class="flex justify-around text-lg text-center">
                                     <div class="flex-col">
                                         <span class="font-bold">{{ days }}</span>
-                                        <div>dia</div>
+                                        <div>Dias</div>
                                     </div>
                                     <div>:</div>
                                     <div class="flex-col">
                                         <span class="font-bold">{{ hours }}</span>
-                                        <div>horas</div>
+                                        <div>Horas</div>
                                     </div>
                                     <div>:</div>
                                     <div class="flex-col">
                                         <span class="font-bold">{{ minutes }}</span>
-                                        <div>minutos</div>
+                                        <div>Minutos</div>
                                     </div>
                                     <div>:</div>
                                     <div class="flex-col">
                                         <span class="font-bold">{{ seconds }}</span>
-                                        <div>segundos</div>
+                                        <div>Segundos</div>
                                     </div>
                                 </div>
                             </div>
