@@ -42,7 +42,7 @@ if (props.is_already_subbed) {
 <style scoped>
 .header {
     height: 200vh;
-    background: radial-gradient(circle at 80% 10%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 60%);
+    background: radial-gradient(circle at 80% 10%, #0D3D73, #1959A9 60%);
 }
 </style>
 

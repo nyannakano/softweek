@@ -12,6 +12,7 @@ const props = defineProps<{
     image_logo: string,
     image_logo_softweek: string,
     images_last_edition: string,
+    image_25_anos: string,
     image_eng_soft: string,
     image_campo_real: string,
     images_partners: ImagePartner,
@@ -34,7 +35,7 @@ const props = defineProps<{
     <div class="bg-gradient-radial-header">
         <header>
 <!--            <RegisterHome :image_logo="image_logo"/>-->
-            <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real"/>
+            <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real" :image_25_anos="image_25_anos"/>
         </header>
         <main>
 <!--            <Partners :images_partners="images_partners"/>-->

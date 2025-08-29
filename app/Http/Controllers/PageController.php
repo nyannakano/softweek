@@ -19,9 +19,10 @@ class PageController extends Controller
 
     public function index()
     {
-        $image_logo = asset('images/LOGO_SOFTWEEK.svg');
-        $image_logo_softweek = asset('images/LOGO_SOFTWEEK.svg');
+        $image_logo = asset('images/LOGO-HOME.png');
+        $image_logo_softweek = asset('images/LOGO-SOFTWEEK.png');
         $image_eng_soft = asset('images/engsoft.svg');
+        $image_25_anos = asset('images/25anos.png');
         $image_campo_real = asset('images/camporeal.png');
         $images_last_edition = [
             asset('images/last_editions/lasted1.png'),
@@ -84,6 +85,7 @@ class PageController extends Controller
             'image_logo' => $image_logo,
             'images_partners' => $images_partners,
             'image_logo_softweek' => $image_logo_softweek,
+            'image_25_anos' => $image_25_anos,
             'images_last_edition' => $images_last_edition,
             'metrics' => $metrics,
             'events' => $events,

@@ -5,6 +5,7 @@ const props = defineProps<{
     image_logo: string,
     image_eng_soft: string
     image_campo_real: string
+    image_25_anos: string
 }>();
 
 const targetDate = new Date('2025-09-22T20:00:00').getTime();
@@ -48,7 +49,11 @@ onUnmounted(() => {
     <div class="flex flex-col justify-center items-center h-screen lg:ml-[180px]">
 
     <div class="flex flex-col md:flex-row">
-            <img :src="image_logo" alt="Logo Softweek 2024" class="logo-image w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
+        <img
+            :src="image_logo"
+            alt="Logo Softweek 2024"
+            class="logo-image max-w-[180px] md:max-w-[220px] lg:max-w-[300px] h-auto object-contain mx-auto"
+        />
 
         <div class="max-w-lg w-full lg:m-10 lg:ml-20 mt-4">
                 <h1 class="text-white text-xl md:text-2xl mb-10 ml-5 font-bold text-title">
@@ -86,11 +91,11 @@ onUnmounted(() => {
                 </section>
             </div>
         </div>
-        <div class="flex flex-col md:flex-row justify-center items-center mt-10 mb-10">
-            <h2 class="text-white text-xl md:text-2xl lg:mr-10 font-bold">Realização:</h2>
-            <div class="flex flex-row items-center">
-                <img :src="image_eng_soft" alt="Engenharia de Software" class="h-20 md:mr-10 mb-2 md:mb-0">
-                <img :src="image_campo_real" alt="Campo Real" class="h-20 ml-10">
+        <div class="flex flex-col md:flex-row justify-center items-center mt-10 mb-10 flex-wrap">
+            <div class="flex flex-row flex-wrap justify-center items-center gap-4 md:gap-10">
+                <img :src="image_eng_soft" alt="Engenharia de Software" class="h-16 md:h-20">
+                <img :src="image_campo_real" alt="Campo Real" class="h-16 md:h-20">
+                <img :src="image_25_anos" alt="25 Anos" class="h-16 md:h-20">
             </div>
         </div>
     </div>
@@ -98,11 +103,11 @@ onUnmounted(() => {
 
 <style scoped>
 section {
-    background-color: rgba(47, 8, 9, 0.2);
+    background-color: rgba(1, 5, 11, 0.2);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(238, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(150, 190, 237, 0.2);
     max-width: 800px;
     margin: 0 auto;
 }
