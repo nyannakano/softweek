@@ -6,6 +6,7 @@ use App\Models\Day;
 use App\Models\Event;
 use App\Models\Lunch;
 use App\Models\Subscription;
+use App\Models\TypeSubscription;
 
 class EventService
 {
@@ -68,19 +69,48 @@ class EventService
 
     public function getEventsPerDay(): array
     {
-        list($monday_id, $tuesday_all_night_id, $tuesday_first_half_id, $tuesday_second_half_id, $wednesday_all_night_id, $wednesday_first_half_id, $wednesday_second_half_id, $friday_all_night_id, $friday_first_half_id, $friday_second_half_id) = $this->getDaysIds();
+        list($monday_all_night_id,
+            $monday_first_half_id,
+            $monday_second_half_id,
+            $tuesday_all_night_id,
+            $tuesday_first_half_id,
+            $tuesday_second_half_id,
+            $wednesday_all_night_id,
+            $wednesday_first_half_id,
+            $wednesday_second_half_id,
+            $thursday_all_night_id,
+            $thursday_first_half_id,
+            $thursday_second_half_id,
+            $friday_all_night_id,
+            $friday_first_half_id,
+            $friday_second_half_id) = $this->getDaysIds();
 
         return [
-            'monday' => $this->getEvents($monday_id),
-            'tuesday_all_night' => $this->getEvents($tuesday_all_night_id),
-            'tuesday_first_half' => $this->getEvents($tuesday_first_half_id),
-            'tuesday_second_half' => $this->getEvents($tuesday_second_half_id),
-            'wednesday_all_night' => $this->getEvents($wednesday_all_night_id),
-            'wednesday_first_half' => $this->getEvents($wednesday_first_half_id),
-            'wednesday_second_half' => $this->getEvents($wednesday_second_half_id),
-            'friday_all_night' => $this->getEvents($friday_all_night_id),
-            'friday_first_half' => $this->getEvents($friday_first_half_id),
-            'friday_second_half' => $this->getEvents($friday_second_half_id),
+            'monday' => [
+                'all_day' => $this->getEvents($monday_all_night_id),
+                'first_half' => $this->getEvents($monday_first_half_id),
+                'second_half' => $this->getEvents($monday_second_half_id),
+            ],
+            'tuesday' => [
+                'all_day' => $this->getEvents($tuesday_all_night_id),
+                'first_half' => $this->getEvents($tuesday_first_half_id),
+                'second_half' => $this->getEvents($tuesday_second_half_id),
+            ],
+            'wednesday' => [
+                'all_day' => $this->getEvents($wednesday_all_night_id),
+                'first_half' => $this->getEvents($wednesday_first_half_id),
+                'second_half' => $this->getEvents($wednesday_second_half_id),
+            ],
+            'thursday' => [
+                'all_day' => $this->getEvents($thursday_all_night_id),
+                'first_half' => $this->getEvents($thursday_first_half_id),
+                'second_half' => $this->getEvents($thursday_second_half_id),
+            ],
+            'friday' => [
+                'all_day' => $this->getEvents($friday_all_night_id),
+                'first_half' => $this->getEvents($friday_first_half_id),
+                'second_half' => $this->getEvents($friday_second_half_id),
+            ],
         ];
     }
 
@@ -139,7 +169,6 @@ class EventService
      */
     public function getDaysIds(): array
     {
-        $monday_id = Day::where('name', 'monday')->first()->id;
         $tuesday_all_night_id = Day::where('name', 'tuesday')->where('period', 'all_day')->first()->id;
         $tuesday_first_half_id = Day::where('name', 'tuesday')->where('period', 'first_half')->first()->id;
         $tuesday_second_half_id = Day::where('name', 'tuesday')->where('period', 'second_half')->first()->id;
@@ -149,6 +178,18 @@ class EventService
         $friday_all_night_id = Day::where('name', 'friday')->where('period', 'all_day')->first()->id;
         $friday_first_half_id = Day::where('name', 'friday')->where('period', 'first_half')->first()->id;
         $friday_second_half_id = Day::where('name', 'friday')->where('period', 'second_half')->first()->id;
-        return array($monday_id, $tuesday_all_night_id, $tuesday_first_half_id, $tuesday_second_half_id, $wednesday_all_night_id, $wednesday_first_half_id, $wednesday_second_half_id, $friday_all_night_id, $friday_first_half_id, $friday_second_half_id);
+        $thursday_all_night_id = Day::where('name', 'thursday')->where('period', 'all_day')->first()->id;
+        $thursday_first_half_id = Day::where('name', 'thursday')->where('period', 'first_half')->first()->id;
+        $thursday_second_half_id = Day::where('name', 'thursday')->where('period', 'second_half')->first()->id;
+        $monday_all_night_id = Day::where('name', 'monday')->where('period', 'all_day')->first()->id;
+        $monday_first_half_id = Day::where('name', 'monday')->where('period', 'first_half')->first()->id;
+        $monday_second_half_id = Day::where('name', 'monday')->where('period', 'second_half')->first()->id;
+
+        return array($monday_all_night_id, $monday_first_half_id, $monday_second_half_id, $tuesday_all_night_id, $tuesday_first_half_id, $tuesday_second_half_id, $wednesday_all_night_id, $wednesday_first_half_id, $wednesday_second_half_id, $thursday_all_night_id, $thursday_first_half_id, $thursday_second_half_id, $friday_all_night_id, $friday_first_half_id, $friday_second_half_id);
+    }
+
+    public function getEventTypes()
+    {
+        return TypeSubscription::select(['id', 'name', 'description'])->get();
     }
 }

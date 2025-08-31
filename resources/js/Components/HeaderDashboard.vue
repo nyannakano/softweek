@@ -11,7 +11,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
     <header>
         <div class="flex flex-col relative">
             <div class="flex items-center justify-start sm:justify-start flex-wrap">
-                <img :src="logo" alt="Logo Softweek 2024" class="w-16 sm:w-[calc(1%+4rem)] mt-5 ml-5 sm:ml-10">
+                <img :src="logo" alt="Logo Softweek 2025" class="w-16 sm:w-[calc(1%+4rem)] mt-5 ml-5 sm:ml-10">
                 <div class="ml-2 sm:ml-4">
                     <h1 class="text-[#8E0300] text-lg sm:text-1xl font-semibold mt-2 sm:mt-3">SOFTWEEK</h1>
                     <h2 class="text-white text-lg sm:text-1xl font-semibold">2024</h2>

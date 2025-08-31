@@ -68,4 +68,22 @@ class EventController extends Controller
 
         return view('admin.register-workshop', compact('days'));
     }
+
+    public function getEventsList()
+    {
+        $events = $this->eventService->getEventsPerDay();
+
+        return response()->json([
+            'events' => $events,
+        ]);
+    }
+
+    public function getEventTypes()
+    {
+        $types = $this->eventService->getEventTypes();
+
+        return response()->json([
+            'types' => $types,
+        ]);
+    }
 }

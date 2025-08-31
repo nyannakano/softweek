@@ -18,7 +18,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): Response
     {
-        $image_logo = asset('images/LOGO-HOME.svg');
+        $image_logo = asset('images/LOGO-HOME.png');
 
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),

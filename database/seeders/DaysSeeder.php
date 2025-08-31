@@ -11,11 +11,15 @@ class DaysSeeder extends Seeder
     {
         $days = [
             [
-                'name' =>'monday',
-                'period' => 'all_day'
+                'name' => 'monday',
+                'period' => 'first_half'
             ],
             [
-                'name' =>'tuesday',
+                'name' => 'monday',
+                'period' => 'second_half'
+            ],
+            [
+                'name' => 'tuesday',
                 'period' => 'first_half'
             ],
             [
@@ -40,20 +44,32 @@ class DaysSeeder extends Seeder
             ],
             [
                 'name' => 'friday',
+                'period' => 'first_half'
+            ],
+            [
+                'name' => 'friday',
+                'period' => 'second_half'
+            ],
+            [
+                'name' => 'monday',
                 'period' => 'all_day'
             ],
             [
-                'name' =>'tuesday',
+                'name' => 'tuesday',
                 'period' => 'all_day'
             ],
             [
-                'name' =>'wednesday',
+                'name' => 'wednesday',
                 'period' => 'all_day'
             ],
             [
                 'name' => 'thursday',
                 'period' => 'all_day'
-            ]
+            ],
+            [
+                'name' => 'friday',
+                'period' => 'all_day'
+            ],
         ];
 
         foreach ($days as $day) {

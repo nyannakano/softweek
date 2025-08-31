@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,13 +38,15 @@ class LoginController extends Controller
             'password' => 'required|confirmed',
             'cpf' => 'required|string|min_digits:11|max_digits:11|unique:users,cpf',
             'ra' => 'required|string|unique:users,ra',
+            'name' => 'required|string',
         ]);
 
         $user = $this->authService->register($request->all());
 
         return response()->json([
             'message' => 'User registered with success',
-            'user' => $user,
+            'user' => $user['user'],
+            'token' => $user['token'],
         ], 201);
     }
 }

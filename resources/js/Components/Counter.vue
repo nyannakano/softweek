@@ -51,7 +51,7 @@ onUnmounted(() => {
     <div class="flex flex-col md:flex-row">
         <img
             :src="image_logo"
-            alt="Logo Softweek 2024"
+            alt="Logo Softweek 2025"
             class="logo-image max-w-[180px] md:max-w-[220px] lg:max-w-[300px] h-auto object-contain mx-auto"
         />
 

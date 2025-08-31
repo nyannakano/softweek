@@ -101,4 +101,11 @@ class SubscriptionController extends Controller
     {
         return $this->subscriptionService->getSubscriptionsByEventId($id);
     }
+
+    public function subscribeApi(Request $request)
+    {
+        $params = $request->all();
+
+        $subscription = $this->subscriptionService->subscribeApi($params);
+    }
 }

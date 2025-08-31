@@ -31,7 +31,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
                             id="password" name="password" type="password" placeholder="Senha*">
                     </div>
                     <div class="flex items-center justify-between">
-                        <button class="bg-[#600F11] hover:bg-[#120F22] text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button class="bg-[#042042] hover:bg-[#2962AC] text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             ENTRAR
                         </button>
                     </div>
@@ -50,7 +50,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
 <style scoped>
 .login-form {
     height: 100vh;
-    background: radial-gradient(circle at 50% 50%, rgba(47, 8, 9, 1), rgba(47, 8, 9, 0) 70%);
+    background: radial-gradient(circle at 50% 50%, rgb(3, 31, 64), rgba(47, 8, 9, 0) 70%);
     align-items: center;
 }
 </style>

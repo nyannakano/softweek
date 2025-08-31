@@ -225,4 +225,9 @@ class SubscriptionService
 
         return $subscriptions->count();
     }
+
+    public function subscribeApi($params)
+    {
+        $mercadoPagoService = new MercadoPagoService();
+    }
 }

@@ -41,4 +41,8 @@ return [
         'client_id' => env('MERCADO_PAGO_CLIENT_ID'),
     ],
     'url' => env('APP_URL'),
+    'client' => [
+        'id' => env('CLIENT_ID'),
+        'secret' => env('CLIENT_SECRET'),
+    ],
 ];
