@@ -11,7 +11,7 @@ class UserAdminSeeder extends Seeder
     {
         $password = app()->environment('local') ? 'placeholder' : 'nJGrKXwD459mEp';
 
-        User::factory()->create([
+        User::create([
             'name' => 'Admin',
             'email' => 'admin@softweek.com.br',
             'email_verified_at' => now(),
