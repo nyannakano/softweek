@@ -28,8 +28,10 @@ export interface Drink {
 export interface Subscription {
     events: Array<Event>,
     will_participate_happy_hour: boolean,
+    type: string,
     transport: boolean,
     status: string,
+    payment_url?: string,
 }
 
 export interface Metric {
@@ -45,9 +47,8 @@ export interface Day {
 }
 
 export interface ImagePartner {
-    jedi: string[];
     master: string[];
-    padawan: string[];
-    force: string[];
-    knight: string[];
+    ouro: string[];
+    prata: string[];
+    parceiros: string[];
 }

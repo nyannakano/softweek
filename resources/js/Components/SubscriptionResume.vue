@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import {Subscription} from "@/types";
+import {Subscription, Event} from "@/types";
 import EventSubscription from "@/Components/EventSubscription.vue";
 
 const props = defineProps<{
     subscription: Subscription
     alreadyHaveEvents: boolean
     events: {
-        tuesday_all_night: Array<Event>;
-        tuesday_first_half: Array<Event>;
-        tuesday_second_half: Array<Event>;
-        wednesday_all_night: Array<Event>;
-        wednesday_first_half: Array<Event>;
-        wednesday_second_half: Array<Event>;
-        thursday_all_night: Array<Event>;
-        thursday_first_half: Array<Event>;
-        thursday_second_half: Array<Event>;
+        tuesday_all_night: Event[];
+        tuesday_first_half: Event[];
+        tuesday_second_half: Event[];
+        wednesday_all_night: Event[];
+        wednesday_first_half: Event[];
+        wednesday_second_half: Event[];
+        thursday_all_night: Event[];
+        thursday_first_half: Event[];
+        thursday_second_half: Event[];
     }
 }>();
 
