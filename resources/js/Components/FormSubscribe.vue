@@ -205,7 +205,7 @@ const handleChange = (day: string, type: string) => {
 
                             <div class="text-center">
                                 <button type="submit"
-                                        class="bg-[#600F11] hover:bg-[#120F22] text-white w-1/2 font-bold py-2 px-4 mt-5 sm:px-10 rounded focus:outline-none focus:shadow-outline">
+                                        class="bg-[#042042] hover:bg-[#2962AC] text-white w-1/2 font-bold py-2 px-4 mt-5 sm:px-10 rounded focus:outline-none focus:shadow-outline">
                                     REALIZAR PAGAMENTO
                                 </button>
                             </div>
@@ -242,10 +242,10 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked {
-    background-color: rgba(255, 0, 7, 0.4);
+    background-color: rgba(34, 73, 152, 0.4);
 }
 
 input[type="radio"]:hover {
-    background-color: rgba(255, 0, 7, 0.4);
+    background-color: rgba(131, 169, 225, 0.4);
 }
 </style>
