@@ -9,9 +9,9 @@
             wednesday_all_night: Array<Event>,
             wednesday_first_half: Array<Event>,
             wednesday_second_half: Array<Event>,
-            friday_all_night: Array<Event>,
-            friday_first_half: Array<Event>,
-            friday_second_half: Array<Event>,
+            thursday_all_night: Array<Event>,
+            thursday_first_half: Array<Event>,
+            thursday_second_half: Array<Event>,
         },
     }>();
 
@@ -43,13 +43,14 @@
             </div>
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Quinta-feira</h3>
-                <p>HAPPY HOUR!</p>
+                <p v-for="event in events['thursday_all_night']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['thursday_first_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p v-for="event in events['thursday_second_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+
             </div>
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Sexta-feira</h3>
-                <p v-for="event in events['friday_all_night']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
-                <p v-for="event in events['friday_first_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
-                <p v-for="event in events['friday_second_half']" class="mt-2"> {{ event['title'] }} - {{ event['company'] }}</p>
+                <p>HAPPY HOUR!</p>
             </div>
         </div>
     </section>

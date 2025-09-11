@@ -5,6 +5,7 @@ use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\DayController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LunchController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ApiMiddleware;
 use Illuminate\Http\Request;
@@ -37,3 +38,5 @@ Route::middleware(ApiMiddleware::class)->group(function () {
         });
     });
 });
+
+Route::post('/webhook', [SubscriptionController::class, 'webhook']);

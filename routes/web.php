@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/subscribe', [SubscriptionController::class, 'subscribe']);
+    Route::post('/subscribe-events', [SubscriptionController::class, 'subscribeEvents']);
 
     Route::get('/payment-success', [SubscriptionController::class, 'paymentSuccess'])->name('payment.success');
     Route::get('/payment-failure', [SubscriptionController::class, 'paymentFailure'])->name('payment.failure');
@@ -45,7 +46,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/create-coupon', [CouponController::class, 'createCoupon'])->name('create-coupon');
     });
 });
-
-Route::post('/webhook', [SubscriptionController::class, 'webhook']);
 
 require __DIR__.'/auth.php';

@@ -21,37 +21,48 @@ class SubscriptionController extends Controller
     public function subscribe(Request $request)
     {
         $validatedData = $request->validate([
-//            'thursday' => 'required',
-//            'tuesday' => 'required_without:tuesday1,tuesday2',
-//            'tuesday1' => 'required_without:tuesday',
-//            'tuesday2' => 'required_without:tuesday',
-//            'wednesday' => 'required_without:wednesday1,wednesday2',
-//            'wednesday1' => 'required_without:wednesday',
-//            'wednesday2' => 'required_without:wednesday',
-//            'friday' => 'required_without:friday1,friday2',
-//            'friday1' => 'required_without:friday',
-//            'friday2' => 'required_without:friday',
             'coupon' => 'nullable|exists:coupons,code',
             'type' => 'required|in:only_opening,workshops,workshops_happy_hour',
-//            'transport' => 'nullable',
         ], [
-//            'friday.required' => 'O campo Sexta-feira é obrigatório.',
-//            'tuesday.required_without' => 'O campo Terça-feira é obrigatório.',
-//            'tuesday1.required_without' => 'O campo Terça-feira é obrigatório.',
-//            'tuesday2.required_without' => 'O campo Terça-feira é obrigatório.',
-//            'wednesday.required_without' => 'O campo Quarta-feira é obrigatório.',
-//            'wednesday1.required_without' => 'O campo Quarta-feira é obrigatório.',
-//            'wednesday2.required_without' => 'O campo Quarta-feira é obrigatório.',
-//            'thursday.required_without' => 'O campo Quinta-feira é obrigatório.',
             'coupon.exists' => 'Cupom inválido.',
             'type.required' => 'Tipo de inscrição obrigatório.',
-//            'friday1.required_without' => 'O campo Sexta-feira é obrigatório.',
-//            'friday2.required_without' => 'O campo Sexta-feira é obrigatório.',
         ]);
 
         $subscriptionUrl = $this->subscriptionService->subscribe($validatedData);
 
         return Inertia::location($subscriptionUrl);
+    }
+
+    public function subscribeEvents(Request $request)
+    {
+        $validatedData = $request->validate([
+            'tuesday' => 'required_without:tuesday1,tuesday2',
+            'tuesday1' => 'required_without:tuesday',
+            'tuesday2' => 'required_without:tuesday',
+            'wednesday' => 'required_without:wednesday1,wednesday2',
+            'wednesday1' => 'required_without:wednesday',
+            'wednesday2' => 'required_without:wednesday',
+            'thursday' => 'required_without:thursday1,thursday2',
+            'thursday1' => 'required_without:thursday',
+            'thursday2' => 'required_without:thursday',
+        ], [
+            'tuesday.required_without' => 'O campo Terça-feira é obrigatório.',
+            'tuesday1.required_without' => 'O campo Terça-feira é obrigatório.',
+            'tuesday2.required_without' => 'O campo Terça-feira é obrigatório.',
+            'wednesday.required_without' => 'O campo Quarta-feira é obrigatório.',
+            'wednesday1.required_without' => 'O campo Quarta-feira é obrigatório.',
+            'wednesday2.required_without' => 'O campo Quarta-feira é obrigatório.',
+            'thursday.required_without' => 'O campo Quinta-feira é obrigatório.',
+            'thursday1.required_without' => 'O campo Quinta-feira é obrigatório.',
+            'thursday2.required_without' => 'O campo Quinta-feira é obrigatório.',
+        ]);
+        $subscription = $this->subscriptionService->subscribeEvents($validatedData);
+
+        if ($subscription) {
+            return redirect()->route('dashboard')->with('success', 'Inscrição realizada com sucesso!');
+        }
+
+        return redirect()->route('dashboard')->with('error', 'Erro ao realizar inscrição.');
     }
 
     public function paymentSuccess(Request $request)

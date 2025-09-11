@@ -14,12 +14,12 @@ const props = defineProps<{
         wednesday_all_night: Array<Event>;
         wednesday_first_half: Array<Event>;
         wednesday_second_half: Array<Event>;
-        friday_all_night: Array<Event>;
-        friday_first_half: Array<Event>;
-        friday_second_half: Array<Event>;
         thursday_all_night: Array<Event>;
+        thursday_first_half: Array<Event>;
+        thursday_second_half: Array<Event>;
     },
     is_already_subbed: boolean,
+    alreadyHaveEvents: boolean,
     subscription: Subscription
 }>();
 
@@ -35,7 +35,7 @@ if (props.is_already_subbed) {
     <div class="header background-image-first">
         <HeaderDashboard :logo="logo" :title="title"/>
         <FormSubscribe v-if="!is_already_subbed" :events="events" />
-        <SubscriptionResume v-else :subscription="subscription" :events="events"/>
+        <SubscriptionResume v-else :subscription="subscription" :alreadyHaveEvents="alreadyHaveEvents" :events="events"/>
     </div>
 </template>
 

@@ -1,8 +1,21 @@
 <script setup lang="ts">
 import {Subscription} from "@/types";
+import EventSubscription from "@/Components/EventSubscription.vue";
 
 const props = defineProps<{
     subscription: Subscription
+    alreadyHaveEvents: boolean
+    events: {
+        tuesday_all_night: Array<Event>;
+        tuesday_first_half: Array<Event>;
+        tuesday_second_half: Array<Event>;
+        wednesday_all_night: Array<Event>;
+        wednesday_first_half: Array<Event>;
+        wednesday_second_half: Array<Event>;
+        thursday_all_night: Array<Event>;
+        thursday_first_half: Array<Event>;
+        thursday_second_half: Array<Event>;
+    }
 }>();
 
 const dayTranslations: Record<string, string> = {
@@ -37,8 +50,12 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
                 <div>
                     <h2 class="text-xl mb-2 font-bold">Workshops</h2>
                     <ul>
-                        <li v-for="event in subscription['events']" :key="event.id">
+                        <li v-if="alreadyHaveEvents" v-for="event in subscription['events']" :key="event.id">
                             <p>- {{ event.title }} - {{ translateDay(event.day.name) }} {{ translatePeriod(event.day.period) }} - {{ event.speaker }}</p>
+                        </li>
+                        <li v-else>
+                            <p>Não inscrito para nenhum workshop, realize a inscrição abaixo:</p>
+                            <EventSubscription :events="events" />
                         </li>
                     </ul>
                 </div>
@@ -46,11 +63,14 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
                 <div>
                     <h2 class="text-xl mb-2 font-bold">Happy Hour</h2>
                     <ul>
-                        <li v-if="subscription['type'] !== 'only_opening'">
-                            <p>Inscrito para o Happy Hour</p>
+                        <li v-if="subscription['type'] == 'only_opening'">
+                            <p>Não inscrito para o Happy Hour</p>
+                        </li>
+                        <li v-else-if="subscription['type'] == 'workshops'">
+                            <p>Não inscrito para o Happy Hour</p>
                         </li>
                         <li v-else>
-                            <p>Não inscrito para o Happy Hour</p>
+                            <p>Inscrito para o Happy Hour</p>
                         </li>
                     </ul>
                 </div>
@@ -61,11 +81,11 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
 
 <style scoped>
 section {
-    background-color: rgba(47, 8, 9, 0.2);
+    background: rgba(13, 61, 115, 0.1);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(238, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(25, 89, 169, 0.3);
     max-width: 800px;
     margin: 0 auto;
 }

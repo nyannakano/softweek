@@ -6,6 +6,7 @@ use App\Models\Coupon;
 use App\Models\Day;
 use App\Models\Event;
 use App\Models\Subscription;
+use App\Models\SubscriptionEvent;
 use LaravelIdea\Helper\App\Models\_IH_Subscription_C;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -43,7 +44,7 @@ class SubscriptionService
 
             $subscribe->events()->detach();
 
-            $monday = Day::where('name', 'monday')->first();
+            $monday = Day::where('name', 'monday')->where('period', 'all_day')->first();
             $event_monday = Event::where('day_id', $monday->id)->first();
 
             $subscribe->events()->attach($event_monday->id);
@@ -113,11 +114,11 @@ class SubscriptionService
 
     public function getSubscription($user)
     {
-        $subscription = Subscription::with('events.day', 'lunch')->where('user_id', $user->id)->first();
+        $subscription = Subscription::with('events.day')->where('user_id', $user->id)->first();
         $subscription->will_participate_happy_hour = false;
 
         $subscription->events->map(function ($event) use ($subscription) {
-            if ($event->day->name == 'thursday') {
+            if ($event->day->name == 'monday') {
                 $subscription->will_participate_happy_hour = true;
             }
         });
@@ -159,13 +160,6 @@ class SubscriptionService
         $subscription = Subscription::find($id);
         $subscription->status = 'paid';
         $subscription->save();
-
-//        $events = $subscription->events;
-//
-//        foreach ($events as $e) {
-//            $e->slots -= 1;
-//            $e->save();
-//        }
 
         return true;
     }
@@ -228,5 +222,67 @@ class SubscriptionService
     public function subscribeApi($params)
     {
         $mercadoPagoService = new MercadoPagoService();
+    }
+
+    public function checkIfAlreadyHaveEvents($user)
+    {
+        $subscription = Subscription::where('user_id', $user->id)->where('status', '!=', 'failed')->first();
+
+        if (!$subscription) {
+            return false;
+        }
+
+       if ($subscription->type == 'only_opening') {
+           return true;
+       }
+
+       $subCount = SubscriptionEvent::where('subscription_id', $subscription->id)->count();
+
+       if ($subCount > 2) {
+           return true;
+       }
+
+       return false;
+    }
+
+    public function subscribeEvents($data)
+    {
+        try {
+            $user = auth()->user();
+
+            $subscribe = Subscription::where('user_id', $user->id)->where('status', '!=', 'failed')->first();
+
+            if (!$subscribe) {
+                return false;
+            }
+
+            if ($data['tuesday']) {
+                $subscribe->events()->attach($data['tuesday']);
+
+            } else {
+                $subscribe->events()->attach($data['tuesday1']);
+                $subscribe->events()->attach($data['tuesday2']);
+            }
+
+            if ($data['wednesday']) {
+                $subscribe->events()->attach($data['wednesday']);
+            } else {
+                $subscribe->events()->attach($data['wednesday1']);
+                $subscribe->events()->attach($data['wednesday2']);
+            }
+
+            if ($data['thursday']) {
+                $subscribe->events()->attach($data['thursday']);
+            } else {
+                $subscribe->events()->attach($data['thursday1']);
+                $subscribe->events()->attach($data['thursday2']);
+            }
+
+            return true;
+        } catch (\Exception $e) {
+            \Log::error('Error subscribing events: ' . $e);
+
+            return false;
+        }
     }
 }

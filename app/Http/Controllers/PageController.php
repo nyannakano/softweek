@@ -39,43 +39,42 @@ class PageController extends Controller
 
         $images_master = [
             asset('images/MASTER/shootinghouse.png'),
-            asset('images/MASTER/teorema.png'),
         ];
 
-        $images_knight = [
-            asset('images/KNIGHT/3c.png'),
-            asset('images/KNIGHT/dam.png'),
+        $image_ouro = [
+            asset('images/OURO/fuel.png'),
+            asset('images/OURO/teorema.png'),
+            asset('images/OURO/Zaaz.png'),
         ];
 
-        $image_force = [
-            asset('images/FORCE/palinha.svg'),
-            asset('images/FORCE/cooperalianca.png'),
+        $image_prata = [
+            asset('images/PRATA/3c.png'),
+            asset('images/PRATA/act.jpeg'),
+            asset('images/PRATA/bridge.jpg'),
+            asset('images/PRATA/celeiro.png'),
+            asset('images/PRATA/cilla.png'),
+            asset('images/PRATA/dam.png'),
+            asset('images/PRATA/izi.png'),
+            asset('images/PRATA/mensagio.png'),
+            asset('images/PRATA/NextAge.png'),
+            asset('images/PRATA/spa.png'),
         ];
 
-        $image_jedi = [
-            asset('images/JEDI/dalpozzo.png'),
-            asset('images/JEDI/fuel.png'),
-            asset('images/JEDI/nexun.png'),
-            asset('images/JEDI/rp.png'),
-            asset('images/JEDI/santamaria.png'),
-            asset('images/JEDI/spa.png'),
-            asset('images/JEDI/unimed.png'),
-        ];
-
-        $image_padawan = [
-            asset('images/PADAWAN/act.png'),
-            asset('images/PADAWAN/celeiro.png'),
-            asset('images/PADAWAN/ctp.png'),
-            asset('images/PADAWAN/lets.png'),
-            asset('images/PADAWAN/NextAge.png'),
+        $image_parceiros = [
+            asset('images/PARCEIROS/cooper.png'),
+            asset('images/PARCEIROS/dalpozzo.png'),
+            asset('images/PARCEIROS/governize.png'),
+            asset('images/PARCEIROS/palinha.jpeg'),
+            asset('images/PARCEIROS/santamaria.png'),
+            asset('images/PARCEIROS/sebrae.png'),
+            asset('images/PARCEIROS/sec.png'),
         ];
 
         $images_partners = [
-            'jedi' => $image_jedi,
-            'padawan' => $image_padawan,
-            'force' => $image_force,
-            'knight' => $images_knight,
             'master' => $images_master,
+            'ouro' => $image_ouro,
+            'prata' => $image_prata,
+            'parceiros' => $image_parceiros,
         ];
 
         $metrics = $this->eventService->getMetrics();
@@ -110,17 +109,18 @@ class PageController extends Controller
 
         if ($is_already_subbed) {
             $subscription = $this->subscriptionService->getSubscription($user);
+
+            $checkIfAlreadyHaveEvents = $this->subscriptionService->checkIfAlreadyHaveEvents($user);
         }
 
-        $lunches = $this->eventService->getLunches('lunch');
         $drinks = $this->eventService->getLunches('drink');
 
         return Inertia::render('Dashboard', [
             'logo' => $logo,
             'events' => $events,
-            'lunches' => $lunches,
             'drinks' => $drinks,
             'is_already_subbed' => $is_already_subbed,
+            'alreadyHaveEvents' => $checkIfAlreadyHaveEvents ?? false,
             'subscription' => $subscription,
         ]);
     }
