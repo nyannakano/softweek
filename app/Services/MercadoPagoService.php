@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Subscription;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Payment\PaymentClient;
 
 class MercadoPagoService
 {
@@ -79,12 +80,24 @@ class MercadoPagoService
 
     public function webhook($request)
     {
-        $subscription = Subscription::where('payment_id', $request->external_reference)->first();
+        $paymentId = $request['data']['id'];
 
-        if ($request->status == 'paid') {
-            $subscription->status = $request->status;
-            $subscription->save();
+        $paymentClient = new PaymentClient();
+        $payment = $paymentClient->get($paymentId);
 
+        $status = $payment->status;
+        $externalReference = $payment->external_reference;
+
+        $subscription = Subscription::where('payment_id', $externalReference)->first();
+
+        if (!$subscription) {
+            return 'Subscription not found';
+        }
+
+        $subscription->status = $status;
+        $subscription->save();
+
+        if ($status === 'approved') {
             $subscriptionId = $subscription->id;
 
             $events = Event::whereHas('subscriptions', function ($query) use ($subscriptionId) {
@@ -95,14 +108,9 @@ class MercadoPagoService
                 $event->slots = $event->slots - 1;
                 $event->save();
             }
-
-            return 'Webhook recebido!';
         }
 
-        $subscription->status = $request->status;
-        $subscription->save();
-
-        return 'Webhook recebido!';
+        return 'Webhook received!';
     }
 
 }
