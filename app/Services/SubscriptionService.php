@@ -16,7 +16,7 @@ class SubscriptionService
         try {
             $mercadoPagoService = new MercadoPagoService();
 
-            $value = $this->setValue($data['thursday']);
+            $value = $this->setValue($data['type']);
 
             if ($data['coupon']) {
                 $percentage = $this->checkCoupon($data['coupon']);
@@ -37,6 +37,8 @@ class SubscriptionService
                     'status' => $status,
                     'payment_id' => $subscription->external_reference ?? 'without_payment',
                     'coupon_id' => $coupon->id ?? null,
+                    'type' => $data['type'] ?? null,
+                    'payment_url' => $subscription->init_point ?? null,
                 ]);
 
             $subscribe->events()->detach();
@@ -46,41 +48,36 @@ class SubscriptionService
 
             $subscribe->events()->attach($event_monday->id);
 
-            $happy_hour = $data['thursday'] ?? null;
-            $subscribe->transport = false;
+            $happy_hour = $data['type'] ?? null;
 
-            if ($happy_hour === 'yes_transport' || $happy_hour === 'yes_without_transport') {
-                $day_thursday = Day::where('name', 'thursday')->first();
-                $event_thursday = Event::where('day_id', $day_thursday->id)->first();
+            if ($happy_hour === 'workshops_happy_hour') {
+                $day_friday = Day::where('name', 'friday')->where('period', 'all_day')->first();
+                $event_friday = Event::where('day_id', $day_friday->id)->first();
 
-                if ($happy_hour === 'yes_transport') {
-                    $subscribe->transport = true;
-                }
-
-                $subscribe->events()->attach($event_thursday->id);
+                $subscribe->events()->attach($event_friday->id);
             }
 
-            if ($data['tuesday']) {
-                $subscribe->events()->attach($data['tuesday']);
-
-            } else {
-                $subscribe->events()->attach($data['tuesday1']);
-                $subscribe->events()->attach($data['tuesday2']);
-            }
-
-            if ($data['wednesday']) {
-                $subscribe->events()->attach($data['wednesday']);
-            } else {
-                $subscribe->events()->attach($data['wednesday1']);
-                $subscribe->events()->attach($data['wednesday2']);
-            }
-
-            if ($data['friday']) {
-                $subscribe->events()->attach($data['friday']);
-            } else {
-                $subscribe->events()->attach($data['friday1']);
-                $subscribe->events()->attach($data['friday2']);
-            }
+//            if ($data['tuesday']) {
+//                $subscribe->events()->attach($data['tuesday']);
+//
+//            } else {
+//                $subscribe->events()->attach($data['tuesday1']);
+//                $subscribe->events()->attach($data['tuesday2']);
+//            }
+//
+//            if ($data['wednesday']) {
+//                $subscribe->events()->attach($data['wednesday']);
+//            } else {
+//                $subscribe->events()->attach($data['wednesday1']);
+//                $subscribe->events()->attach($data['wednesday2']);
+//            }
+//
+//            if ($data['friday']) {
+//                $subscribe->events()->attach($data['friday']);
+//            } else {
+//                $subscribe->events()->attach($data['friday1']);
+//                $subscribe->events()->attach($data['friday2']);
+//            }
 
             $subscribe->save();
 
@@ -130,11 +127,13 @@ class SubscriptionService
 
     public function setValue($willParticipateHappyHour): float
     {
-        if ($willParticipateHappyHour == 'yes_transport' || $willParticipateHappyHour == 'yes_without_transport') {
+        if ($willParticipateHappyHour == 'workshops_happy_hour') {
             return 90.0;
+        } elseif ($willParticipateHappyHour == 'workshops') {
+            return 80.0;
         }
 
-        return 80.0;
+        return 70.0;
     }
 
     public function checkCoupon($couponCode)
@@ -161,12 +160,12 @@ class SubscriptionService
         $subscription->status = 'paid';
         $subscription->save();
 
-        $events = $subscription->events;
-
-        foreach ($events as $e) {
-            $e->slots -= 1;
-            $e->save();
-        }
+//        $events = $subscription->events;
+//
+//        foreach ($events as $e) {
+//            $e->slots -= 1;
+//            $e->save();
+//        }
 
         return true;
     }

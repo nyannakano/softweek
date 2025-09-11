@@ -17,6 +17,8 @@ class Subscription extends Model
         'lunch_id',
         'coupon_id',
         'transport',
+        'type',
+        'payment_url',
     ];
 
     public function user(): BelongsTo

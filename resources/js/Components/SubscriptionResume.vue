@@ -28,9 +28,9 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
     <section class="p-8 rounded-lg shadow-lg m-10 text-left items-center">
         <div class="grid grid-cols-1 md:grid-cols-1 gap-8 text-white">
             <div class="flex justify-between">
-                <h1 class="text-2xl font-bold">Resumo da inscrição</h1>
-                <h3 v-if="subscription['status'] == 'paid'" class="text-xl font-semibold">Status: Pago</h3>
-                <h3 v-else class="text-xl font-semibold">Status: Pendente de pagamento - Caso já tenha pago envie o comprovante para:
+                <h1 class="text-2xl mr-5 font-bold">Resumo da inscrição</h1>
+                <h3 v-if="subscription['status'] == 'paid'" class="text-xl mt-1 font-semibold">Status: Pago</h3>
+                <h3 v-else class="text-xl font-semibold mt-1">Status: Pendente de pagamento - Realize o pagamento <a :href="subscription['payment_url']">AQUI</a>. Caso já tenha pago envie o comprovante para:
                     <a href="https://wa.me/554299386986?text=Ol%C3%A1%2C%20segue%20o%20comprovante%20de%20pagamento%20de%20minha%20inscri%C3%A7%C3%A3o%20para%20a%20Softweek%202024%3A">clique aqui</a></h3>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
@@ -46,10 +46,8 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
                 <div>
                     <h2 class="text-xl mb-2 font-bold">Happy Hour</h2>
                     <ul>
-                        <li v-if="subscription['will_participate_happy_hour']">
+                        <li v-if="subscription['type'] !== 'only_opening'">
                             <p>Inscrito para o Happy Hour</p>
-                            <p v-if="subscription['transport']">Vai necessitar de transporte</p>
-                            <p v-else>Não vai necessitar de transporte</p>
                         </li>
                         <li v-else>
                             <p>Não inscrito para o Happy Hour</p>

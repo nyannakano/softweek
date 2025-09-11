@@ -35,8 +35,8 @@ const props = defineProps<{
     <div class="bg-gradient-radial-header">
 
         <header>
-<!--            <RegisterHome :image_logo="image_logo"/>-->
-            <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real" :image_25_anos="image_25_anos"/>
+            <RegisterHome :image_logo="image_logo"/>
+<!--            <Counter :image_logo="image_logo" :image_eng_soft="image_eng_soft" :image_campo_real="image_campo_real" :image_25_anos="image_25_anos"/>-->
         </header>
         <main>
             <Partners :images_partners="images_partners"/>
