@@ -44,19 +44,7 @@ class SubscriptionService
 
             $subscribe->events()->detach();
 
-            $monday = Day::where('name', 'monday')->where('period', 'all_day')->first();
-            $event_monday = Event::where('day_id', $monday->id)->first();
-
-            $subscribe->events()->attach($event_monday->id);
-
             $happy_hour = $data['type'] ?? null;
-
-            if ($happy_hour === 'workshops_happy_hour') {
-                $day_friday = Day::where('name', 'friday')->where('period', 'all_day')->first();
-                $event_friday = Event::where('day_id', $day_friday->id)->first();
-
-                $subscribe->events()->attach($event_friday->id);
-            }
 
 //            if ($data['tuesday']) {
 //                $subscribe->events()->attach($data['tuesday']);
