@@ -15,8 +15,6 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('payment_url')->nullable();
             $table->dropColumn('transport');
-            $table->dropForeign(['lunch_id']);
-            $table->dropColumn('lunch_id');
         });
     }
 
@@ -29,8 +27,6 @@ return new class extends Migration
             $table->dropColumn('type');
             $table->dropColumn('payment_url');
             $table->boolean('transport')->default(false);
-            $table->unsignedBigInteger('lunch_id')->nullable();
-            $table->foreign('lunch_id')->references('id')->on('lunches')->onDelete('cascade');
         });
     }
 };
