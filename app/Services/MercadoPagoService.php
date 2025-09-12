@@ -41,7 +41,7 @@ class MercadoPagoService
                 "pending" =>  config('services.url') . "/payment-pending"
             ],
             "external_reference" => $random_id,
-            "notification_url" => config('services.url') . "/webhook",
+            "notification_url" => config('services.url') . "/api/webhook",
         ]);
     }
 
