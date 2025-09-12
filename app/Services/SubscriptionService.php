@@ -129,12 +129,12 @@ class SubscriptionService
     public function setValue($willParticipateHappyHour): float
     {
         if ($willParticipateHappyHour == 'workshops_happy_hour') {
-            return 1.0;
+            return 5.0;
         } elseif ($willParticipateHappyHour == 'workshops') {
-            return 1.0;
+            return 5.0;
         }
 
-        return 1.0;
+        return 5.0;
     }
 
     public function checkCoupon($couponCode)
