@@ -58,10 +58,10 @@
 
 <style scoped>
 section {
-    background-color: rgba(47, 8, 9, 0.2);;
+    background-color: rgba(11, 27, 58, 0.4);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(238, 0, 0, 0.1);
+    border: 2px solid rgba(3, 26, 67, 0.4);
 }
 </style>

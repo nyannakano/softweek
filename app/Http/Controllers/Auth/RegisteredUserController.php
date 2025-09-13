@@ -60,6 +60,7 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
                 'cpf' => $request->cpf,
                 'ra' => $request->ra,
+                'company' => $request->company,
             ]);
 
             event(new Registered($user));

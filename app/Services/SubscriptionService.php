@@ -117,12 +117,12 @@ class SubscriptionService
     public function setValue($willParticipateHappyHour): float
     {
         if ($willParticipateHappyHour == 'workshops_happy_hour') {
-            return 5.0;
+            return 70.0;
         } elseif ($willParticipateHappyHour == 'workshops') {
-            return 5.0;
+            return 60.0;
         }
 
-        return 5.0;
+        return 30.0;
     }
 
     public function checkCoupon($couponCode)
@@ -133,12 +133,11 @@ class SubscriptionService
             return 0;
         }
 
-        if ($coupon->uses >= $coupon->max_uses) {
+        $uses = Subscription::where('coupon_id', $coupon->id)->count();
+
+        if ($uses >= $coupon->max_uses) {
             return 0;
         }
-
-        $coupon->uses += 1;
-        $coupon->save();
 
         return $coupon->percentage;
     }

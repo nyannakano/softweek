@@ -82,12 +82,12 @@ const handleChange = (day: string, type: string) => {
                     </h1>
 
 
-                    <h3 class="font-bold text-2xl mt-10 mb-4">Segunda-feira - 14 de outubro:</h3>
+                    <h3 class="font-bold text-2xl mt-10 mb-4">Segunda-feira - 22 de setembro:</h3>
                     <p class="mt-2">Palestra
                         de abertura</p>
 
                     <div class="text-left">
-                        <h3 class="font-bold text-2xl mb-4 mt-10">Terça-feira - 15 de outubro:</h3>
+                        <h3 class="font-bold text-2xl mb-4 mt-10">Terça-feira - 23 de setembro:</h3>
                         <h4 class="font-bold mb-4 mt-5">Noite toda: 19h-22:30h</h4>
 
                         <p class="mt-2" v-for="event in events['tuesday_all_night']">
@@ -114,7 +114,7 @@ const handleChange = (day: string, type: string) => {
 
                     </div>
                     <div class="text-left">
-                        <h3 class="font-bold text-2xl mb-4 mt-10">Quarta-feira - 16 de outubro:</h3>
+                        <h3 class="font-bold text-2xl mb-4 mt-10">Quarta-feira - 24 de setembro:</h3>
 
                         <h4 class="font-bold mb-4 mt-5">Noite toda: 19h-22:30h</h4>
                         <p class="mt-2" v-for="event in events['wednesday_all_night']">
@@ -142,7 +142,7 @@ const handleChange = (day: string, type: string) => {
                     </div>
 
                     <div class="text-left">
-                        <h3 class="font-bold text-2xl mb-4 mt-10">Quinta-feira - 17 de outubro:</h3>
+                        <h3 class="font-bold text-2xl mb-4 mt-10">Quinta-feira - 25 de setembro:</h3>
 
                         <h4 class="font-bold mb-4 mt-5">Noite toda: 19h-22:30h</h4>
                         <p class="mt-2" v-for="event in events['thursday_all_night']">
@@ -168,7 +168,7 @@ const handleChange = (day: string, type: string) => {
                         </p>
                     </div>
 
-                    <h3 class="font-bold text-2xl mt-10 mb-4">Sexta-feira - 14 de outubro:</h3>
+                    <h3 class="font-bold text-2xl mt-10 mb-4">Sexta-feira - 26 de setembro:</h3>
                     <p class="mt-2">Happy Hour</p>
 
 
@@ -193,7 +193,7 @@ section {
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(238, 0, 0, 0.1);
+    border: 2px solid rgba(3, 26, 67, 0.4);
     max-width: 800px;
     margin: 0 auto;
 }

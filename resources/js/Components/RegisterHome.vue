@@ -12,7 +12,7 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
             <img :src="image_logo" alt="Logo Softweek 2025" class="logo-image w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
 
             <div class="max-w-lg w-full">
-                <form action="/register" method="POST" class="relative rounded px-8 pt-6 pb-8 mb-4 mt-10 overflow-hidden flex flex-col">
+                <form action="/register" method="POST" class="relative rounded px-8 pt-6 pb-8 mb-4  overflow-hidden flex flex-col">
                     <h1 class="text-center text-white text-xl md:text-2xl mb-2">CADASTRE-SE</h1>
 
                     <input type="hidden" name="_token" :value="csrfToken">
@@ -34,6 +34,12 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
                         <input
                             class="shadow appearance-none text-black bg-white border-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="ra" name="ra" type="text" placeholder="R.A.">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="company"></label>
+                        <input
+                            class="shadow appearance-none text-black bg-white border-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="company" name="company" type="text" placeholder="Empresa/Instituição">
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="cpf"></label>

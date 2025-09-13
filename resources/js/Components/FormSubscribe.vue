@@ -63,6 +63,8 @@ const handleChange = (day: string, type: string) => {
 
 <template>
     <section class="p-8 rounded-lg shadow-lg m-10 text-left items-center">
+          <span v-if="form.errors.coupon"
+                class="text-white bg-red-600 rounded border-b px-5">{{ form.errors.coupon }}</span>
         <form @submit.prevent="submit">
             <input type="hidden" name="_token" :value="csrfToken">
             <div class="grid grid-cols-1 md:grid-cols-1 gap-8 text-white">
@@ -87,7 +89,7 @@ const handleChange = (day: string, type: string) => {
                     <p class="mt-2">
                         <input
                             class="shadow appearance-none text-white bg-transparent border-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="coupon" name="coupon" type="text" v-model="form.coupon"
+                            id="coupon" name="coupon" type="text" required v-model="form.coupon"
                             placeholder="Código de cupom">
                     </p>
                 </div>
@@ -112,7 +114,7 @@ section {
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid rgba(238, 0, 0, 0.1);
+    border: 2px solid rgba(4, 22, 57, 0.4);
     max-width: 800px;
     margin: 0 auto;
 }

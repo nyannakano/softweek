@@ -104,7 +104,7 @@ class EventService
     public function getMetrics()
     {
         $total_subscriptions = (Subscription::where('status', 'paid')->count());
-        $companies = 18;
+        $companies = 21;
         $speakers = Event::select('speaker')->distinct()->count();
         $firstHalfDays = Day::where('period', 'first_half')->pluck('id');
         $secondHalfDays = Day::where('period', 'second_half')->pluck('id');
