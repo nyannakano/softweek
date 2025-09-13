@@ -33,7 +33,8 @@ class SubscriptionService
             }
 
             $subscribe = Subscription::updateOrCreate([
-                'user_id' => auth()->id()],
+                'user_id' => auth()->id()
+            ],
                 [
                     'status' => $status,
                     'payment_id' => $subscription->external_reference ?? 'without_payment',
@@ -43,30 +44,6 @@ class SubscriptionService
                 ]);
 
             $subscribe->events()->detach();
-
-            $happy_hour = $data['type'] ?? null;
-
-//            if ($data['tuesday']) {
-//                $subscribe->events()->attach($data['tuesday']);
-//
-//            } else {
-//                $subscribe->events()->attach($data['tuesday1']);
-//                $subscribe->events()->attach($data['tuesday2']);
-//            }
-//
-//            if ($data['wednesday']) {
-//                $subscribe->events()->attach($data['wednesday']);
-//            } else {
-//                $subscribe->events()->attach($data['wednesday1']);
-//                $subscribe->events()->attach($data['wednesday2']);
-//            }
-//
-//            if ($data['friday']) {
-//                $subscribe->events()->attach($data['friday']);
-//            } else {
-//                $subscribe->events()->attach($data['friday1']);
-//                $subscribe->events()->attach($data['friday2']);
-//            }
 
             $subscribe->save();
 
@@ -114,15 +91,35 @@ class SubscriptionService
         return $subscription;
     }
 
-    public function setValue($willParticipateHappyHour): float
+    /**
+     * @throws \Exception
+     */
+    public function setValue($type): float
     {
-        if ($willParticipateHappyHour == 'workshops_happy_hour') {
-            return 70.0;
-        } elseif ($willParticipateHappyHour == 'workshops') {
-            return 60.0;
+        $countOnlyOpening = Subscription::where('type', 'only_opening')->count();
+        $countWorkshops = Subscription::whereIn('type', ['workshops', 'workshops_happy_hour'])->count();
+
+        if ($type === 'only_opening') {
+            if ($countOnlyOpening < 50) {
+                return 30.0;
+            } else {
+                throw new \Exception('Ingressos para abertura esgotados.');
+            }
         }
 
-        return 30.0;
+        if (in_array($type, ['workshops', 'workshops_happy_hour'])) {
+            if ($countWorkshops < 50) {
+                return $type === 'workshops_happy_hour' ? 70.0 : 60.0;
+            } elseif ($countWorkshops < 100) {
+                return $type === 'workshops_happy_hour' ? 80.0 : 70.0;
+            } elseif ($countWorkshops < 125) {
+                return $type === 'workshops_happy_hour' ? 90.0 : 80.0;
+            } else {
+                throw new \Exception('Ingressos para workshops esgotados.');
+            }
+        }
+
+        throw new \Exception('Inscrição inválida.');
     }
 
     public function checkCoupon($couponCode)
@@ -189,7 +186,7 @@ class SubscriptionService
         });
 
         $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="inscritos_' . $event->title .'.csv"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="inscritos_' . $event->title . '.csv"');
 
         return $response;
     }
@@ -219,17 +216,17 @@ class SubscriptionService
             return false;
         }
 
-       if ($subscription->type == 'only_opening') {
-           return true;
-       }
+        if ($subscription->type == 'only_opening') {
+            return true;
+        }
 
-       $subCount = SubscriptionEvent::where('subscription_id', $subscription->id)->count();
+        $subCount = SubscriptionEvent::where('subscription_id', $subscription->id)->count();
 
-       if ($subCount > 2) {
-           return true;
-       }
+        if ($subCount > 2) {
+            return true;
+        }
 
-       return false;
+        return false;
     }
 
     public function subscribeEvents($data)

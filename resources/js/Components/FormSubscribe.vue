@@ -78,9 +78,9 @@ const handleChange = (day: string, type: string) => {
                             class="shadow appearance-none text-white bg-transparent border-white rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         >
                             <option disabled value="">Selecione uma opção</option>
-                            <option value="only_opening" class="bg-[#042042]">Só abertura</option>
-                            <option value="workshops" class="bg-[#042042]">Abertura + Palestras</option>
-                            <option value="workshops_happy_hour" class="bg-[#042042]">Abertura + Palestras + Happy
+                            <option value="only_opening" class="bg-[#042042]">Talk com Murilo Kaled Jovtei</option>
+                            <option value="workshops" class="bg-[#042042]">Talk com Murilo Kaled Jovtei + Palestras</option>
+                            <option value="workshops_happy_hour" class="bg-[#042042]">Talk com Murilo Kaled Jovtei + Palestras + Happy
                                 Hour
                             </option>
                         </select>

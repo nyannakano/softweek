@@ -49,7 +49,12 @@ const translatePeriod = (period: string) => periodTranslations[period] || period
             <div v-if="subscription['status'] == 'paid'" class="grid grid-cols-1 md:grid-cols-1 gap-8">
                 <div>
                     <h2 class="text-xl mb-2 font-bold">Workshops</h2>
-                    <ul>
+                    <ul v-if="subscription['type'] == 'only_opening'">
+                        <li>
+                            <p>Inscrito apenas para a abertura - Talk com Murilo Kaled Jovtei</p>
+                        </li>
+                    </ul>
+                    <ul v-else>
                         <li v-if="alreadyHaveEvents" v-for="event in subscription['events']" :key="event.id">
                             <p>- {{ event.title }} - {{ translateDay(event.day.name) }} {{ translatePeriod(event.day.period) }} - {{ event.speaker }}</p>
                         </li>

@@ -56,7 +56,12 @@ class SubscriptionController extends Controller
             'thursday1.required_without' => 'O campo Quinta-feira é obrigatório.',
             'thursday2.required_without' => 'O campo Quinta-feira é obrigatório.',
         ]);
-        $subscription = $this->subscriptionService->subscribeEvents($validatedData);
+
+        try {
+            $subscription = $this->subscriptionService->subscribeEvents($validatedData);
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard')->with('error', 'Erro ao realizar inscrição.' . $e->getMessage());
+        }
 
         if ($subscription) {
             return redirect()->route('dashboard')->with('success', 'Inscrição realizada com sucesso!');
