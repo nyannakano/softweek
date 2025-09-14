@@ -47,7 +47,7 @@ class MercadoPagoService
 
     public function paymentSuccess($request): string
     {
-        $subscription = Subscription::where('payment_id', $request->external_reference)->first();
+        $subscription = Subscription::where('external_reference', $request->external_reference)->first();
         $subscription->status = 'paid';
         $subscription->save();
         $subscriptionId = $subscription->id;
@@ -66,14 +66,14 @@ class MercadoPagoService
 
     public function paymentFailure($request): void
     {
-        $subscription = Subscription::where('payment_id', $request->external_reference)->first();
+        $subscription = Subscription::where('external_reference', $request->external_reference)->first();
         $subscription->status = 'failed';
         $subscription->save();
     }
 
     public function paymentPending($request): void
     {
-        $subscription = Subscription::where('payment_id', $request->external_reference)->first();
+        $subscription = Subscription::where('external_reference', $request->external_reference)->first();
         $subscription->status = 'pending';
         $subscription->save();
     }
