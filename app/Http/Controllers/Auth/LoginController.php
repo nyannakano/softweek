@@ -52,10 +52,17 @@ class LoginController extends Controller
 
     public function changeUserPassword($id, Request $request)
     {
-       $this->authService->changeUserPassword($id, $request->all());
+        try {
+            $this->authService->changeUserPassword($id, $request->all());
 
-       return response()->json([
-           'message' => 'User password changed with success',
-       ], 200);
+            return response()->json([
+                'message' => 'User password changed with success',
+            ], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Erro ao alterar senha',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

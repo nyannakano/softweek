@@ -45,7 +45,7 @@
                     <td class="py-2 px-4 border-b">{{ $person->status }}</td>
                     <td class="py-2 px-4 border-b">
                         <button onclick="changePassword({{ $person->user->id }})"
-                                class="bg-blue-500 text-white px-2 py-1 rounded">
+                                class="border border-black text-black px-2 py-1 rounded">
                             Mudar senha
                         </button>
                     </td>
@@ -54,7 +54,7 @@
                             <form action="{{ route('admin.confirm-payment', ['id' => $person->id]) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="subscription_id" value="{{ $person->id }}">
-                                <button type="submit">Confirmar pagamento</button>
+                                <button type="submit" class="border border-black text-black px-2 py-1 rounded">Confirmar pagamento</button>
                             </form>
                         @endif
                     </td>

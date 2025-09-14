@@ -35,8 +35,6 @@ Route::middleware(ApiMiddleware::class)->group(function () {
             Route::post('/create-lunch', [LunchController::class, 'createLunch']);
             Route::patch('/update-lunch', [LunchController::class, 'updateLunch']);
             Route::delete('/delete-lunch', [LunchController::class, 'deleteLunch']);
-
-            Route::put('/change-user-password/{id}', [LoginController::class, 'changeUserPassword'])->name('change-user-password');
         });
     });
 });

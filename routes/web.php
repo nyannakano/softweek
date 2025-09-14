@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\EventController;
@@ -44,6 +45,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/delete-event', [EventController::class, 'deleteEvent'])->name('delete-workshop');
 
         Route::post('/create-coupon', [CouponController::class, 'createCoupon'])->name('create-coupon');
+
+        Route::put('/change-user-password/{id}', [LoginController::class, 'changeUserPassword'])->name('change-user-password');
     });
 });
 

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
@@ -31,7 +32,7 @@ class AuthService
     {
         $user = User::find($id);
         $user->update([
-            'password' => $params['password'],
+            'password' => Hash::make($params['password']),
         ]);
 
         return $user;
