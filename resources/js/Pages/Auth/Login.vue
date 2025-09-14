@@ -1,7 +1,22 @@
 <script setup lang="ts">
+import { usePage, useForm } from '@inertiajs/vue3';
+
 const props = defineProps<{
     image_logo: string
 }>();
+
+const page = usePage();
+const errors = page.props.errors as Record<string, string>;
+
+const form = useForm({
+    email: '',
+    password: '',
+    remember: false
+})
+
+function submit() {
+    form.post('/login')
+}
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 </script>
@@ -13,33 +28,43 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
             <img :src="image_logo" alt="Logo Softweek 2024" class="logo-image w-1/2 mb-4 md:mb-0 self-center">
 
             <div class="max-w-lg w-full">
-                <form action="/login" method="POST" class="relative rounded px-8 pt-6 pb-8 mb-4 mt-10 overflow-hidden flex flex-col">
+                <div v-if="form.errors.login || form.errors.email" class="text-red-500 text-sm mb-4 text-center">
+                    {{ form.errors.login }}
+                </div>
+                <form @submit.prevent="submit" class="relative rounded px-8 pt-6 pb-8 mb-4 mt-10 overflow-hidden flex flex-col">
                     <h1 class="text-center text-white text-xl md:text-2xl mb-2">FAZER LOGIN</h1>
 
-                    <input type="hidden" name="_token" :value="csrfToken">
-
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email"></label>
                         <input
-                            class="shadow appearance-none text-white bg-transparent border-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="email" name="email" type="email" placeholder="Endereço de e-mail*">
+                            v-model="form.email"
+                            class="shadow appearance-none text-white bg-transparent border-white rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                            id="email"
+                            type="email"
+                            placeholder="Endereço de e-mail*"
+                        >
+                        <div v-if="form.errors.email" class="text-red-500 text-sm mt-1">{{ form.errors.email }}</div>
                     </div>
+
                     <div class="mb-6">
-                        <label class="block text-gray-700 text-white text-sm font-bold mb-2" for="password"></label>
                         <input
-                            class="shadow appearance-none bg-transparent border-white rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                            id="password" name="password" type="password" placeholder="Senha*">
+                            v-model="form.password"
+                            class="shadow appearance-none text-white bg-transparent border-white rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                            id="password"
+                            type="password"
+                            placeholder="Senha*"
+                        >
+                        <div v-if="form.errors.password" class="text-red-500 text-sm mt-1">{{ form.errors.password }}</div>
                     </div>
+
                     <div class="flex items-center justify-between">
-                        <button class="bg-[#042042] hover:bg-[#2962AC] text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        <button
+                            class="bg-[#042042] hover:bg-[#2962AC] text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit"
+                            :disabled="form.processing"
+                        >
                             ENTRAR
                         </button>
                     </div>
-                    <small class="text-xs text-white mt-5 text-center">Não possui uma conta?
-                        <a href="/" class="text-white underline hover:text-gray-400">
-                            clique aqui.
-                        </a>
-                    </small>
                 </form>
             </div>
         </div>

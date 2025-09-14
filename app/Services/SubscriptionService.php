@@ -77,6 +77,11 @@ class SubscriptionService
         return (bool)$subscription;
     }
 
+    public function getSubscriptionCountForOnlyOpening()
+    {
+        return Subscription::where('type', 'only_opening')->count();
+    }
+
     public function getSubscription($user)
     {
         $subscription = Subscription::with('events.day')->where('user_id', $user->id)->first();
@@ -189,18 +194,6 @@ class SubscriptionService
         $response->headers->set('Content-Disposition', 'attachment; filename="inscritos_' . $event->title . '.csv"');
 
         return $response;
-    }
-
-    public function getTransportCount()
-    {
-        $subscriptions = Subscription::where('status', 'paid')
-            ->where('transport', true)
-            ->whereHas('events', function ($query) {
-                $query->where('title', 'Happy Hour');
-            })
-            ->get();
-
-        return $subscriptions->count();
     }
 
     public function subscribeApi($params)

@@ -27,7 +27,7 @@
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8 text-white">
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Segunda-feira</h3>
-                <p>Palestra de abertura</p>
+                <p>Talk com Murilo Kaled Jovtei</p>
             </div>
             <div class="text-center">
                 <h3 class="font-bold text-xl mb-4">Terça-feira</h3>

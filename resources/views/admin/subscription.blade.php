@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mx-auto p-6 bg-white shadow-md rounded-lg">
         <h1 class="text-2xl font-semibold mb-4">Lista de Inscritos</h1>
-        <h2 class="text-xl font-semibold mb-4">Com transporte: {{ $subscriptions_with_transport }}</h2>
+        <h2 class="text-xl font-semibold mb-4">Apenas abertura: {{ $subscriptions_count_for_only_opening }}</h2>
 
         <div class="mb-4">
             <input type="text" placeholder="Buscar inscritos..."
@@ -17,6 +17,7 @@
                 <th class="py-2 px-4 border-b">ID</th>
                 <th class="py-2 px-4 border-b">Nome</th>
                 <th class="py-2 px-4 border-b">Email</th>
+                <th class="py-2 px-4 border-b">Tipo</th>
                 <th class="py-2 px-4 border-b">Data de Inscrição</th>
                 <th class="py-2 px-4 border-b">Cupom usado</th>
                 <th class="py-2 px-4 border-b">Status</th>
@@ -24,10 +25,20 @@
             </thead>
             <tbody id="inscritos-table-body">
             @foreach($subscriptions as $person)
+                @php
+                    if ($person->type == 'only_opening') {
+                        $type = 'Apenas abertura';
+                    } elseif ($person->type == 'workshops') {
+                        $type = 'Workshops';
+                    } else {
+                        $type = 'Completo';
+                    }
+                @endphp
                 <tr>
                     <td class="py-2 px-4 border-b">{{ $person->id }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->user->name }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->user->email }}</td>
+                    <td class="py-2 px-4 border-b">{{ $type }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->created_at }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->coupon->code ?? '' }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->status }}</td>
