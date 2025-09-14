@@ -37,7 +37,7 @@ class SubscriptionService
             ],
                 [
                     'status' => $status,
-                    'payment_id' => $subscription->external_reference ?? 'without_payment',
+                    'payment_id' => $subscription->collector_id ?? 'without_payment',
                     'coupon_id' => $coupon->id ?? null,
                     'type' => $data['type'] ?? null,
                     'payment_url' => $subscription->init_point ?? null,

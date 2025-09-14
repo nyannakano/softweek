@@ -86,9 +86,12 @@ class MercadoPagoService
         $payment = $paymentClient->get($paymentId);
 
         $status = $payment->status;
-        $externalReference = $payment->external_reference;
 
-        $subscription = Subscription::where('payment_id', $externalReference)->first();
+        if ($status === 'approved') {
+            $status = 'paid';
+        }
+
+        $subscription = Subscription::where('payment_id', $paymentId)->first();
 
         if (!$subscription) {
             return 'Subscription not found';
