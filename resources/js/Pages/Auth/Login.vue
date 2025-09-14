@@ -28,9 +28,6 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribut
             <img :src="image_logo" alt="Logo Softweek 2024" class="logo-image w-1/2 mb-4 md:mb-0 self-center">
 
             <div class="max-w-lg w-full">
-                <div v-if="form.errors.login || form.errors.email" class="text-red-500 text-sm mb-4 text-center">
-                    {{ form.errors.login }}
-                </div>
                 <form @submit.prevent="submit" class="relative rounded px-8 pt-6 pb-8 mb-4 mt-10 overflow-hidden flex flex-col">
                     <h1 class="text-center text-white text-xl md:text-2xl mb-2">FAZER LOGIN</h1>
 
