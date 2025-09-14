@@ -138,6 +138,10 @@ class PageController extends Controller
             $workshop->total_slots = $total_slots;
         });
 
-        return view('admin.workshops', compact('workshops'));
+        $subCountOnlyOpening = $this->subscriptionService->getSubscriptionCountForOnlyOpening();
+        $subCountWorkshops = $this->subscriptionService->getSubscriptionCountForWorkshops();
+        $subCountWorkshopsHappyHour = $this->subscriptionService->getSubscriptionCountForWorkshopsHappyHour();
+
+        return view('admin.workshops', compact(['workshops', 'subCountOnlyOpening', 'subCountWorkshops', 'subCountWorkshopsHappyHour']));
     }
 }

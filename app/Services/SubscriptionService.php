@@ -82,6 +82,16 @@ class SubscriptionService
         return Subscription::where('type', 'only_opening')->count();
     }
 
+    public function getSubscriptionCountForWorkshops()
+    {
+        return Subscription::where('type', 'workshops')->count();
+    }
+
+    public function getSubscriptionCountForWorkshopsHappyHour()
+    {
+        return Subscription::where('type', 'workshops_happy_hour')->count();
+    }
+
     public function getSubscription($user)
     {
         $subscription = Subscription::with('events.day')->where('user_id', $user->id)->first();

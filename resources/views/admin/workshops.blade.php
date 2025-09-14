@@ -3,7 +3,9 @@
 @section('content')
     <div class="container mx-auto p-6 bg-white shadow-md rounded-lg">
         <h1 class="text-2xl font-semibold mb-4">Lista de Workshops</h1>
-
+        <h2 class="text-xl font-semibold mb-4">Apenas abertura: {{ $subCountOnlyOpening }}</h2>
+        <h2 class="text-xl font-semibold mb-4">Workshops: {{ $subCountWorkshops }}</h2>
+        <h2 class="text-xl font-semibold mb-4">Completo: {{ $subCountWorkshopsHappyHour }}</h2>
         <div class="mb-4">
             <input type="text" placeholder="Buscar cupom..."
                    class="border border-gray-300 rounded-lg px-4 py-2 w-full"
