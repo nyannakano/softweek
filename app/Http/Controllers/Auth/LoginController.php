@@ -49,4 +49,13 @@ class LoginController extends Controller
             'token' => $user['token'],
         ], 201);
     }
+
+    public function changeUserPassword($id, Request $request)
+    {
+       $this->authService->changeUserPassword($id, $request->all());
+
+       return response()->json([
+           'message' => 'User password changed with success',
+       ], 200);
+    }
 }

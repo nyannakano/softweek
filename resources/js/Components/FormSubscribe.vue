@@ -89,7 +89,7 @@ const handleChange = (day: string, type: string) => {
                     <p class="mt-2">
                         <input
                             class="shadow appearance-none text-white bg-transparent border-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="coupon" name="coupon" type="text" required v-model="form.coupon"
+                            id="coupon" name="coupon" type="text" v-model="form.coupon"
                             placeholder="Código de cupom">
                     </p>
                 </div>

@@ -54,7 +54,14 @@ class EventService
 
     public function getEvents($dayId): array
     {
-        return Event::where('day_id', $dayId)->where('slots', '>', 0)->get()->toArray();
+        return Event::where('day_id', $dayId)
+            ->withCount('subscriptionEvents')
+            ->get()
+            ->filter(function ($event) {
+                return $event->subscription_events_count < $event->slots;
+            })
+            ->values()
+            ->toArray();
     }
 
     public function getEventsHome($dayId): array

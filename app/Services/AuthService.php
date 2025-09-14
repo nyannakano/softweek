@@ -26,4 +26,14 @@ class AuthService
             'token' => $token->plainTextToken,
         ];
     }
+
+    public function changeUserPassword($id, $params)
+    {
+        $user = User::find($id);
+        $user->update([
+            'password' => $params['password'],
+        ]);
+
+        return $user;
+    }
 }

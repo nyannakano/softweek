@@ -21,7 +21,7 @@ class SubscriptionController extends Controller
     public function subscribe(Request $request)
     {
         $validatedData = $request->validate([
-            'coupon' => 'required|exists:coupons,code',
+            'coupon' => 'nullable|exists:coupons,code',
             'type' => 'required|in:only_opening,workshops,workshops_happy_hour',
         ], [
             'coupon.exists' => 'Cupom inválido.',

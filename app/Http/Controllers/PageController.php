@@ -134,7 +134,7 @@ class PageController extends Controller
     {
         $workshops = $this->eventService->getEventsAsAdmin();
         $workshops->each(function ($workshop) {
-            $total_slots = $workshop->slots + $workshop->subscriptions()->count();
+            $total_slots = $workshop->slots - $workshop->subscriptions()->count();
             $workshop->total_slots = $total_slots;
         });
 

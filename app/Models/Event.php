@@ -29,4 +29,9 @@ class Event extends Model
     {
         return $this->belongsToMany(Subscription::class, 'subscriptions_events');
     }
+
+    public function subscriptionEvents(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(SubscriptionEvent::class, 'event_id', 'id');
+    }
 }

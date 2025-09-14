@@ -21,6 +21,7 @@
                 <th class="py-2 px-4 border-b">Data de Inscrição</th>
                 <th class="py-2 px-4 border-b">Cupom usado</th>
                 <th class="py-2 px-4 border-b">Status</th>
+                <th class="py-2 px-4 border-b">Mudar senha</th>
             </tr>
             </thead>
             <tbody id="inscritos-table-body">
@@ -42,6 +43,12 @@
                     <td class="py-2 px-4 border-b">{{ $person->created_at }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->coupon->code ?? '' }}</td>
                     <td class="py-2 px-4 border-b">{{ $person->status }}</td>
+                    <td class="py-2 px-4 border-b">
+                        <button onclick="changePassword({{ $person->user->id }})"
+                                class="bg-blue-500 text-white px-2 py-1 rounded">
+                            Mudar senha
+                        </button>
+                    </td>
                     <td class="py-2 px-4 border-b">
                         @if($person->status == 'pending')
                             <form action="{{ route('admin.confirm-payment', ['id' => $person->id]) }}" method="post">
@@ -80,6 +87,34 @@
                     row.style.display = 'none';
                 }
             });
+        }
+
+        async function changePassword(userId) {
+            const newPassword = prompt("Digite a nova senha para o usuário ID " + userId + ":");
+            if (!newPassword) {
+                alert("Senha não informada!");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/change-user-password/${userId}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ password: newPassword })
+                });
+
+                if (response.ok) {
+                    alert("Senha alterada com sucesso!");
+                } else {
+                    const error = await response.json();
+                    alert("Erro ao alterar senha: " + (error.message || "tente novamente"));
+                }
+            } catch (e) {
+                alert("Erro inesperado: " + e.message);
+            }
         }
     </script>
 
