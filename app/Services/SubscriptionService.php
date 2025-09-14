@@ -37,7 +37,7 @@ class SubscriptionService
             ],
                 [
                     'status' => $status,
-                    'payment_id' => $subscription->collector_id ?? 'without_payment',
+                    'payment_id' => $subscription->id ?? 'without_payment',
                     'coupon_id' => $coupon->id ?? null,
                     'type' => $data['type'] ?? null,
                     'payment_url' => $subscription->init_point ?? null,
@@ -111,8 +111,8 @@ class SubscriptionService
      */
     public function setValue($type): float
     {
-        $countOnlyOpening = Subscription::where('type', 'only_opening')->count();
-        $countWorkshops = Subscription::whereIn('type', ['workshops', 'workshops_happy_hour'])->count();
+        $countOnlyOpening = Subscription::where('type', 'only_opening')->where('status', 'paid')->count();
+        $countWorkshops = Subscription::whereIn('type', ['workshops', 'workshops_happy_hour'])->where('status', 'paid')->count();
 
         if ($type === 'only_opening') {
             if ($countOnlyOpening < 50) {
