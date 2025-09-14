@@ -41,6 +41,7 @@ class SubscriptionService
                     'coupon_id' => $coupon->id ?? null,
                     'type' => $data['type'] ?? null,
                     'payment_url' => $subscription->init_point ?? null,
+                    'external_reference' => $subscription->external_reference ?? null,
                 ]);
 
             $subscribe->events()->detach();

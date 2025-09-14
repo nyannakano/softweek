@@ -19,6 +19,7 @@ class Subscription extends Model
         'transport',
         'type',
         'payment_url',
+        'external_reference',
     ];
 
     public function user(): BelongsTo
