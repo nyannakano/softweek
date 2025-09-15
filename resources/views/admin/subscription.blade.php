@@ -50,7 +50,7 @@
                         </button>
                     </td>
                     <td class="py-2 px-4 border-b">
-                        @if($person->status == 'pending')
+                        @if($person->status != 'paid')
                             <form action="{{ route('admin.confirm-payment', ['id' => $person->id]) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="subscription_id" value="{{ $person->id }}">
