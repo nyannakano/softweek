@@ -103,6 +103,8 @@ class PageController extends Controller
 
         $logo = asset('images/LOGO_SOFTWEEK.png');
 
+        $isPaid = $this->subscriptionService->checkIfSubscriptionIsPaid($user);
+
         $events = $this->eventService->getEventsPerDay();
         $is_already_subbed = $this->subscriptionService->isSubscribed($user);
         $subscription = null;

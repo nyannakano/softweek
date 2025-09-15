@@ -39,4 +39,4 @@ Route::middleware(ApiMiddleware::class)->group(function () {
     });
 });
 
-Route::post('/webhook/{id}', [SubscriptionController::class, 'webhook']);
+Route::post('/webhook', [SubscriptionController::class, 'webhook']);

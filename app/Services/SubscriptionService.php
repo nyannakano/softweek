@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Subscription;
 use App\Models\SubscriptionEvent;
 use LaravelIdea\Helper\App\Models\_IH_Subscription_C;
+use MercadoPago\Client\Payment\PaymentClient;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class SubscriptionService
@@ -272,5 +273,33 @@ class SubscriptionService
 
             return false;
         }
+    }
+
+    public function checkIfSubscriptionIsPaid($user)
+    {
+        $subscription = Subscription::where('user_id', $user->id)->where('status', '!=', 'failed')->first();
+
+        if (!$subscription) {
+            return false;
+        }
+
+        try {
+            $paymentClient = new PaymentClient();
+            $payment = $paymentClient->get($subscription->payment_id);
+
+            $status = $payment->status;
+
+            if ($status === 'approved') {
+                $status = 'paid';
+            }
+
+            $subscription->status = $status;
+            $subscription->save();
+        } catch (\Exception $e) {
+            \Log::error('Error checking subscription: ' . $e);
+            return false;
+        }
+
+        return true;
     }
 }

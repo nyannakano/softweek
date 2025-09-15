@@ -41,8 +41,8 @@ class MercadoPagoService
                 "pending" =>  config('services.url') . "/payment-pending"
             ],
             "external_reference" => $random_id,
-            "notification_url" => config('services.url') . "/api/webhook/" . $random_id,
-            "auto_return" => "all",
+            "notification_url" => config('services.url') . "/api/webhook",
+            "auto_return" => "approved",
         ]);
     }
 
@@ -70,7 +70,7 @@ class MercadoPagoService
         $subscription->save();
     }
 
-    public function webhook($request, $id)
+    public function webhook($request)
     {
         $paymentId = $request['data']['id'];
 
@@ -83,7 +83,7 @@ class MercadoPagoService
             $status = 'paid';
         }
 
-        $subscription = Subscription::where('external_reference', $id)->first();
+        $subscription = Subscription::where('external_reference', $paymentId)->first();
 
         if (!$subscription) {
             return 'Subscription not found';

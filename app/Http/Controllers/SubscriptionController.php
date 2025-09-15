@@ -95,9 +95,9 @@ class SubscriptionController extends Controller
         return redirect()->route('dashboard')->with('success', 'Inscrição pendente de pagamento.');
     }
 
-    public function webhook(Request $request, $id)
+    public function webhook(Request $request)
     {
-        return $this->mercadoPagoService->webhook($request, $id);
+        return $this->mercadoPagoService->webhook($request);
     }
 
     public function getSubscriptionsAsAdmin()
