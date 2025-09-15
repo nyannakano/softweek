@@ -285,6 +285,10 @@ class SubscriptionService
             return false;
         }
 
+        if ($subscription->status == 'paid') {
+            return true;
+        }
+
         try {
             $mercadoPagoService = new MercadoPagoService();
             $mercadoPagoService->checkIfIsPaid($subscription);
