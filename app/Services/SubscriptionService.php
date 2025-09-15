@@ -9,7 +9,9 @@ use App\Models\Subscription;
 use App\Models\SubscriptionEvent;
 use LaravelIdea\Helper\App\Models\_IH_Subscription_C;
 use MercadoPago\Client\Payment\PaymentClient;
+use MercadoPago\Exceptions\MPApiException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use function Laravel\Prompts\error;
 
 class SubscriptionService
 {
@@ -113,8 +115,8 @@ class SubscriptionService
      */
     public function setValue($type): float
     {
-        $countOnlyOpening = Subscription::where('type', 'only_opening')->where('status','paid')->where('payment_id','!=','without_payment')->count();
-        $countWorkshops = Subscription::whereIn('type', ['workshops', 'workshops_happy_hour'])->where('status','paid')->where('payment_id','!=','without_payment')->count();
+        $countOnlyOpening = Subscription::where('type', 'only_opening')->where('status', 'paid')->where('payment_id', '!=', 'without_payment')->count();
+        $countWorkshops = Subscription::whereIn('type', ['workshops', 'workshops_happy_hour'])->where('status', 'paid')->where('payment_id', '!=', 'without_payment')->count();
 
         if ($type === 'only_opening') {
             if ($countOnlyOpening < 50) {
@@ -298,6 +300,9 @@ class SubscriptionService
         } catch (\Throwable $e) {
             \Log::error('Error checking subscription: ' . $e->getMessage());
             return false;
+        } catch (MPApiException $e) {
+            \Log::error('Error checking subscription: ' . $e->getMessage());
+            \Log::error('Error api: ' . $e->getApiResponse()->getContent());
         }
 
         return true;
