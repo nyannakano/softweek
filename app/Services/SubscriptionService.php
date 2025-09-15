@@ -286,17 +286,8 @@ class SubscriptionService
         }
 
         try {
-            $paymentClient = new PaymentClient();
-            $payment = $paymentClient->get($subscription->payment_id);
-
-            $status = $payment->status;
-
-            if ($status === 'approved') {
-                $status = 'paid';
-            }
-
-            $subscription->status = $status;
-            $subscription->save();
+            $mercadoPagoService = new MercadoPagoService();
+            $mercadoPagoService->checkIfIsPaid($subscription);
         } catch (MPApiException $e) {
             \Log::error('Error checking subscription: ' . $e->getMessage());
             \Log::error('Error api: ', $e->getApiResponse()->getContent());

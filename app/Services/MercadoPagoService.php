@@ -108,4 +108,18 @@ class MercadoPagoService
         return 'Webhook received!';
     }
 
+    public function checkIfIsPaid($subscription)
+    {
+        $paymentClient = new PaymentClient();
+        $payment = $paymentClient->get($subscription->payment_id);
+
+        $status = $payment->status;
+
+        if ($status === 'approved') {
+            $status = 'paid';
+        }
+
+        $subscription->status = $status;
+        $subscription->save();
+    }
 }
