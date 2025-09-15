@@ -297,12 +297,12 @@ class SubscriptionService
 
             $subscription->status = $status;
             $subscription->save();
-        } catch (\Throwable $e) {
-            \Log::error('Error checking subscription: ' . $e->getMessage());
-            return false;
         } catch (MPApiException $e) {
             \Log::error('Error checking subscription: ' . $e->getMessage());
             \Log::error('Error api: ' . $e->getApiResponse()->getContent());
+        }   catch (\Throwable $e) {
+            \Log::error('Error checking subscription: ' . $e->getMessage());
+            return false;
         }
 
         return true;
