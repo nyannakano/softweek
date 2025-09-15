@@ -295,8 +295,8 @@ class SubscriptionService
 
             $subscription->status = $status;
             $subscription->save();
-        } catch (\Exception $e) {
-            \Log::error('Error checking subscription: ' . $e);
+        } catch (\Throwable $e) {
+            \Log::error('Error checking subscription: ' . $e->getMessage());
             return false;
         }
 
