@@ -41,7 +41,8 @@ class MercadoPagoService
                 "pending" =>  config('services.url') . "/payment-pending"
             ],
             "external_reference" => $random_id,
-            "notification_url" => config('services.url') . "/api/webhook",
+            "notification_url" => config('services.url') . "/api/webhook/" . $random_id,
+            "auto_return" => "all",
         ]);
     }
 
@@ -50,16 +51,6 @@ class MercadoPagoService
         $subscription = Subscription::where('external_reference', $request->external_reference)->first();
         $subscription->status = 'paid';
         $subscription->save();
-        $subscriptionId = $subscription->id;
-
-        $events = Event::whereHas('subscriptions', function ($query) use ($subscriptionId) {
-            $query->where('subscription_id', $subscriptionId);
-        })->get();
-
-        foreach ($events as $event) {
-            $event->slots = $event->slots - 1;
-            $event->save();
-        }
 
         return true;
     }
@@ -75,10 +66,11 @@ class MercadoPagoService
     {
         $subscription = Subscription::where('external_reference', $request->external_reference)->first();
         $subscription->status = 'pending';
+        $subscription->payment_id = $request->payment_id ?? null;
         $subscription->save();
     }
 
-    public function webhook($request)
+    public function webhook($request, $id)
     {
         $paymentId = $request['data']['id'];
 
@@ -91,7 +83,7 @@ class MercadoPagoService
             $status = 'paid';
         }
 
-        $subscription = Subscription::where('payment_id', $paymentId)->first();
+        $subscription = Subscription::where('external_reference', $id)->first();
 
         if (!$subscription) {
             return 'Subscription not found';
