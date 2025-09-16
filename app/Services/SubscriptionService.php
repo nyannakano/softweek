@@ -7,6 +7,7 @@ use App\Models\Day;
 use App\Models\Event;
 use App\Models\Subscription;
 use App\Models\SubscriptionEvent;
+use App\Models\User;
 use LaravelIdea\Helper\App\Models\_IH_Subscription_C;
 use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\Exceptions\MPApiException;
@@ -302,5 +303,10 @@ class SubscriptionService
         }
 
         return true;
+    }
+
+    public function getUsers()
+    {
+        return User::whereDoesntHave('subscriptions')->get();
     }
 }

@@ -107,6 +107,12 @@ class SubscriptionController extends Controller
             'subscriptions_count_for_only_opening' => $this->subscriptionService->getSubscriptionCountForOnlyOpening()
         ]);
     }
+    public function getUsersAsAdmin()
+    {
+        return view('admin.users', [
+            'users' => $this->subscriptionService->getUsers(),
+        ]);
+    }
 
     public function confirmPayment($id)
     {
@@ -126,4 +132,6 @@ class SubscriptionController extends Controller
 
         $subscription = $this->subscriptionService->subscribeApi($params);
     }
+
+
 }
