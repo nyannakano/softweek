@@ -178,7 +178,7 @@ class SubscriptionService
 
             $handle = fopen('php://output', 'w');
             // Add CSV headers
-            fputcsv($handle, ['Nome', 'CPF', 'RA', 'E-mail', 'Status da inscrição']);
+            fputcsv($handle, ['Nome', 'CPF', 'RA', 'Empresa/Instituição', 'E-mail', 'Tipo Inscrição', 'Status da inscrição']);
 
             // Add CSV rows
             foreach ($subscriptions as $subscription) {
@@ -193,11 +193,21 @@ class SubscriptionService
                     $subscription->status = 'Confirmado';
                 }
 
+                if ($subscription->type == 'only_opening') {
+                    $type = 'Apenas Abertura';
+                } elseif ($subscription->type == 'workshops') {
+                    $type = 'Workshops';
+                } else {
+                    $type = 'Workshops e Happy Hour';
+                }
+
                 fputcsv($handle, [
                     $subscription->user->name,
                     $subscription->user->cpf,
                     $subscription->user->ra ?? '',
+                    $subscription->user->company ?? '',
                     $subscription->user->email,
+                    $type,
                     $subscription->status,
                 ]);
             }
