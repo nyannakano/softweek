@@ -24,11 +24,11 @@ const props = defineProps<{
             </div>
             <div class="flex flex-col md:flex-row md:space-x-20">
                 <div class="mb-10 md:mb-0">
-                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['hours_total']}}h</h1>
+                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+60h</h1>
                     <p class="text-white font-semibold text-2xl md:text-4xl">IMERSÃO</p>
                 </div>
                 <div>
-                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+{{ metrics['speakers']}}</h1>
+                    <h1 class="text-white font-semibold text-2xl md:text-4xl">+30</h1>
                     <p class="text-white font-semibold text-2xl md:text-4xl">PALESTRANTES</p>
                 </div>
             </div>
