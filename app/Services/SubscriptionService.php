@@ -221,6 +221,58 @@ class SubscriptionService
         return $response;
     }
 
+
+    public function getSubscriptionsAll()
+    {
+        $subscriptions = Subscription::with('user')->get();
+
+        $response = new StreamedResponse(function () use ($subscriptions) {
+
+            $handle = fopen('php://output', 'w');
+            // Add CSV headers
+            fputcsv($handle, ['Nome', 'CPF', 'RA', 'Empresa/Instituição', 'E-mail', 'Tipo Inscrição', 'Status da inscrição']);
+
+            // Add CSV rows
+            foreach ($subscriptions as $subscription) {
+
+                if ($subscription->status == 'failed') {
+                    continue;
+                }
+
+                if ($subscription->status == 'pending') {
+                    $subscription->status = 'Pendente';
+                } else {
+                    $subscription->status = 'Confirmado';
+                }
+
+                if ($subscription->type == 'only_opening') {
+                    $type = 'Apenas Abertura';
+                } elseif ($subscription->type == 'workshops') {
+                    $type = 'Workshops';
+                } else {
+                    $type = 'Workshops e Happy Hour';
+                }
+
+                fputcsv($handle, [
+                    $subscription->user->name,
+                    $subscription->user->cpf,
+                    $subscription->user->ra ?? '',
+                    $subscription->user->company ?? '',
+                    $subscription->user->email,
+                    $type,
+                    $subscription->status,
+                ]);
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="inscritos_2025.csv"');
+
+        return $response;
+    }
+
     public function subscribeApi($params)
     {
         $mercadoPagoService = new MercadoPagoService();

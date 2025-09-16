@@ -5,6 +5,8 @@
         <h1 class="text-2xl font-semibold mb-4">Lista de Inscritos</h1>
         <h2 class="text-xl font-semibold mb-4">Apenas abertura: {{ $subscriptions_count_for_only_opening }}</h2>
 
+        <a href="{{ route('admin.get-subscriptions-all') }}" class="border">Baixar CSV</a>
+
         <div class="mb-4">
             <input type="text" placeholder="Buscar inscritos..."
                    class="border border-gray-300 rounded-lg px-4 py-2 w-full"
