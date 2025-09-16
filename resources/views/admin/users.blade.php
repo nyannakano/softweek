@@ -28,7 +28,7 @@
                     <td class="py-2 px-4 border-b">{{ $user->email }}</td>
                     <td class="py-2 px-4 border-b">{{ $user->created_at }}</td>
                     <td class="py-2 px-4 border-b">
-                        <button onclick="changePassword({{ $person->user->id }})"
+                        <button onclick="changePassword({{ $user->id }})"
                                 class="border border-black text-black px-2 py-1 rounded">
                             Mudar senha
                         </button>
