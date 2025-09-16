@@ -30,30 +30,36 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-                'password' => ['required'],
-                'cpf' => 'required|string|min_digits:11|max_digits:11|unique:' . User::class,
-            ], [
-                'email.unique' => 'O e-mail informado já está em uso.',
-                'email.email' => 'O e-mail informado não é válido.',
-                'email.lowercase' => 'O e-mail informado não é válido.',
-                'email.string' => 'O e-mail informado não é válido.',
-                'email.max' => 'O e-mail informado não é válido.',
-                'name.required' => 'O nome informado não é válido.',
-                'name.string' => 'O nome informado não é válido.',
-                'name.max' => 'O nome informado não é válido.',
-                'password.required' => 'A senha informada não é válida.',
-                'password.string' => 'A senha informada não é válida.',
-                'password.min' => 'A senha informada não é válida.',
-                'cpf.unique' => 'O CPF informado já está em uso.',
-                'cpf.string' => 'O CPF informado não é válido.',
-                'cpf.min_digits' => 'O CPF informado não é válido.',
-                'cpf.max_digits' => 'O CPF informado não é válido.',
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+            'password' => ['required'],
+            'cpf' => 'required|string|min_digits:11|max_digits:11|unique:' . User::class,
+            'ra' => 'nullable|string|unique:' . User::class,
+            'company' => 'nullable|string',
+        ], [
+            'email.unique' => 'O e-mail informado já está em uso.',
+            'email.email' => 'O e-mail informado não é válido.',
+            'email.lowercase' => 'O e-mail informado não é válido.',
+            'email.string' => 'O e-mail informado não é válido.',
+            'email.max' => 'O e-mail informado não é válido.',
+            'name.required' => 'O nome informado não é válido.',
+            'name.string' => 'O nome informado não é válido.',
+            'name.max' => 'O nome informado não é válido.',
+            'password.required' => 'A senha informada não é válida.',
+            'password.string' => 'A senha informada não é válida.',
+            'password.min' => 'A senha informada não é válida.',
+            'cpf.unique' => 'O CPF informado já está em uso.',
+            'cpf.string' => 'O CPF informado não é válido.',
+            'cpf.min_digits' => 'O CPF informado não é válido.',
+            'cpf.max_digits' => 'O CPF informado não é válido.',
+            'ra.unique' => 'O RA informado já está em uso.',
+            'ra.string' => 'O R.A informado não é válido.',
+            'company.string' => 'A empresa informada não é válida.',
+            'cpf.required' => 'O CPF informado não é válido.',
+        ]);
 
+        try {
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
