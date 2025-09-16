@@ -22,15 +22,6 @@
             </thead>
             <tbody id="inscritos-table-body">
             @foreach($users as $user)
-                @php
-                    if ($person->type == 'only_opening') {
-                        $type = 'Apenas abertura';
-                    } elseif ($person->type == 'workshops') {
-                        $type = 'Workshops';
-                    } else {
-                        $type = 'Completo';
-                    }
-                @endphp
                 <tr>
                     <td class="py-2 px-4 border-b">{{ $user->id }}</td>
                     <td class="py-2 px-4 border-b">{{ $user->name }}</td>

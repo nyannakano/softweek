@@ -8,6 +8,8 @@
             <div class="flex flex-col space-y-2">
                 <a href="{{ route('admin.subscriptions') }}"
                    class="block text-center text-blue-500 hover:text-blue-700 font-medium py-2 border-b border-gray-300">Inscritos</a>
+                <a href="{{ route('admin.users') }}"
+                   class="block text-center text-blue-500 hover:text-blue-700 font-medium py-2 border-b border-gray-300">Usuários sem Inscrição</a>
                 <a href="{{ route('admin.workshops') }}"
                    class="block text-center text-blue-500 hover:text-blue-700 font-medium py-2 border-b border-gray-300">Workshops</a>
                 <a href="{{ route('admin.coupons') }}"
