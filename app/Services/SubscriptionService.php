@@ -128,7 +128,7 @@ class SubscriptionService
         }
 
         if (in_array($type, ['workshops', 'workshops_happy_hour'])) {
-            if ($countWorkshops < 50) {
+            if ($countWorkshops < 40) {
                 return $type === 'workshops_happy_hour' ? 70.0 : 60.0;
             } elseif ($countWorkshops < 100) {
                 return $type === 'workshops_happy_hour' ? 80.0 : 70.0;
